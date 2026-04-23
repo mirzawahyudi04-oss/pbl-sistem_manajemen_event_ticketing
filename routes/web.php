@@ -25,3 +25,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+// EVENTS
+Route::get('/events', function () {
+    return view('events');
+})->name('events');
