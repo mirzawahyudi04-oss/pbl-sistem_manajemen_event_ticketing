@@ -18,3 +18,7 @@ Route::get('/register', function () {
 });
 
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
