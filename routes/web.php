@@ -22,9 +22,9 @@ Route::get('/register', function () {
 Route::post('/register', [AuthController::class, 'register']);
 
 // DASHBOARD
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard user', function () {
+    return view('dashboard user');
+})->name('dashboard user');
 
 // EVENTS
 Route::get('/events', function () {
