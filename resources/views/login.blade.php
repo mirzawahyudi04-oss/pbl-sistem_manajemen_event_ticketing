@@ -13,35 +13,26 @@
             align-items: center;
             height: 100vh;
         }
-
         .wrapper {
             background: #e5e5e5;
             padding: 40px;
             border-radius: 20px;
             width: 350px;
         }
-
         .card {
             background: #f9f9f9;
             padding: 30px;
             border-radius: 20px;
             text-align: center;
         }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
         input {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
             border-radius: 30px;
             border: 1px solid #ccc;
-            outline: none;
             text-align: center;
         }
-
         button {
             width: 100%;
             padding: 12px;
@@ -50,27 +41,9 @@
             background: #222;
             color: white;
             margin-top: 15px;
-            cursor: pointer;
         }
-
-        button:hover {
-            background: #444;
-        }
-
-        .footer {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        a {
-            color: blue;
-            text-decoration: none;
-        }
-
-        .error {
-            color: red;
-            font-size: 13px;
-        }
+        .footer { margin-top: 15px; }
+        .error { color: red; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -85,15 +58,14 @@
 
         <form method="POST" action="/login">
             @csrf
-
-            <input type="email" name="email" placeholder="Masukkan Email Anda" required>
-            <input type="password" name="password" placeholder="Masukkan Password Anda" required>
-
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Masuk</button>
         </form>
 
         <div class="footer">
-            Belum punya akun? <a href="#">Daftar di sini</a>
+            Belum punya akun? 
+            <a href="{{ route('register') }}">Daftar di sini</a>
         </div>
     </div>
 </div>

@@ -35,12 +35,17 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">LOGO</a>
+        <a class="navbar-brand" href="/">LOGO</a>
         <div>
-            <a class="nav-link d-inline text-white" href="#">Beranda</a>
+            <a class="nav-link d-inline text-white" href="/">Beranda</a>
             <a class="nav-link d-inline text-white" href="#">Event Populer</a>
             <a class="nav-link d-inline text-white" href="#">Cara Kerja</a>
-            <button class="btn btn-outline-light">Login</button>
+
+            <!-- ✅ LOGIN BUTTON FIX -->
+            <a href="{{ route('login') }}" class="btn btn-outline-light">Login</a>
+
+            <!-- (Opsional) REGISTER -->
+            <a href="/register" class="btn btn-light">Daftar</a>
         </div>
     </div>
 </nav>
