@@ -43,7 +43,7 @@ Route::post('/register', [AuthController::class, 'register']);
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard', function () {
-    return view('dashboard'); // resources/views/dashboard.blade.php
+    return view('dashboard'); // pastikan file ada
 })->name('dashboard');
 
 
@@ -53,26 +53,42 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard-user', function () {
-    return view('dashboard_user'); // resources/views/dashboard_user.blade.php
+    return view('dashboard_user'); // pastikan file ada
 })->name('dashboard_user');
 
 
 /*
 |--------------------------------------------------------------------------
-| EVENTS (JELAJAH EVENT)
+| EVENTS
 |--------------------------------------------------------------------------
 */
 Route::get('/events', function () {
-    return view('events'); // resources/views/events.blade.php
+    return view('events'); // pastikan file ada
 })->name('events');
 
 
 /*
 |--------------------------------------------------------------------------
-| LOGOUT (opsional)
+| LOGOUT
 |--------------------------------------------------------------------------
 */
 Route::get('/logout', function () {
     session()->flush();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/transaksi', function () {
+    return view('transaksi');
+});
+
+Route::get('/manajemen-event', function () {
+    return view('manajemen_event');
+});
+
+Route::get('/kategori-tiket', function () {
+    return view('kategori_tiket');
+});
+
+Route::get('/detail-event', function () {
+    return view('detail_event');
+})->name('detail.event');
