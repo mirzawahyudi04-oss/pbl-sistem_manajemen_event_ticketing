@@ -165,3 +165,54 @@ Route::get('/logout', function () {
 Route::get('/tambah-kategori', function () {
     return "Halaman tambah kategori tiket";
 })->name('tambah.kategori');
+
+Route::get('/dashboard-user', function () {
+    return view('dashboard_user');
+})->name('dashboard_user');
+
+Route::get('/events', function () {
+    return view('events');
+})->name('events');
+
+Route::get('/transaksi', function () {
+    return view('transaksi');
+})->name('transaksi');
+
+Route::get('/logout', function () {
+    session()->forget('user');
+    return redirect('/login');
+})->name('logout');
+
+/*
+|--------------------------------------------------------------------------
+| PROTEKSI ADMIN
+|--------------------------------------------------------------------------
+*/
+Route::get('/dashboard-admin', function () {
+    if (!session()->has('admin')) {
+        return redirect('/admin/login');
+    }
+    return view('dashboard'); // pakai dashboard yang sama
+})->name('dashboard_admin');
+Route::get('/login_admin', [AuthController::class, 'showLoginAdmin']);
+
+// halaman login admin
+Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.login.form');
+
+// proses login admin (WAJIB pakai name ini karena dipanggil di Blade)
+Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
+
+
+// halaman login admin
+Route::get('/admin/login', [AuthController::class, 'showLoginAdmin']);
+
+// proses login
+Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
+
+// dashboard admin
+Route::get('/dashboard-admin', function () {
+    if (!session()->has('admin')) {
+        return redirect('/admin/login');
+    }
+    return view('dashboard'); // file dashboard kamu
+})->name('dashboard_admin');

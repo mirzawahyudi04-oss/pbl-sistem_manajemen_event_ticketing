@@ -17,6 +17,21 @@
             font-weight: bold;
         }
 
+        /* BUTTON BACK */
+        .btn-back {
+            display: inline-block;
+            margin: 0 20px 10px;
+            padding: 8px 15px;
+            background: #444;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+        }
+
+        .btn-back:hover {
+            background: #222;
+        }
+
         /* SEARCH */
         .search-bar {
             background: #666;
@@ -79,6 +94,11 @@
             margin: 10px 0;
             color: white;
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #777;
         }
 
         .footer-card {
@@ -109,18 +129,31 @@
 
 <h1>JELAJAHI EVENT</h1>
 
+<!-- ✅ BUTTON KEMBALI -->
+<a href="{{ route('dashboard_user') }}" class="btn-back">
+    ⬅ Kembali ke Dashboard
+</a>
+
 <!-- SEARCH -->
 <div class="search-bar">
     <input type="text" id="search" placeholder="Cari Event..." onkeyup="searchEvent()">
 </div>
 
-<!-- DATA EVENT (TIDAK DOUBLE) -->
+<!-- DATA EVENT -->
 @php
 $events = [
- ['Live Music','Java Jazz Fest','25 Mei 2026','Jazz Fest','concert'],
- ['Workshop','Fullstack Web','05 Mei 2026','Fullstack Tech','coding'],
- ['FunRun','Batam 5K','30 Mei 2026','GoRun Batam','run'],
- ['Seminar','Masa Depan AI','10 Juli 2026','MindTech','seminar'],
+ ['Konser','Java Jazz Festival','25 Mei 2026','Jazz Fest','concert'],
+ ['Konser','We The Fest','20 Juli 2026','Ismaya Live','festival'],
+ ['Konser','Coldplay Live','10 September 2026','Music Asia','concert'],
+ ['Festival','Djakarta Warehouse Project','12 Desember 2026','DWP','music'],
+ ['Olahraga','Liga 1 Indonesia','05 Mei 2026','PSSI','stadium'],
+ ['Olahraga','Fun Run Batam 5K','30 Mei 2026','GoRun','run'],
+ ['Seminar','Seminar Nasional IT','15 Juni 2026','TechTalk','seminar'],
+ ['Workshop','Bootcamp Coding','18 Juni 2026','Code Academy','coding'],
+ ['Expo','Indonesia Comic Con','01 Juli 2026','Comic ID','anime'],
+ ['Teater','Pentas Drama Musikal','22 Juni 2026','ArtStage','theater'],
+ ['Pameran','Art Exhibition 2026','28 Juni 2026','ArtSpace','art'],
+ ['Kompetisi','Turnamen E-Sport MLBB','10 Juli 2026','E-Sport ID','gaming'],
 ];
 @endphp
 
@@ -134,7 +167,8 @@ $events = [
     <p>{{ $e[1] }}</p>
     <p>{{ $e[2] }}</p>
 
-    <button class="btn">Detail</button>
+    <!-- DETAIL (OPSIONAL KE DASHBOARD) -->
+    <a href="{{ route('dashboard_user') }}" class="btn">Detail</a>
 
     <div class="footer-card">
         <img src="https://source.unsplash.com/50x50/?person">
@@ -146,7 +180,7 @@ $events = [
 </div>
 
 <footer>
-    Copyright ©2026, Design by Steven.id
+    Copyright ©2026
 </footer>
 
 <!-- SEARCH SCRIPT -->

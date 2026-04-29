@@ -6,29 +6,88 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    /*
+    |--------------------------------------------------------------------------
+    | LOGIN USER
+    |--------------------------------------------------------------------------
+    */
+    public function showLoginUser()
     {
-        // Validasi
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        // USER SEMENTARA
-        if ($request->email == "user@gmail.com" && $request->password == "123") {
-
-            // Simpan session
-            session(['user' => $request->email]);
-
-            // 👉 arahkan ke dashboard user
-            return redirect('/dashboard-user');
-        }
-
-        return back()->with('error', 'Email atau password salah');
+        return view('login');
     }
 
-    public function register(Request $request)
+    public function login(Request $request)
     {
-        return back()->with('success', 'Register berhasil (dummy)');
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        // SIMULASI LOGIN USER
+        if (
+            $request->email === 'user@gmail.com' &&
+            $request->password === '123'
+        ) {
+            session([
+                'user' => $request->email,
+                'nama' => 'Mirza',
+                'role' => 'user'
+            ]);
+
+            return redirect()->route('dashboard_user');
+        }
+
+        return back()
+            ->withInput()
+            ->with('error', 'Email atau password salah');
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGIN ADMIN
+    |--------------------------------------------------------------------------
+    */
+    public function showLoginAdmin()
+    {
+        return view('login_admin');
+    }
+
+    public function loginAdmin(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        // SIMULASI LOGIN ADMIN
+        if (
+            $request->email === 'admin@gmail.com' &&
+            $request->password === '123456'
+        ) {
+            session([
+                'admin' => $request->email,
+                'nama' => 'Admin',
+                'role' => 'admin'
+            ]);
+
+            return redirect()->route('dashboard_admin');
+        }
+
+        return back()
+            ->withInput()
+            ->with('error', 'Email atau password salah (admin)');
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGOUT
+    |--------------------------------------------------------------------------
+    */
+    public function logout()
+    {
+        session()->flush();
+        return redirect()->route('login');
     }
 }

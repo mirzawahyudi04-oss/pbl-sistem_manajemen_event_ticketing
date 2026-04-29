@@ -130,19 +130,37 @@
 <!-- CARA KERJA -->
 <div class="container mt-5 text-center">
     <h5>Cara Kerja</h5>
+    <p class="text-muted">
+        Hanya dalam beberapa langkah mudah, kamu sudah bisa mendapatkan tiket event favoritmu.
+    </p>
 
     <div class="row mt-4">
-        <div class="col-md-3"><div class="step">Cari event</div></div>
-        <div class="col-md-3"><div class="step">Pilih tiket</div></div>
-        <div class="col-md-3"><div class="step">Pembayaran</div></div>
-        <div class="col-md-3"><div class="step">E-ticket dikirim</div></div>
+        <div class="col-md-3">
+            <div class="step">
+                <b>Cari Event</b><br>
+                <small>Temukan event sesuai minatmu</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="step">
+                <b>Pilih Tiket</b><br>
+                <small>Pilih kategori & jumlah tiket</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="step">
+                <b>Pembayaran</b><br>
+                <small>Lakukan pembayaran dengan aman</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="step">
+                <b>E-Ticket</b><br>
+                <small>Tiket langsung dikirim ke kamu</small>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- FOOTER -->
-<footer class="bg-dark text-white text-center mt-5 p-3">
-    Copyright ©2026
-</footer>
-
-</body>
-</html>

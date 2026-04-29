@@ -108,7 +108,6 @@ th, td {
 <div class="sidebar">
     <h2>ADMIN</h2>
 
-    <!-- ✅ pakai route -->
     <a href="{{ route('dashboard') }}">Dashboard</a>
     <a href="{{ route('manajemen') }}">Manajemen Event</a>
     <a href="{{ route('transaksi') }}">Data Transaksi</a>
@@ -138,14 +137,105 @@ th, td {
                 <th>Aksi</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr>
-                <td>Java Jazz Festival 2026</td>
-                <td>Music</td>
-                <td>01 April 2026</td>
-                <td><span class="status approved">Approved</span></td>
-                <td><button class="btn-edit">Edit</button></td>
-            </tr>
+
+        <tr>
+            <td>Java Jazz Festival</td>
+            <td>Konser</td>
+            <td>25 Mei 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>We The Fest</td>
+            <td>Festival</td>
+            <td>20 Juli 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Coldplay Live</td>
+            <td>Konser</td>
+            <td>10 September 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Djakarta Warehouse Project</td>
+            <td>Festival</td>
+            <td>12 Desember 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Liga 1 Indonesia</td>
+            <td>Olahraga</td>
+            <td>05 Mei 2026</td>
+            <td><span class="status pending">Pending</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Fun Run Batam 5K</td>
+            <td>Olahraga</td>
+            <td>30 Mei 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Seminar Nasional IT</td>
+            <td>Seminar</td>
+            <td>15 Juni 2026</td>
+            <td><span class="status pending">Pending</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Bootcamp Coding</td>
+            <td>Workshop</td>
+            <td>18 Juni 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Indonesia Comic Con</td>
+            <td>Expo</td>
+            <td>01 Juli 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Pentas Drama Musikal</td>
+            <td>Teater</td>
+            <td>22 Juni 2026</td>
+            <td><span class="status rejected">Rejected</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Art Exhibition 2026</td>
+            <td>Pameran</td>
+            <td>28 Juni 2026</td>
+            <td><span class="status approved">Approved</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
+        <tr>
+            <td>Turnamen E-Sport MLBB</td>
+            <td>Kompetisi</td>
+            <td>10 Juli 2026</td>
+            <td><span class="status pending">Pending</span></td>
+            <td><button class="btn-edit">Edit</button></td>
+        </tr>
+
         </tbody>
     </table>
 </div>

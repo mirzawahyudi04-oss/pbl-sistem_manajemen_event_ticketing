@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: #f5f5f5;
         }
 
@@ -18,14 +18,15 @@
         /* SIDEBAR */
         .sidebar {
             width: 220px;
+            height: 100vh;
             background: #3d3d3d;
             color: white;
-            height: 100vh;
             padding: 20px;
             position: relative;
         }
 
         .sidebar h2 {
+            margin: 0;
             font-size: 18px;
         }
 
@@ -46,14 +47,25 @@
             background: #575757;
         }
 
+        /* LOGOUT */
         .logout {
             position: absolute;
             bottom: 20px;
+            width: 80%;
         }
 
-        .logout a {
+        .btn-logout {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background: red;
             color: white;
             text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-logout:hover {
+            background: darkred;
         }
 
         /* MAIN */
@@ -65,23 +77,27 @@
         .cards {
             display: flex;
             gap: 20px;
+            margin-top: 15px;
         }
 
         .card {
             background: white;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             width: 150px;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .event {
             background: white;
             padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .btn {
@@ -111,20 +127,21 @@
 
         <div class="menu">
             <a href="{{ route('dashboard_user') }}">Dashboard</a>
-            <a href="/tiket">Tiket Saya</a>
-            <a href="{{ route('events') }}">Event</a> <!-- ✅ INI YANG BISA DIKLIK -->
-            <a href="/transaksi">Riwayat</a>
-            <a href="/profil">Profil</a>
+            <a href="#">Tiket Saya</a>
+            <a href="{{ route('events') }}">Event</a>
+            <a href="{{ route('transaksi') }}">Riwayat</a>
+            <a href="#">Profil</a>
         </div>
 
         <div class="logout">
-            <a href="{{ route('logout') }}">Keluar</a>
+            <a href="{{ route('logout') }}" class="btn-logout">Logout</a>
         </div>
     </div>
 
     <!-- MAIN -->
     <div class="main">
-        <h3>Halo, {{ session('user') }} 👋</h3>
+        <!-- 🔥 GANTI NAMA DI SINI -->
+        <h3>Halo, {{ session('namespace') ?? 'Mirza' }} 👋</h3>
 
         <div class="cards">
             <div class="card">
@@ -141,6 +158,7 @@
             </div>
         </div>
 
+        <!-- EVENT LIST -->
         <div class="event">
             <div>
                 <b>Java Jazz Festival</b><br>
