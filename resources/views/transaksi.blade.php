@@ -110,14 +110,16 @@ footer {
 <div class="sidebar">
     <div class="menu">
         <h3 style="text-align:center;">ADMIN</h3>
-        <a href="/dashboard">Dashboard</a>
-        <a href="#">Manajemen Event</a>
-        <a href="#">Data Transaksi</a>
-        <a href="#">Kategori Tiket</a>
+
+        <!-- ✅ pakai route -->
+        <a href="{{ route('dashboard') }}">Dashboard</a>
+        <a href="{{ route('manajemen') }}">Manajemen Event</a>
+        <a href="{{ route('transaksi') }}">Data Transaksi</a>
+        <a href="{{ route('kategori') }}">Kategori Tiket</a>
     </div>
 
     <div class="logout">
-        <a href="/logout">Keluar</a>
+        <a href="{{ route('logout') }}">Keluar</a>
     </div>
 </div>
 
@@ -147,33 +149,6 @@ footer {
                 <td>#INV-202604010</td>
                 <td>Andi Pratama</td>
                 <td>Java Jazz Festival</td>
-                <td>Rp.120.000</td>
-                <td><span class="status lunas">Lunas</span></td>
-                <td class="aksi">👁️</td>
-            </tr>
-
-            <tr>
-                <td>#INV-20260409</td>
-                <td>Budi Santoso</td>
-                <td>Workshop Fullstack</td>
-                <td>Rp.50.000</td>
-                <td><span class="status pending">Pending</span></td>
-                <td class="aksi">✔️</td>
-            </tr>
-
-            <tr>
-                <td>#INV-20260408</td>
-                <td>Dibran AI</td>
-                <td>Seminar Nasional</td>
-                <td>Rp.50.000</td>
-                <td><span class="status batal">Batal</span></td>
-                <td class="aksi">🗑️</td>
-            </tr>
-
-            <tr>
-                <td>#INV-20260407</td>
-                <td>Owa Sastro</td>
-                <td>FunRun Batam 5K</td>
                 <td>Rp.120.000</td>
                 <td><span class="status lunas">Lunas</span></td>
                 <td class="aksi">👁️</td>

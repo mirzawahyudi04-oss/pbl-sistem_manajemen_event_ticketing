@@ -98,12 +98,6 @@ th, td {
 .pending { background: orange; }
 .rejected { background: red; }
 
-.btn {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 10px;
-}
-
 footer {
     text-align: center;
     margin-top: 20px;
@@ -113,14 +107,19 @@ footer {
 </head>
 <body>
 
+<!-- SIDEBAR -->
 <div class="sidebar">
     <h2>ADMIN</h2>
-    <a href="/dashboard">Dashboard</a>
-    <a href="#">Manajemen Event</a>
-    <a href="#">Data Transaksi</a>
-    <a href="#">Kategori Tiket</a>
+
+    <!-- ✅ pakai route -->
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('manajemen') }}">Manajemen Event</a>
+    <a href="{{ route('transaksi') }}">Data Transaksi</a>
+    <a href="{{ route('kategori') }}">Kategori Tiket</a>
+    <a href="{{ route('logout') }}">Keluar</a>
 </div>
 
+<!-- MAIN -->
 <div class="main">
     <div class="top">
         <h2>Halo, Admin!</h2>
@@ -165,7 +164,7 @@ footer {
             <td>Music</td>
             <td>01 April 2026</td>
             <td><span class="status approved">Approved</span></td>
-            <td><button class="btn">Edit</button></td>
+            <td><button>Edit</button></td>
         </tr>
     </table>
 

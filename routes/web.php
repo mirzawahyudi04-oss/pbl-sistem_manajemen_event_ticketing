@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
-| HALAMAN AWAL (LANDING)
+| LANDING PAGE
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
@@ -15,7 +15,7 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| LOGIN
+| LOGIN & REGISTER
 |--------------------------------------------------------------------------
 */
 Route::get('/login', function () {
@@ -24,12 +24,6 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthController::class, 'login']);
 
-
-/*
-|--------------------------------------------------------------------------
-| REGISTER
-|--------------------------------------------------------------------------
-*/
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
@@ -39,21 +33,14 @@ Route::post('/register', [AuthController::class, 'register']);
 
 /*
 |--------------------------------------------------------------------------
-| DASHBOARD ADMIN
-|--------------------------------------------------------------------------
-*/
-Route::get('/dashboard', function () {
-    return view('dashboard'); // pastikan file ada
-})->name('dashboard');
-
-
-/*
-|--------------------------------------------------------------------------
 | DASHBOARD USER
 |--------------------------------------------------------------------------
 */
 Route::get('/dashboard-user', function () {
-    return view('dashboard_user'); // pastikan file ada
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('dashboard_user');
 })->name('dashboard_user');
 
 
@@ -63,8 +50,57 @@ Route::get('/dashboard-user', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/events', function () {
-    return view('events'); // pastikan file ada
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('events');
 })->name('events');
+
+
+/*
+|--------------------------------------------------------------------------
+| DASHBOARD ADMIN
+|--------------------------------------------------------------------------
+*/
+Route::get('/dashboard', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('dashboard');
+})->name('dashboard');
+
+
+/*
+|--------------------------------------------------------------------------
+| KATEGORI TIKET (INI YANG DIPERBAIKI 🔥)
+|--------------------------------------------------------------------------
+*/
+Route::get('/kategori-tiket', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('kategori_tiket');
+})->name('kategori'); // ✅ penting!
+
+
+/*
+|--------------------------------------------------------------------------
+| HALAMAN LAIN
+|--------------------------------------------------------------------------
+*/
+Route::get('/transaksi', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('transaksi');
+})->name('transaksi');
+
+Route::get('/detail-event', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('detail_event');
+})->name('detail.event');
 
 
 /*
@@ -73,22 +109,59 @@ Route::get('/events', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/logout', function () {
-    session()->flush();
-    return redirect('/login');
+    session()->forget('user');
+    return redirect()->route('login');
 })->name('logout');
 
-Route::get('/transaksi', function () {
-    return view('transaksi');
-});
+Route::get('/manajemen-event', function () {
+    if (!session()->has('user')) {
+        return redirect('/login');
+    }
+    return view('manajemen_event'); // pastikan file ada
+})->name('manajemen');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 Route::get('/manajemen-event', function () {
     return view('manajemen_event');
-});
+})->name('manajemen');
 
 Route::get('/kategori-tiket', function () {
     return view('kategori_tiket');
-});
+})->name('kategori');
 
-Route::get('/detail-event', function () {
-    return view('detail_event');
-})->name('detail.event');
+Route::get('/transaksi', function () {
+    return view('transaksi');
+})->name('transaksi');
+
+Route::get('/logout', function () {
+    session()->forget('user');
+    return redirect('/login');
+})->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/manajemen-event', function () {
+    return view('manajemen_event');
+})->name('manajemen');
+
+Route::get('/transaksi', function () {
+    return view('transaksi');
+})->name('transaksi');
+
+Route::get('/kategori-tiket', function () {
+    return view('kategori_tiket');
+})->name('kategori');
+
+Route::get('/logout', function () {
+    session()->forget('user');
+    return redirect('/login');
+})->name('logout');
+
+Route::get('/tambah-kategori', function () {
+    return "Halaman tambah kategori tiket";
+})->name('tambah.kategori');

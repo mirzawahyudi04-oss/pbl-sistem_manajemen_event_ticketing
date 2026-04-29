@@ -3,71 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial;
             background: #f3f3f3;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-        .wrapper {
-            background: #e5e5e5;
-            padding: 40px;
-            border-radius: 20px;
-            width: 350px;
-        }
-        .card {
-            background: #f9f9f9;
+        .box {
+            background: white;
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 10px;
+            width: 300px;
             text-align: center;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             margin: 10px 0;
-            border-radius: 30px;
-            border: 1px solid #ccc;
-            text-align: center;
         }
         button {
             width: 100%;
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            background: #222;
+            padding: 10px;
+            background: black;
             color: white;
-            margin-top: 15px;
+            border: none;
         }
-        .footer { margin-top: 15px; }
-        .error { color: red; font-size: 13px; }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="card">
-        <h2>LOGIN</h2>
+<div class="box">
+    <h2>LOGIN</h2>
 
-        @if(session('error'))
-            <p class="error">{{ session('error') }}</p>
-        @endif
+    @if(session('error'))
+        <p class="error">{{ session('error') }}</p>
+    @endif
 
-        <form method="POST" action="/login">
-            @csrf
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Masuk</button>
-        </form>
-
-        <div class="footer">
-            Belum punya akun? 
-            <a href="{{ route('register') }}">Daftar di sini</a>
-        </div>
-    </div>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Masuk</button>
+    </form>
 </div>
 
 </body>

@@ -1,118 +1,121 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Manajemen Event</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #e5e5e5;
-        }
+<meta charset="UTF-8">
+<title>Manajemen Event</title>
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #333;
-            color: white;
-            position: fixed;
-            padding-top: 20px;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #e5e5e5;
+}
 
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #333;
+    color: white;
+    position: fixed;
+    padding-top: 20px;
+}
 
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-        }
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        .sidebar a:hover {
-            background: #444;
-        }
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+}
 
-        .logout {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-        }
+.sidebar a:hover {
+    background: #444;
+}
 
-        /* MAIN */
-        .main {
-            margin-left: 220px;
-            padding: 20px;
-        }
+.logout {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* MAIN */
+.main {
+    margin-left: 220px;
+    padding: 20px;
+}
 
-        .btn {
-            padding: 8px 12px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-        }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .btn-add {
-            background: white;
-            border: 1px solid #ccc;
-        }
+.btn {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
+.btn-add {
+    background: white;
+    border: 1px solid #ccc;
+}
 
-        table, th, td {
-            border: 1px solid #999;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
+table, th, td {
+    border: 1px solid #999;
+}
 
-        .status {
-            padding: 5px 10px;
-            border-radius: 15px;
-            color: white;
-        }
+th, td {
+    padding: 10px;
+    text-align: center;
+}
 
-        .approved { background: green; }
-        .pending { background: orange; }
-        .rejected { background: red; }
+.status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+}
 
-        .btn-edit {
-            padding: 5px 10px;
-            border-radius: 15px;
-            border: 1px solid #ccc;
-            background: white;
-            cursor: pointer;
-        }
-    </style>
+.approved { background: green; }
+.pending { background: orange; }
+.rejected { background: red; }
+
+.btn-edit {
+    padding: 5px 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Manajemen Event</a>
-    <a href="#">Data Transaksi</a>
-    <a href="#">Kategori Tiket</a>
+    <h2>ADMIN</h2>
+
+    <!-- ✅ pakai route -->
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('manajemen') }}">Manajemen Event</a>
+    <a href="{{ route('transaksi') }}">Data Transaksi</a>
+    <a href="{{ route('kategori') }}">Kategori Tiket</a>
 
     <div class="logout">
-        <a href="#">Keluar</a>
+        <a href="{{ route('logout') }}">Keluar</a>
     </div>
 </div>
 
@@ -141,20 +144,6 @@
                 <td>Music</td>
                 <td>01 April 2026</td>
                 <td><span class="status approved">Approved</span></td>
-                <td><button class="btn-edit">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Workshop Fullstack</td>
-                <td>Seminar</td>
-                <td>06 April 2026</td>
-                <td><span class="status pending">Pending</span></td>
-                <td><button class="btn-edit">Edit</button></td>
-            </tr>
-            <tr>
-                <td>Crypto GetRich Seminar</td>
-                <td>Seminar</td>
-                <td>15 April 2026</td>
-                <td><span class="status rejected">Rejected</span></td>
                 <td><button class="btn-edit">Edit</button></td>
             </tr>
         </tbody>

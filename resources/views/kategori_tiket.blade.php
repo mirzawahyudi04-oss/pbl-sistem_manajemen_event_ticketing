@@ -1,171 +1,108 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Kategori Tiket</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #e5e5e5;
-        }
+<meta charset="UTF-8">
+<title>Kategori Tiket</title>
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #333;
-            color: white;
-            position: fixed;
-            padding-top: 20px;
-        }
+<style>
+body { margin:0; font-family:Arial; background:#e5e5e5; }
 
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+/* SIDEBAR */
+.sidebar {
+    width:220px; height:100vh;
+    background:#333; color:white;
+    position:fixed;
+}
+.sidebar h2 { text-align:center; padding:15px; }
+.sidebar a {
+    display:block; padding:12px; color:white; text-decoration:none;
+}
+.sidebar a:hover { background:#444; }
 
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-        }
+/* MAIN */
+.main { margin-left:220px; padding:20px; }
 
-        .sidebar a:hover {
-            background: #444;
-        }
+.btn {
+    padding:6px 12px; border-radius:20px;
+    border:1px solid #ccc; background:white;
+    text-decoration:none;
+}
 
-        .logout {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-        }
-
-        /* MAIN */
-        .main {
-            margin-left: 220px;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .icons {
-            font-size: 20px;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            background: white;
-            cursor: pointer;
-        }
-
-        /* TABLE */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-        }
-
-        table, th, td {
-            border: 1px solid #999;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .btn-edit {
-            padding: 4px 10px;
-            border-radius: 15px;
-            border: 1px solid #ccc;
-            background: white;
-            cursor: pointer;
-        }
-
-        .btn-delete {
-            padding: 4px 10px;
-            border-radius: 15px;
-            border: 1px solid #ccc;
-            background: white;
-            cursor: pointer;
-        }
-    </style>
+table {
+    width:100%; margin-top:20px;
+    border-collapse:collapse;
+    background:white;
+}
+th, td {
+    border:1px solid #999;
+    padding:10px;
+    text-align:center;
+}
+</style>
 </head>
+
 <body>
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Manajemen Event</a>
-    <a href="#">Data Transaksi</a>
-    <a href="#">Kategori Tiket</a>
-
-    <div class="logout">
-        <a href="#">Keluar</a>
-    </div>
+    <h2>ADMIN</h2>
+    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('manajemen') }}">Manajemen Event</a>
+    <a href="{{ route('transaksi') }}">Data Transaksi</a>
+    <a href="{{ route('kategori') }}">Kategori Tiket</a>
 </div>
 
 <!-- MAIN -->
 <div class="main">
-    <div class="header">
-        <h2>Halo, Admin!</h2>
-        <div class="icons">🔔 👤</div>
-    </div>
 
-    <h3>Kategori tiket</h3>
+<h2>Manajemen Kategori Tiket 🎫</h2>
 
-    <button class="btn">+ kelola tiket</button>
+<!-- ✅ tombol sudah bisa diklik -->
+<a href="{{ route('tambah.kategori') }}" class="btn">+ Tambah Kategori</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Jenis Tiket</th>
-                <th>Harga</th>
-                <th>Kuota</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>VIP</td>
-                <td>350.000</td>
-                <td>01 April 2026</td>
-                <td>
-                    <button class="btn-edit">Edit</button>
-                    <button class="btn-delete">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Reguler</td>
-                <td>250.000</td>
-                <td>06 April 2026</td>
-                <td>
-                    <button class="btn-edit">Edit</button>
-                    <button class="btn-delete">Hapus</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Festival</td>
-                <td>200.000</td>
-                <td>15 April 2026</td>
-                <td>
-                    <button class="btn-edit">Edit</button>
-                    <button class="btn-delete">Hapus</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<table>
+<tr>
+    <th>Jenis</th>
+    <th>Harga</th>
+    <th>Kuota</th>
+    <th>Aksi</th>
+</tr>
+
+<tr>
+    <td>VIP</td>
+    <td>350.000</td>
+    <td>100</td>
+    <td>
+        <button onclick="edit('VIP')">Edit</button>
+        <button onclick="hapus('VIP')">Hapus</button>
+    </td>
+</tr>
+
+<tr>
+    <td>Reguler</td>
+    <td>250.000</td>
+    <td>200</td>
+    <td>
+        <button onclick="edit('Reguler')">Edit</button>
+        <button onclick="hapus('Reguler')">Hapus</button>
+    </td>
+</tr>
+
+</table>
+
 </div>
+
+<script>
+function edit(nama){
+    alert("Edit: " + nama);
+}
+
+function hapus(nama){
+    if(confirm("Hapus "+nama+"?")){
+        alert("Data dihapus (dummy)");
+    }
+}
+</script>
 
 </body>
 </html>
