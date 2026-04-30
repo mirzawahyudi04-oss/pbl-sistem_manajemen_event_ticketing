@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Lupa Password</title>  {{-- sudah benar --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -12,7 +12,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             background: url('/images/bglogin.jpg') center/cover no-repeat fixed;
         }
 
@@ -29,7 +28,6 @@
             z-index: 1;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 40px;
             border-radius: 20px;
@@ -40,6 +38,12 @@
         h2 {
             color: white;
             letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        p.sub {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 13px;
             margin-bottom: 20px;
         }
 
@@ -84,6 +88,12 @@
             background: #444;
         }
 
+        .success {
+            color: #80ffb0;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
         .error {
             color: #ff8080;
             font-size: 13px;
@@ -97,42 +107,34 @@
         }
 
         a {
-            color: #90c8ff;
+            color: #4da6ff;        /* ← diubah jadi biru lebih cerah */
             text-decoration: none;
         }
-        .forgot {
-            display: block;
-            margin-top: 10px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-        }
-        .forgot:hover {
-            color: #90c8ff;
+
+        a:hover {
+            color: #80c4ff;        /* ← hover sedikit lebih terang */
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
 <div class="box">
-    <h2>LOGIN</h2>
+    <h2>LUPA PASSWORD</h2>
+    <p class="sub">Masukkan email akunmu untuk melanjutkan.</p>
 
-    @if(session('error'))
-        <p class="error">{{ session('error') }}</p>
+    @if($errors->any())
+        <p class="error">{{ $errors->first() }}</p>
     @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('password.check-email') }}">
         @csrf
         <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Masuk</button>
+        <button type="submit">Lanjutkan</button>
     </form>
 
     <div class="footer">
-        <a href="{{ route('password.request') }}" class="forgot">Lupa password?</a>
-        Belum punya akun? <a href="/register">Daftar di sini</a>
+        <a href="{{ route('login') }}">← Kembali ke Login</a>
     </div>
 </div>
-
 </body>
 </html>

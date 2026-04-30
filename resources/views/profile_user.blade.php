@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard User</title>
+    <title>Profil User</title>
 
     <style>
         body {
@@ -47,7 +47,6 @@
             background: #575757;
         }
 
-        /* LOGOUT */
         .logout {
             position: absolute;
             bottom: 20px;
@@ -64,62 +63,44 @@
             border-radius: 5px;
         }
 
-        .btn-logout:hover {
-            background: darkred;
-        }
-
         /* MAIN */
         .main {
             flex: 1;
             padding: 20px;
         }
 
-        .cards {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-        }
-
         .card {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
-            width: 150px;
-            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .event {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .card h3 {
+            margin-top: 0;
         }
 
-        .btn {
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
             background: navy;
             color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            text-decoration: none;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .status {
-            background: green;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-size: 12px;
+        button:hover {
+            background: darkblue;
         }
-        .menu a.active {
-        background: #575757;
-        font-weight: bold;
-        border-left: 4px solid #00c3ff;
-    }
     </style>
 </head>
 <body>
@@ -136,7 +117,6 @@
             <a href="{{ route('events') }}">Event</a>
             <a href="{{ route('user.riwayat') }}">Riwayat</a>
             <a href="{{ route('user.profile') }}">Profil</a>
-            
         </div>
 
         <div class="logout">
@@ -146,41 +126,28 @@
 
     <!-- MAIN -->
     <div class="main">
-        <!-- 🔥 GANTI NAMA DI SINI -->
-        <h3>Halo, {{ session('namespace') ?? 'Mirza' }} 👋</h3>
+        <h2>Profil Saya</h2>
 
-        <div class="cards">
-            <div class="card">
-                <h4>Tiket</h4>
-                <p>2</p>
-            </div>
-            <div class="card">
-                <h4>Riwayat</h4>
-                <p>9</p>
-            </div>
-            <div class="card">
-                <h4>Pending</h4>
-                <p>1</p>
-            </div>
+        <!-- INFO -->
+        <div class="card">
+            <h3>Informasi Akun</h3>
+            <p><b>Nama:</b> {{ session('user') ?? 'Mirza' }}</p>
+            <p><b>Email:</b> user@email.com</p>
+            <p><b>No HP:</b> 08123456789</p>
         </div>
 
-        <!-- EVENT LIST -->
-        <div class="event">
-            <div>
-                <b>Java Jazz Festival</b><br>
-                <small>25 Mei 2026</small><br>
-                <span class="status">Lunas</span>
-            </div>
-            <a href="#" class="btn">E-Tiket</a>
-        </div>
+        <!-- EDIT -->
+        <div class="card">
+            <h3>Edit Profil</h3>
 
-        <div class="event">
-            <div>
-                <b>Fun Run Batam</b><br>
-                <small>30 Mei 2026</small><br>
-                <span class="status">Lunas</span>
-            </div>
-            <a href="#" class="btn">E-Tiket</a>
+            <form method="POST" action="#">
+                @csrf
+                <input type="text" name="nama" placeholder="Nama Baru">
+                <input type="email" name="email" placeholder="Email Baru">
+                <input type="password" name="password" placeholder="Password Baru">
+                <br><br>
+                <button type="submit">Simpan Perubahan</button>
+            </form>
         </div>
 
     </div>
