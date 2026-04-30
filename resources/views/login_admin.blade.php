@@ -6,33 +6,48 @@
     <style>
         body {
             font-family: Arial;
-            background: #f3f3f3;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
+            background: url('/images/concert-bg.jpg') center/cover no-repeat;
         }
+
         .box {
-            background: white;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
             padding: 30px;
             border-radius: 10px;
             width: 300px;
             text-align: center;
         }
+
+        h2 {
+            color: black;
+        }
+
         input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
+
         button {
             width: 100%;
             padding: 10px;
             background: black;
             color: white;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
+
         .error {
-            color: red;
+            color: #ffaaaa;
         }
     </style>
 </head>

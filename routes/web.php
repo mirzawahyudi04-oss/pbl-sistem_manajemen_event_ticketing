@@ -216,3 +216,7 @@ Route::get('/dashboard-admin', function () {
     }
     return view('dashboard'); // file dashboard kamu
 })->name('dashboard_admin');
+
+Route::get('/detail', function () {
+    return view('detail');
+});

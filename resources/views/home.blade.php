@@ -3,105 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Event Ticketing</title>
-
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         .hero {
-            background: url('https://source.unsplash.com/1600x600/?concert') center/cover no-repeat;
-            height: 400px;
+            background: url('/images/concert-bg.jpg') center/cover no-repeat;
+            height: 450px;
             color: white;
             display: flex;
             align-items: center;
+            background-color: rgba(0,0,0,0.6);
+            background-blend-mode: darken;
         }
 
         .overlay {
-            background: rgba(0,0,0,0.6);
             width: 100%;
-            padding: 40px;
+            padding: 60px 40px;
         }
 
         .card-box {
             background: #f1f1f1;
             border-radius: 10px;
-            padding: 15px;
+            padding: 20px 15px;
             text-align: center;
+            height: 100%;
         }
 
         .step {
             background: #e0e0e0;
             border-radius: 20px;
-            padding: 15px;
+            padding: 20px 15px;
+            height: 100%;
+            text-align: center;
+        }
+
+        .event-card {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .event-card .event-img {
+            height: 150px;
+            background: #ccc;
         }
     </style>
 </head>
 <body>
 
-<!-- ✅ NAVBAR -->
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-
-        <a class="navbar-brand" href="/">LOGO</a>
-
-        <div class="d-flex align-items-center">
-
-            <a class="nav-link text-white me-3" href="/">Beranda</a>
-
-            <a class="nav-link text-white me-3" href="{{ route('events') }}">
-                Jelajahi Event
-            </a>
-
-            <a class="nav-link text-white me-3" href="#">Cara Kerja</a>
-
-            <!-- 🔥 LOGIN & DAFTAR -->
-            <a href="{{ route('login') }}" class="btn btn-outline-light me-2">
-                Login
-            </a>
-
-            <a href="{{ route('register') }}" class="btn btn-light">
-                Daftar
-            </a>
-
+        <a class="navbar-brand" href="/">STEVENtix</a>
+        <div class="d-flex align-items-center gap-3">
+            <a class="nav-link text-white" href="/">Beranda</a>
+            <a class="nav-link text-white" href="{{ route('login') }}">Jelajahi Event</a>
+            <a class="nav-link text-white" href="#">Cara Kerja</a>
+            <a href="{{ route('login') }}" class="btn btn-outline-light">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-light">Daftar</a>
         </div>
     </div>
 </nav>
 
-<!-- ✅ HERO -->
+<!-- HERO -->
 <section class="hero">
-    <div class="overlay container">
-        <h2>Temukan Event Terbaik,<br>Pesan Tiket dalam Sekejap</h2>
-        <p>Cari, Pilih, dan beli tiket event favoritmu dengan cepat dan aman.</p>
-
-        <a href="{{ route('events') }}" class="btn btn-light">
-            Jelajahi Event
-        </a>
+    <div class="overlay">
+        <div class="container">
+            <h2 class="fw-bold mb-3">Temukan Event Terbaik,<br>Pesan Tiket dalam Sekejap</h2>
+            <p class="mb-4">Cari, Pilih, dan beli tiket event favoritmu dengan cepat dan aman.</p>
+            <a href="{{ route('login') }}" class="btn btn-light px-4">Jelajahi Event</a>
+        </div>
     </div>
 </section>
 
 <!-- KELEBIHAN -->
-<div class="container mt-5 text-center">
-    <h5>Kenapa Pilih Platform Ini?</h5>
-
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card-box">
-                <h6>Kemudahan Akses</h6>
-                <p>Cepat & Mudah pesan tiket</p>
+<div class="container mt-5">
+    <h5 class="text-center mb-4">Kenapa Pilih Platform Ini?</h5>
+    <div class="row g-4 align-items-stretch">
+        <div class="col-md-4 d-flex">
+            <div class="card-box w-100">
+                <h6 class="fw-bold mb-2">Kemudahan Akses</h6>
+                <p class="text-muted mb-0">Cepat & mudah pesan tiket hanya dalam hitungan detik tanpa perlu antre panjang.</p>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card-box">
-                <h6>Keamanan Transaksi</h6>
-                <p>Pembayaran aman & terpercaya</p>
+        <div class="col-md-4 d-flex">
+            <div class="card-box w-100">
+                <h6 class="fw-bold mb-2">Keamanan Transaksi</h6>
+                <p class="text-muted mb-0">Pembayaran aman dengan berbagai metode yang terenkripsi dan terjamin keamanannya.</p>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card-box">
-                <h6>Pilihan Event Lengkap</h6>
-                <p>Banyak event menarik tersedia</p>
+        <div class="col-md-4 d-flex">
+            <div class="card-box w-100">
+                <h6 class="fw-bold mb-2">Pilihan Event Lengkap</h6>
+                <p class="text-muted mb-0">Mulai dari konser musik, seminar, hingga workshop kreatif semua ada di sini.</p>
             </div>
         </div>
     </div>
@@ -109,58 +102,78 @@
 
 <!-- EVENT PREVIEW -->
 <div class="container mt-5">
-    <h5 class="text-center">Event Terbaru</h5>
+    <h5 class="text-center mb-4">Event Terbaru</h5>
+    <div class="row g-4 align-items-stretch">
 
-    <div class="row mt-4">
-        @for($i=0;$i<3;$i++)
-        <div class="col-md-4">
-            <div class="card p-3 text-center">
-                <div style="height:100px; background:#ccc;"></div>
-                <p class="mt-2">Nama Event</p>
+        @php
+            $events = [
+                
+                ['nama' => 'Music Festival', 'img' => 'musik1.jpg'],
+                ['nama' => 'Workshop Kreatif', 'img' => 'ws2.jpg'],
+                ['nama' => 'Fun Run 2026', 'img' => 'funrun3.jpg'],
+                ['nama' => 'Seminar Teknologi', 'img' => 'seminar4.jpg'],
+                
+            ];
+        @endphp
 
-                <a href="{{ route('events') }}" class="btn btn-secondary">
-                    Detail
-                </a>
+        @foreach($events as $event)
+        <div class="col-md-3 d-flex">
+            <div class="card event-card w-100">
+                <img src="{{ asset('images/' . $event['img']) }}"
+                     style="height:150px; object-fit:cover; width:100%; filter: grayscale(100%);"">
+                <div class="card-body text-center">
+                    <p class="mb-3">{{ $event['nama'] }}</p>
+                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Detail</a>
+                </div>
             </div>
         </div>
-        @endfor
+        @endforeach
+
     </div>
 </div>
 
 <!-- CARA KERJA -->
-<div class="container mt-5 text-center">
-    <h5>Cara Kerja</h5>
-    <p class="text-muted">
+<div class="container mt-5 mb-5">
+    <h5 class="text-center mb-2">Cara Kerja</h5>
+    <p class="text-center text-muted mb-4">
         Hanya dalam beberapa langkah mudah, kamu sudah bisa mendapatkan tiket event favoritmu.
     </p>
-
-    <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="step">
+    <div class="row g-4 align-items-stretch">
+        <div class="col-md-3 d-flex">
+            <div class="step w-100">
                 <b>Cari Event</b><br>
-                <small>Temukan event sesuai minatmu</small>
+                <small class="text-muted">Cari dan pilih event favorit kamu di halaman jelajahi.</small>
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div class="step">
+        <div class="col-md-3 d-flex">
+            <div class="step w-100">
                 <b>Pilih Tiket</b><br>
-                <small>Pilih kategori & jumlah tiket</small>
+                <small class="text-muted">Tentukan jumlah tiket dan isi data diri dengan benar.</small>
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div class="step">
+        <div class="col-md-3 d-flex">
+            <div class="step w-100">
                 <b>Pembayaran</b><br>
-                <small>Lakukan pembayaran dengan aman</small>
+                <small class="text-muted">Selesaikan pembayaran via transfer bank, e-wallet, atau kartu kredit.</small>
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div class="step">
+        <div class="col-md-3 d-flex">
+            <div class="step w-100">
                 <b>E-Ticket</b><br>
-                <small>Tiket langsung dikirim ke kamu</small>
+                <small class="text-muted">Tiket dikirim otomatis ke email kamu dan siap digunakan.</small>
             </div>
         </div>
     </div>
 </div>
+<!-- FOOTER -->
+<footer class="bg-dark text-white mt-5 py-4">
+    <div class="container text-center">
+        <p class="mb-1 fw-bold">Steven.id</p>
+        <p class="text-muted mb-0" style="font-size: 13px;">
+            &copy; {{ date('Y') }} Steven.id — Platform tiket event terbaik di Indonesia.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
