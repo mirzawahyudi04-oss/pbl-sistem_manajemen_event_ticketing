@@ -162,3 +162,26 @@ Route::get('/user/profile', function () {
     }
     return view('profile_user');
 })->name('user.profile');
+
+Route::get('/user/profile', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('profile_user');
+})->name('user.profile');
+
+Route::get('/user/tiket', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('tiket_user');
+})->name('user.tiket');
+
+
+//tiket saya
+Route::get('/user/tiket', function () {
+    if (!session()->has('user')) {
+        return redirect()->route('login');
+    }
+    return view('tiket_user');
+})->name('user.tiket');

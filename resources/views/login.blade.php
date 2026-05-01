@@ -14,6 +14,7 @@
             align-items: center;
 
             background: url('/images/bglogin.jpg') center/cover no-repeat fixed;
+            
         }
 
         body::before {
@@ -109,6 +110,10 @@
         }
         .forgot:hover {
             color: #90c8ff;
+        }
+        .forgot {
+            color: #90c8ff;
+;
         }
     </style>
 </head>

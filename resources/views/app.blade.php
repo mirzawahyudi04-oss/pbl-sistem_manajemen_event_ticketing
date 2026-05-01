@@ -50,18 +50,29 @@
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>DASHBOARD USER</h2>
 
-    <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
-    <a href="{{ route('manajemen.event') }}" class="{{ request()->is('manajemen-event') ? 'active' : '' }}">Manajemen Event</a>
-    <a href="{{ route('transaksi') }}" class="{{ request()->is('transaksi') ? 'active' : '' }}">Data Transaksi</a>
-    <a href="{{ route('kategori.tiket') }}" class="{{ request()->is('kategori-tiket') ? 'active' : '' }}">Kategori Tiket</a>
+    <div class="menu">
+        <a href="{{ route('dashboard_user') }}" 
+           class="{{ request()->is('dashboard-user') ? 'active' : '' }}">Dashboard</a>
 
-    <div style="position:absolute; bottom:20px; width:100%;">
-        <a href="#">Keluar</a>
+        <a href="{{ route('user.tiket') }}" 
+           class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
+
+        <a href="{{ route('events') }}" 
+           class="{{ request()->is('events') ? 'active' : '' }}">Event</a>
+
+        <a href="{{ route('user.riwayat') }}" 
+           class="{{ request()->is('user/riwayat') ? 'active' : '' }}">Riwayat</a>
+
+        <a href="{{ route('user.profile') }}" 
+           class="{{ request()->is('user/profile') ? 'active' : '' }}">Profil</a>
+    </div>
+
+    <div class="logout">
+        <a href="{{ route('logout') }}" class="btn-logout">Logout</a>
     </div>
 </div>
-
 <!-- CONTENT -->
 <div class="main">
     @yield('content')

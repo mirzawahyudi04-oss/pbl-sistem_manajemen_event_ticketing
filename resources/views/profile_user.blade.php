@@ -113,7 +113,8 @@
 
         <div class="menu">
             <a href="{{ route('dashboard_user') }}">Dashboard</a>
-            <a href="#">Tiket Saya</a>
+            <a href="{{ route('user.tiket') }}" 
+   class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
             <a href="{{ route('events') }}">Event</a>
             <a href="{{ route('user.riwayat') }}">Riwayat</a>
             <a href="{{ route('user.profile') }}">Profil</a>

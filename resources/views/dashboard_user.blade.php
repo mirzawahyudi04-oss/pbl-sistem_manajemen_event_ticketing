@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard User</title>
-
     <style>
         body {
             margin: 0;
@@ -19,7 +18,7 @@
         .sidebar {
             width: 220px;
             height: 100vh;
-            background: #3d3d3d;
+            background: #2c2c2c;
             color: white;
             padding: 20px;
             position: relative;
@@ -27,7 +26,9 @@
 
         .sidebar h2 {
             margin: 0;
-            font-size: 18px;
+            font-size: 15px;
+            color: #888;
+            letter-spacing: 1px;
         }
 
         .menu {
@@ -36,18 +37,26 @@
 
         .menu a {
             display: block;
-            padding: 10px;
-            margin: 5px 0;
-            color: white;
+            padding: 10px 15px;
+            margin: 3px 0;
+            color: #aaa;
             text-decoration: none;
             border-radius: 5px;
+            border-left: 3px solid transparent;
+            font-size: 14px;
         }
 
         .menu a:hover {
-            background: #575757;
+            background: #3a3a3a;
+            color: white;
         }
 
-        /* LOGOUT */
+        .menu a.active {
+            background: #3a3a3a;
+            color: white;
+            border-left: 3px solid red;
+        }
+
         .logout {
             position: absolute;
             bottom: 20px;
@@ -62,6 +71,7 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         .btn-logout:hover {
@@ -71,55 +81,130 @@
         /* MAIN */
         .main {
             flex: 1;
-            padding: 20px;
+            padding: 25px;
         }
 
+        .greeting {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* CARDS STATISTIK */
         .cards {
             display: flex;
-            gap: 20px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .card {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             width: 150px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
 
-        .event {
+        .card h4 {
+            font-size: 13px;
+            color: gray;
+            margin: 0 0 8px;
+        }
+
+        .card p {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* PANEL */
+        .panel {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 12px;
         }
 
-        .btn {
-            background: navy;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
+        .panel-header h5 {
+            font-size: 12px;
+            color: gray;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .panel-header a {
+            font-size: 12px;
+            color: navy;
             text-decoration: none;
         }
 
-        .status {
-            background: green;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 10px;
+        /* TIKET ROW */
+        .tiket-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .tiket-row:last-child {
+            border-bottom: none;
+        }
+
+        .tiket-row b {
+            font-size: 14px;
+        }
+
+        .tiket-row small {
+            color: gray;
             font-size: 12px;
         }
-        .menu a.active {
-        background: #575757;
-        font-weight: bold;
-        border-left: 4px solid #00c3ff;
-    }
+
+        .tiket-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-lunas {
+            background: #d4edda;
+            color: #155724;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .btn-etiket {
+            background: navy;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .btn-etiket:hover {
+            background: #001a6e;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -131,12 +216,12 @@
         <h2>DASHBOARD USER</h2>
 
         <div class="menu">
-            <a href="{{ route('dashboard_user') }}">Dashboard</a>
-            <a href="#">Tiket Saya</a>
+            <a href="{{ route('dashboard_user') }}" class="active">Dashboard</a>
+            <a href="{{ route('user.tiket') }}" 
+   class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
             <a href="{{ route('events') }}">Event</a>
             <a href="{{ route('user.riwayat') }}">Riwayat</a>
             <a href="{{ route('user.profile') }}">Profil</a>
-            
         </div>
 
         <div class="logout">
@@ -146,9 +231,10 @@
 
     <!-- MAIN -->
     <div class="main">
-        <!-- 🔥 GANTI NAMA DI SINI -->
-        <h3>Halo, {{ session('namespace') ?? 'Mirza' }} 👋</h3>
 
+        <div class="greeting">Halo, {{ session('name') ?? 'User' }} 👋</div>
+
+        <!-- STATISTIK -->
         <div class="cards">
             <div class="card">
                 <h4>Tiket</h4>
@@ -160,31 +246,56 @@
             </div>
             <div class="card">
                 <h4>Pending</h4>
-                <p>1</p>
+                <p style="color: #b45309;">1</p>
             </div>
         </div>
 
-        <!-- EVENT LIST -->
-        <div class="event">
-            <div>
-                <b>Java Jazz Festival</b><br>
-                <small>25 Mei 2026</small><br>
-                <span class="status">Lunas</span>
+        <!-- TIKET TERBARU -->
+        <div class="panel">
+            <div class="panel-header">
+                <h5>Tiket Terbaru</h5>
+                <a href="{{ route('user.tiket') }}">Lihat semua →</a>
             </div>
-            <a href="#" class="btn">E-Tiket</a>
+
+            <div class="tiket-row">
+                <div>
+                    <b>Java Jazz Festival</b><br>
+                    <small>25 Mei 2026</small>
+                </div>
+                <div class="tiket-actions">
+                    <span class="status-lunas">Lunas</span>
+                    <a href="#" class="btn-etiket">E-Tiket</a>
+                </div>
+            </div>
+
+            <div class="tiket-row">
+                <div>
+                    <b>Fun Run Batam</b><br>
+                    <small>30 Mei 2026</small>
+                </div>
+                <div class="tiket-actions">
+                    <span class="status-lunas">Lunas</span>
+                    <a href="#" class="btn-etiket">E-Tiket</a>
+                </div>
+            </div>
         </div>
 
-        <div class="event">
-            <div>
-                <b>Fun Run Batam</b><br>
-                <small>30 Mei 2026</small><br>
-                <span class="status">Lunas</span>
+        <!-- TRANSAKSI PENDING -->
+        <div class="panel">
+            <div class="panel-header">
+                <h5>Transaksi Pending</h5>
             </div>
-            <a href="#" class="btn">E-Tiket</a>
+
+            <div class="tiket-row">
+                <div>
+                    <b>Konser Indie Night</b><br>
+                    <small>12 Jun 2026 · Menunggu pembayaran</small>
+                </div>
+                <span class="status-pending">Pending</span>
+            </div>
         </div>
 
     </div>
-
 </div>
 
 </body>
