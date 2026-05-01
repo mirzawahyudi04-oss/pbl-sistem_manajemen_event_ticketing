@@ -136,24 +136,60 @@ footer {
         <input type="text" class="search" placeholder="Cari Transaksi...">
 
         <table>
-            <tr>
-                <th>ID Transaksi</th>
-                <th>Pelanggan</th>
-                <th>Event</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
+    <tr>
+        <th>ID Transaksi</th>
+        <th>Pelanggan</th>
+        <th>Event</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
 
-            <tr>
-                <td>#INV-202604010</td>
-                <td>Andi Pratama</td>
-                <td>Java Jazz Festival</td>
-                <td>Rp.120.000</td>
-                <td><span class="status lunas">Lunas</span></td>
-                <td class="aksi">👁️</td>
-            </tr>
-        </table>
+    <tr>
+        <td>#INV-202604010</td>
+        <td>Andi Pratama</td>
+        <td>Java Jazz Festival</td>
+        <td>Rp.120.000</td>
+        <td><span class="status lunas">Lunas</span></td>
+        <td class="aksi">👁️</td>
+    </tr>
+
+    <tr>
+        <td>#INV-202604011</td>
+        <td>Siti Rahma</td>
+        <td>We The Fest</td>
+        <td>Rp.500.000</td>
+        <td><span class="status pending">Pending</span></td>
+        <td class="aksi">👁️</td>
+    </tr>
+
+    <tr>
+        <td>#INV-202604012</td>
+        <td>Budi Santoso</td>
+        <td>Coldplay Live</td>
+        <td>Rp.1.500.000</td>
+        <td><span class="status lunas">Lunas</span></td>
+        <td class="aksi">👁️</td>
+    </tr>
+
+    <tr>
+        <td>#INV-202604013</td>
+        <td>Dewi Lestari</td>
+        <td>DWP Festival</td>
+        <td>Rp.750.000</td>
+        <td><span class="status batal">Batal</span></td>
+        <td class="aksi">👁️</td>
+    </tr>
+
+    <tr>
+        <td>#INV-202604014</td>
+        <td>Rizky Hidayat</td>
+        <td>Seminar IT</td>
+        <td>Rp.50.000</td>
+        <td><span class="status lunas">Lunas</span></td>
+        <td class="aksi">👁️</td>
+    </tr>
+</table>
     </div>
 
     <footer>
