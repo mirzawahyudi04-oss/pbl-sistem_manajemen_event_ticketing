@@ -5,53 +5,138 @@
     <title>Event Ticketing</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .hero {
-            background: url('/images/concert-bg.jpg') center/cover no-repeat;
-            height: 450px;
-            color: white;
-            display: flex;
-            align-items: center;
-            background-color: rgba(0,0,0,0.6);
-            background-blend-mode: darken;
-        }
+    :root{
+        --navy: #0F172A;
+        --blue: #2563EB;
+        --blue-hover: #1D4ED8;
+        --accent: #38BDF8;
+        --bg-light: #F8FAFC;
+        --white: #FFFFFF;
+    }
 
-        .overlay {
-            width: 100%;
-            padding: 60px 40px;
-        }
+    body{
+        background-color: var(--bg-light);
+        font-family: Arial, sans-serif;
+    }
 
-        .card-box {
-            background: #f1f1f1;
-            border-radius: 10px;
-            padding: 20px 15px;
-            text-align: center;
-            height: 100%;
-        }
+    .hero {
+        background: url('/images/concert-bg.jpg') center/cover no-repeat;
+        height: 450px;
+        color: white;
+        display: flex;
+        align-items: center;
+        background-color: rgba(15, 23, 42, 0.75);
+        background-blend-mode: darken;
+    }
 
-        .step {
-            background: #e0e0e0;
-            border-radius: 20px;
-            padding: 20px 15px;
-            height: 100%;
-            text-align: center;
-        }
+    .overlay {
+        width: 100%;
+        padding: 60px 40px;
+    }
 
-        .event-card {
-            border-radius: 10px;
-            overflow: hidden;
-            height: 100%;
-        }
+    .navbar{
+        background-color: var(--navy) !important;
+    }
 
-        .event-card .event-img {
-            height: 150px;
-            background: #ccc;
-        }
-    </style>
+    .navbar-brand{
+        font-weight: bold;
+        color: var(--white) !important;
+    }
+
+    .nav-link:hover{
+        color: var(--accent) !important;
+    }
+
+    .btn-primary{
+        background-color: var(--blue);
+        border: none;
+    }
+
+    .btn-primary:hover{
+        background-color: var(--blue-hover);
+    }
+
+    .btn-outline-light:hover{
+        background-color: var(--blue);
+        border-color: var(--blue);
+    }
+
+    .btn-light{
+        border-radius: 8px;
+    }
+
+    .card-box {
+        background: white;
+        border-radius: 15px;
+        padding: 25px 20px;
+        text-align: center;
+        height: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+
+    .card-box:hover{
+        transform: translateY(-5px);
+    }
+
+    .step {
+        background: white;
+        border-radius: 20px;
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .event-card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+
+    .event-card:hover{
+        transform: translateY(-5px);
+    }
+
+    .event-card .btn{
+        background-color: var(--blue);
+        border: none;
+        color: white;
+    }
+
+    .event-card .btn:hover{
+        background-color: var(--blue-hover);
+    }
+
+    .footer-custom{
+    background: var(--navy);
+    color: white;
+    }
+
+    .footer-logo{
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .footer-desc{
+        color: rgba(255,255,255,0.75);
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .footer-line{
+        border-color: rgba(255,255,255,0.15);
+        width: 50%;
+        margin: 15px auto;
+    }
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="/">STEVENtix</a>
         <div class="d-flex align-items-center gap-3">
@@ -70,7 +155,7 @@
         <div class="container">
             <h2 class="fw-bold mb-3">Temukan Event Terbaik,<br>Pesan Tiket dalam Sekejap</h2>
             <p class="mb-4">Cari, Pilih, dan beli tiket event favoritmu dengan cepat dan aman.</p>
-            <a href="{{ route('login') }}" class="btn btn-light px-4">Jelajahi Event</a>
+            <a href="{{ route('login') }}" class="btn btn-primary px-4">Jelajahi Event</a>
         </div>
     </div>
 </section>
@@ -123,7 +208,7 @@
                      style="height:150px; object-fit:cover; width:100%; filter: grayscale(100%);"">
                 <div class="card-body text-center">
                     <p class="mb-3">{{ $event['nama'] }}</p>
-                    <a href="{{ route('login') }}" class="btn btn-secondary btn-sm">Detail</a>
+                    <a href="{{ route('login') }}" class="btn btn-sm">Detail</a>
                 </div>
             </div>
         </div>
@@ -166,11 +251,15 @@
     </div>
 </div>
 <!-- FOOTER -->
-<footer class="bg-dark text-white mt-5 py-4">
-    <div class="container text-center">
-        <p class="mb-1 fw-bold">Steven.id</p>
-        <p class="text-muted mb-0" style="font-size: 13px;">
-            &copy; {{ date('Y') }} Steven.id — Platform tiket event terbaik di Indonesia.
+<footer class="footer-custom mt-5">
+    <div class="container text-center py-4">
+        <h5 class="footer-logo">STEVENtix</h5>
+        <p class="footer-desc">
+            Platform tiket event terbaik untuk mempermudah pemesanan tiket secara online.
+        </p>
+        <hr class="footer-line">
+        <p class="mb-0 small">
+            © {{ date('Y') }} STEVENtix | All Rights Reserved
         </p>
     </div>
 </footer>

@@ -6,177 +6,200 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f3f3f3;
-            margin: 0;
-        }
+    :root{
+        --navy: #0F172A;
+        --blue: #2563EB;
+        --blue-hover: #1D4ED8;
+        --accent: #38BDF8;
+        --bg-light: #F8FAFC;
+    }
 
-        /* SEARCH */
-        .search-bar {
-            background: #666;
-            padding: 15px;
-            text-align: center;
-        }
+    body{
+        font-family:'Poppins', sans-serif;
+        background: var(--bg-light);
+        margin:0;
+    }
 
-        .search-bar input {
-            width: 350px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-        }
+    /* NAVBAR */
+    .navbar{
+    background: var(--navy) !important;
+    padding: 8px 0;
+    }
 
-        /* FILTER */
-        .filter-bar {
-            background: #f3f3f3;
-            padding: 12px 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            border-bottom: 1px solid #ddd;
-        }
+    .navbar-brand{
+    font-weight: bold;
+    font-size: 20px;
+    }
+    .nav-link{
+    font-size: 15px;
+    }   
 
-        .filter-btn {
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid #aaa;
-            background: white;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            transition: 0.2s;
-        }
+    .nav-link:hover{
+        color: var(--accent)!important;
+    }
+    .btn-outline-light{
+    padding: 5px 14px;
+    font-size: 14px;
+    }
 
-        .filter-btn:hover, .filter-btn.active {
-            background: #444;
-            color: white;
-            border-color: #444;
-        }
+    /* SEARCH */
+    .search-bar{
+    background: var(--bg-light);
+    padding: 25px 0 10px;
+    text-align: center;
+    }
+    .search-bar input{
+    width: 380px;
+    max-width: 90%;
+    padding: 12px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 30px;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
 
-        /* GRID */
-        .event-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 20px;
-        }
+    /* FILTER */
+    .filter-bar{
+        padding:20px;
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:10px;
+        background:white;
+        border-bottom:1px solid #ddd;
+    }
 
-        /* CARD */
-        .card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: 0.3s;
-        }
+    .filter-btn{
+        border:none;
+        padding:8px 18px;
+        border-radius:25px;
+        background:#eef2ff;
+        color: var(--navy);
+        transition:.3s;
+    }
 
-        .card:hover {
-            transform: scale(1.02);
-        }
+    .filter-btn:hover,
+    .filter-btn.active{
+        background: var(--blue);
+        color:white;
+    }
 
-        .card img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            object-position: center;
-        
-        }
+    /* GRID */
+    .event-grid{
+        display:grid;
+        grid-template-columns: repeat(4,1fr);
+        gap:25px;
+        padding:30px;
+    }
 
-        .card-body {
-            padding: 12px;
-            text-align: center;
-        }
+    /* CARD */
+    .card{
+        border:none;
+        border-radius:18px;
+        overflow:hidden;
+        box-shadow:0 4px 15px rgba(0,0,0,.08);
+        transition:.3s;
+    }
 
-        .card-body h3 {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
+    .card:hover{
+        transform: translateY(-8px);
+    }
 
-        .card-body .kategori {
-            display: inline-block;
-            background: #eee;
-            border-radius: 20px;
-            padding: 2px 10px;
-            font-size: 11px;
-            color: #555;
-            margin-bottom: 6px;
-        }
+    .card img{
+        width:100%;
+        height:180px;
+        object-fit:cover;
+    }
 
-        .card-body p {
-            font-size: 12px;
-            color: gray;
-            margin: 2px 0;
-        }
+    .card-body{
+        text-align:center;
+        padding:20px;
+    }
 
-        .card-body .harga {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
-            margin: 6px 0;
-        }
+    .kategori{
+        background:#DBEAFE;
+        color: var(--blue);
+        padding:5px 14px;
+        border-radius:20px;
+        font-size:12px;
+    }
 
-        .btn-detail {
-            background: #999;
-            border: none;
-            border-radius: 20px;
-            padding: 7px 20px;
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 13px;
-            font-family: 'Poppins', sans-serif;
-            transition: 0.2s;
-        }
+    .card-body h3{
+        margin-top:12px;
+        font-size:20px;
+        font-weight:600;
+    }
 
-        .btn-detail:hover {
-            background: #777;
-            color: white;
-        }
+    .harga{
+        color: var(--blue);
+        font-size:20px;
+        font-weight:bold;
+    }
 
-        .footer-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px;
-            border-top: 1px solid #eee;
-            font-size: 12px;
-            color: #555;
-        }
+    .btn-detail{
+        background: var(--blue);
+        color:white;
+        padding:10px 25px;
+        border-radius:25px;
+        text-decoration:none;
+        transition:.3s;
+    }
 
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 16px;
-            margin-top: 20px;
-            font-size: 13px;
+    .btn-detail:hover{
+        background: var(--blue-hover);
+        color:white;
+    }
+
+    .footer-card{
+        text-align:center;
+        padding:12px;
+        color:#777;
+        border-top:1px solid #eee;
+    }
+
+    /* FOOTER */
+    footer{
+        background: var(--navy);
+        color:white;
+        text-align:center;
+        padding:25px;
+        margin-top:40px;
+    }
+
+    @media(max-width:1000px){
+        .event-grid{
+            grid-template-columns: repeat(2,1fr);
         }
-    </style>
+    }
+
+    @media(max-width:600px){
+        .event-grid{
+            grid-template-columns:1fr;
+        }
+    }
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="/">STEVENtix</a>
+
         <div class="d-flex align-items-center gap-3">
-            <a class="nav-link text-white" href="/">Beranda</a>
-            <a class="nav-link text-white" href="#">Jelajahi Event</a>
-            <a class="nav-link text-white" href="#">Cara Kerja</a>
+            <a href="{{ route('dashboard_user') }}" class="btn btn-outline-light">
+                Dashboard
+            </a>
         </div>
     </div>
 </nav>
 
 <!-- SEARCH -->
 <div class="search-bar">
-    <input type="text" id="search" placeholder="Cari event, lokasi, kategori..." onkeyup="searchEvent()">
-</div>
+<input type="text" 
+       id="search" 
+       placeholder="🔍 Cari event..." 
+       onkeyup="searchEvent()"></div>
 
 <!-- FILTER -->
 <div class="filter-bar">
@@ -235,9 +258,17 @@ $events = [
 </div>
 
 <!-- FOOTER -->
-<footer>
-    <p class="mb-1 fw-bold">Steven.id</p>
-    <p style="font-size:12px; color:#aaa;">&copy; {{ date('Y') }} Steven.id — Platform tiket event terbaik di Indonesia.</p>
+<footer class="footer-custom mt-5">
+    <div class="container text-center py-4">
+        <h5 class="footer-logo">STEVENtix</h5>
+        <p class="footer-desc">
+            Platform tiket event terbaik untuk mempermudah pemesanan tiket secara online.
+        </p>
+        <hr class="footer-line">
+        <p class="mb-0 small">
+            © {{ date('Y') }} STEVENtix | All Rights Reserved
+        </p>
+    </div>
 </footer>
 
 <script>

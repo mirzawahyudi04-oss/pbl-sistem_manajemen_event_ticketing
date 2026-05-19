@@ -53,6 +53,8 @@
     <h2>DASHBOARD USER</h2>
 
     <div class="menu">
+        <a href="/">Beranda</a>
+            <a href="{{ route('dashboard_user') }}">Dashboard</a>
         <a href="{{ route('dashboard_user') }}" 
            class="{{ request()->is('dashboard-user') ? 'active' : '' }}">Dashboard</a>
 
