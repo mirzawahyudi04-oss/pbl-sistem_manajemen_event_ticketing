@@ -3,46 +3,69 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    
     /*
     |--------------------------------------------------------------------------
     | LOGIN USER
     |--------------------------------------------------------------------------
     */
     public function showLoginUser()
-    {
-        return view('login');
-    }
-
+{
+    return view('pages.login');
+}
     public function login(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
+{
+    $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required']
+    ]);
 
-        // SIMULASI LOGIN USER
-        if (
-            $request->email === 'user@gmail.com' &&
-            $request->password === '123'
-        ) {
-            session([
-                'user' => $request->email,
-                'nama' => 'Mirza',
-                'role' => 'user'
-            ]);
+    if (Auth::attempt([
+        'email' => $request->email,
+        'password' => $request->password
+    ])) {
 
-            return redirect()->route('dashboard_user');
+        $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        if ($user->role == 'organizer') {
+            return redirect()->route('dashboard_organizer');
         }
 
-        return back()
-            ->withInput()
-            ->with('error', 'Email atau password salah');
+        return redirect()->route('dashboard_user');
     }
 
+    return back()->with('error', 'Email atau password salah');
+}
 
+
+//LOGIN ORGANIZER
+    public function register(Request $request)
+{
+    $request->validate([
+        'name' => ['required'],
+        'email' => ['required', 'email', 'unique:users,email'],
+        'password' => ['required', 'min:3'],
+        'role' => ['required']
+    ]);
+
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role' => $request->role
+    ]);
+
+    return redirect()->route('login')
+            ->with('success', 'Registrasi berhasil, silakan login');
+}
     /*
     |--------------------------------------------------------------------------
     | LOGIN ADMIN
@@ -85,9 +108,11 @@ class AuthController extends Controller
     | LOGOUT
     |--------------------------------------------------------------------------
     */
-    public function logout()
-    {
-        session()->flush();
-        return redirect()->route('login');
-    }
+   public function logout()
+{
+    Auth::logout();
+    session()->flush();
+    return redirect()->route('login');
 }
+}
+

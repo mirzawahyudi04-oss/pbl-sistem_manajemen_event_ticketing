@@ -126,7 +126,7 @@
         <p class="error">{{ session('error') }}</p>
     @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form action="{{ route('login') }}" method="POST">
         @csrf
         <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
         <input type="password" name="password" placeholder="Password" required>

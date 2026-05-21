@@ -129,6 +129,11 @@
             <input type="email" name="email" placeholder="Masukkan Email Anda" value="{{ old('email') }}" required>
             <input type="password" name="password" placeholder="Masukkan Password Anda" required>
             <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+            <label>Pilih Role</label>
+            <select name="role" required>
+                <option value="buyer">Buyer</option>
+                <option value="organizer">Organizer</option>
+            </select>
 
             <button type="submit">Daftar</button>
         </form>

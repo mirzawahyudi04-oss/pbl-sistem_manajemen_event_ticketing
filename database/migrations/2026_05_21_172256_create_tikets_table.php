@@ -11,18 +11,15 @@ return new class extends Migration
         Schema::create('tikets', function (Blueprint $table) {
             $table->id('id_tiket');
 
-            $table->unsignedBigInteger('id_event');
+            $table->foreignId('id_event')
+                  ->constrained('events', 'id_event')
+                  ->onDelete('cascade');
 
             $table->string('nama_tiket');
             $table->decimal('harga', 10, 2);
             $table->integer('kuota');
 
             $table->timestamps();
-
-            $table->foreign('id_event')
-                  ->references('id_event')
-                  ->on('events')
-                  ->onDelete('cascade');
         });
     }
 
