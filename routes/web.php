@@ -121,3 +121,38 @@ Route::get('/user/tiket', function () {
     if (!session()->has('user')) return redirect()->route('login');
     return view('pages.tiket_user');
 })->name('user.tiket');
+
+Route::get('/dashboard-organizer', function () {
+    return view('pages.dashboard_organizer');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ORGANIZER MENU
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/dashboard-organizer', function () {
+    return view('pages.dashboard_organizer');
+});
+
+Route::get('/peserta', function () {
+    return view('pages.dashboard_user');
+});
+
+Route::get('/laporan', function () {
+    return view('pages.dashboard');
+});
+
+Route::get('/profile-organizer', function () {
+    return view('pages.profile_user');
+});
+
+Route::get('/tiket', function () {
+    return view('pages.kategori_tiket');
+});
+
+//kelolaeventorganizer
+Route::get('/manajemen-event', function () {
+    return view('pages.kelola_event');
+});
