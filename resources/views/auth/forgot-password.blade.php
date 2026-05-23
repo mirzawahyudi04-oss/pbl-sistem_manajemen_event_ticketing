@@ -2,139 +2,170 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Lupa Password</title>  {{-- sudah benar --}}
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Lupa Password</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
+
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: url('/images/bglogin.jpg') center/cover no-repeat fixed;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 0;
+        body{
+            min-height:100vh;
+            display:flex;
         }
 
-        .box {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            border-radius: 20px;
-            width: 300px;
-            text-align: center;
+        .left{
+            flex:1;
+            background:linear-gradient(135deg,#1456c5,#0b2f7a);
+            color:white;
+            padding:70px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            position:relative;
+            overflow:hidden;
         }
 
-        h2 {
-            color: white;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+        .left::after{
+            content:'';
+            position:absolute;
+            width:320px;
+            height:320px;
+            border-radius:50%;
+            background:rgba(255,255,255,.08);
+            right:-100px;
+            bottom:-100px;
         }
 
-        p.sub {
-            color: rgba(255, 255, 255, 0.65);
-            font-size: 13px;
-            margin-bottom: 20px;
+        .logo{
+            position:absolute;
+            top:40px;
+            left:70px;
+            font-size:28px;
+            font-weight:700;
+            color:white;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-            box-sizing: border-box;
+        .left h1{
+            font-size:52px;
+            line-height:1.1;
+            margin-bottom:20px;
+            z-index:1;
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .left p{
+            color:rgba(255,255,255,.8);
+            max-width:400px;
+            line-height:1.8;
+            z-index:1;
         }
 
-        input:focus {
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.15);
+        .right{
+            flex:1;
+            background:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            background: #222;
-            color: white;
-            margin-top: 15px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
+        .form-box{
+            width:100%;
+            max-width:430px;
         }
 
-        button:hover {
-            background: #444;
+        h2{
+            font-size:36px;
+            margin-bottom:10px;
+            color:#0b2f7a;
         }
 
-        .success {
-            color: #80ffb0;
-            font-size: 13px;
-            margin-bottom: 10px;
+        .subtitle{
+            color:#777;
+            margin-bottom:25px;
         }
 
-        .error {
-            color: #ff8080;
-            font-size: 13px;
-            margin-bottom: 10px;
+        input{
+            width:100%;
+            padding:15px;
+            margin-bottom:15px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            outline:none;
         }
 
-        .footer {
-            margin-top: 15px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+        input:focus{
+            border-color:#1456c5;
+            box-shadow:0 0 0 3px rgba(20,86,197,.15);
         }
 
-        a {
-            color: #4da6ff;        /* ← diubah jadi biru lebih cerah */
-            text-decoration: none;
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#1456c5;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
         }
 
-        a:hover {
-            color: #80c4ff;        /* ← hover sedikit lebih terang */
-            text-decoration: underline;
+        .footer{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        a{
+            color:#1456c5;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .error{
+            color:red;
+            margin-bottom:15px;
+        }
+
+        @media(max-width:900px){
+            .left{display:none;}
         }
     </style>
 </head>
 <body>
-<div class="box">
-    <h2>LUPA PASSWORD</h2>
-    <p class="sub">Masukkan email akunmu untuk melanjutkan.</p>
 
-    @if($errors->any())
-        <p class="error">{{ $errors->first() }}</p>
-    @endif
+<div class="left">
+    <div class="logo">STEVENTix</div>
+    <h1>Lupa Password?</h1>
+    <p>
+        Jangan khawatir. Masukkan email akunmu
+        dan kami bantu reset password-mu.
+    </p>
+</div>
 
-    <form method="POST" action="{{ route('password.check-email') }}">
-        @csrf
-        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-        <button type="submit">Lanjutkan</button>
-    </form>
+<div class="right">
+    <div class="form-box">
+        <h2>Reset Password</h2>
+        <p class="subtitle">Masukkan email untuk melanjutkan</p>
 
-    <div class="footer">
-        <a href="{{ route('login') }}">← Kembali ke Login</a>
+        @if($errors->any())
+            <p class="error">{{ $errors->first() }}</p>
+        @endif
+
+        <form method="POST" action="{{ route('password.check-email') }}">
+            @csrf
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Lanjutkan</button>
+        </form>
+
+        <div class="footer">
+            <a href="{{ route('login') }}">← Kembali ke Login</a>
+        </div>
     </div>
 </div>
+
 </body>
 </html>

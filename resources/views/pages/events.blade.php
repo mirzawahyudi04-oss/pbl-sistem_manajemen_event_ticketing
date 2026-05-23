@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Jelajahi Event</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
     :root{
         --navy: #0F172A;

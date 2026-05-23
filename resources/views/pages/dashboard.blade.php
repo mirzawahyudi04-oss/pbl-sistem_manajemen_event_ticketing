@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 
 <style>
 body {

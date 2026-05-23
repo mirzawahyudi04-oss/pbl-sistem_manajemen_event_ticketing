@@ -8,7 +8,7 @@ Route::get('/', fn() => view('pages.home'))->name('home');
 
 Route::get('/login', [AuthController::class, 'showLoginUser'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', fn() => view('register'))->name('register');
+Route::get('/register', fn() => view('auth.register'))->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

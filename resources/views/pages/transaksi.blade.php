@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Data Transaksi</title>
+<link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
 <style>

@@ -3,139 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: url('/images/bglogin.jpg') center/cover no-repeat fixed;
-            
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            z-index: 0;
+        body{
+            min-height:100vh;
+            display:flex;
         }
 
-        .box {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            border-radius: 20px;
-            width: 300px;
-            text-align: center;
+        .left{
+            flex:1;
+            background: linear-gradient(135deg,#1456c5,#0b2f7a);
+            color:white;
+            padding:70px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            position:relative;
+            overflow:hidden;
         }
 
-        h2 {
-            color: white;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+        .left::after{
+            content:'';
+            position:absolute;
+            width:320px;
+            height:320px;
+            border-radius:50%;
+            background:rgba(255,255,255,.08);
+            right:-100px;
+            bottom:-100px;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            outline: none;
-            box-sizing: border-box;
+        .logo{
+            position:absolute;
+            top:40px;
+            left:70px;
+            font-size:28px;
+            font-weight:700;
+            color:white;
+            letter-spacing:1px;
         }
 
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .left h1{
+            font-size:56px;
+            line-height:1.1;
+            margin-bottom:20px;
+            z-index:1;
         }
 
-        input:focus {
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.15);
+        .left span{
+            color:#ffffff;
+            font-weight:700;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            background: #222;
-            color: white;
-            margin-top: 15px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
+        .left p{
+            color:rgba(255,255,255,.8);
+            max-width:420px;
+            line-height:1.8;
+            z-index:1;
         }
 
-        button:hover {
-            background: #444;
+        .right{
+            flex:1;
+            background:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
         }
 
-        .error {
-            color: #ff8080;
-            font-size: 13px;
-            margin-bottom: 10px;
+        .form-box{
+            width:100%;
+            max-width:450px;
         }
 
-        .footer {
-            margin-top: 15px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
+        .form-box h2{
+            font-size:38px;
+            margin-bottom:10px;
+            color:#0b2f7a;
         }
 
-        a {
-            color: #90c8ff;
-            text-decoration: none;
+        .form-box p{
+            color:#777;
+            margin-bottom:30px;
         }
-        .forgot {
-            display: block;
-            margin-top: 10px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            text-align: center;
+
+        input{
+            width:100%;
+            padding:15px;
+            margin-bottom:15px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            outline:none;
+            transition:.2s;
         }
-        .forgot:hover {
-            color: #90c8ff;
+
+        input:focus{
+            border-color:#1456c5;
+            box-shadow:0 0 0 3px rgba(20,86,197,.15);
         }
-        .forgot {
-            color: #90c8ff;
-;
+
+        button{
+            width:100%;
+            padding:15px;
+            border:none;
+            border-radius:12px;
+            background:#1456c5;
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            transform:translateY(-2px);
+            background:#0f47a8;
+        }
+
+        .footer{
+            margin-top:20px;
+            text-align:center;
+            font-size:14px;
+        }
+
+        a{
+            text-decoration:none;
+            color:#1456c5;
+            font-weight:600;
+        }
+
+        .forgot{
+            display:block;
+            text-align:right;
+            margin-bottom:20px;
+            color:#777;
+            font-size:14px;
+        }
+
+        @media(max-width:900px){
+            .left{
+                display:none;
+            }
+
+            .right{
+                flex:1;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="box">
-    <h2>LOGIN</h2>
+<div class="left">
+    <div class="logo">STEVENTix</div>
 
-    @if(session('error'))
-        <p class="error">{{ session('error') }}</p>
-    @endif
+    <h1>
+        Temukan event terbaik,<br>
+        pesan tiket dalam <span>hitungan detik.</span>
+    </h1>
 
-    <form action="{{ route('login') }}" method="POST">
-        @csrf
-        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Masuk</button>
-    </form>
+    <p>
+        Konser, seminar, workshop, dan festival favoritmu
+        tersedia dalam satu platform.
+    </p>
+</div>
 
-    <div class="footer">
-        <a href="{{ route('password.request') }}" class="forgot">Lupa password?</a>
-        Belum punya akun? <a href="/register">Daftar di sini</a>
+<div class="right">
+    <div class="form-box">
+        <h2>Login</h2>
+        <p>Silakan masuk ke akun Anda</p>
+
+        @if(session('error'))
+            <p style="color:red">{{ session('error') }}</p>
+        @endif
+
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+
+            <a href="{{ route('password.request') }}" class="forgot">
+                Lupa password?
+            </a>
+
+            <button type="submit">Masuk</button>
+        </form>
+
+        <div class="footer">
+            Belum punya akun? <a href="/register">Daftar</a>
+        </div>
     </div>
 </div>
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Kategori Tiket</title>
+<link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 
 <style>
 body { margin:0; font-family:Arial; background:#e5e5e5; }

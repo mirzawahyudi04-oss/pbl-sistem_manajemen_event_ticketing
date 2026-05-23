@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Riwayat Transaksi</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
     <style>
         body {
             margin: 0;

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Manajemen Event</title>
+<link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 
 <style>
 body {
