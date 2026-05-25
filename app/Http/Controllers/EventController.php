@@ -51,6 +51,10 @@ class EventController extends Controller
         $gambar = $request->file('gambar')->getClientOriginalName();
         $request->file('gambar')->move(public_path('images'), $gambar);
     }
+    $path = $request->file('gambar')->store('events', 'public');
+
+    $event->gambar = $path;
+    $event->save();
 
     // Ambil organizer milik user yang login
     $organizer = \App\Models\Organizer::where('id_user', auth()->id())->first();

@@ -4,172 +4,154 @@
     <meta charset="UTF-8">
     <title>Riwayat Transaksi</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
+
     <style>
-        body {
-            margin: 0;
+        :root{
+            --navy:#10194F;
+            --indigo:#5661A4;
+            --soft-blue:#7E92B8;
+            --cream:#D9D0BF;
+            --bg:#F8F9FC;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: var(--bg);
+            color: var(--navy);
         }
 
-        .container {
-            display: flex;
+        .container{
+            display:flex;
+            min-height:100vh;
         }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #2c2c2c;
-            color: white;
-            padding: 20px;
-            position: relative;
+        .sidebar{
+            width:250px;
+            background: var(--navy);
+            color:white;
+            padding:25px 20px;
+            position:relative;
         }
 
-        .sidebar h2 {
-            margin: 0;
-            font-size: 15px;
-            color: #888;
-            letter-spacing: 1px;
+        .sidebar h2{
+            text-align:center;
+            color:var(--cream);
+            margin-bottom:30px;
         }
 
-        .menu {
-            margin-top: 20px;
+        .menu a{
+            display:block;
+            padding:14px 18px;
+            margin-bottom:8px;
+            color:rgba(255,255,255,0.8);
+            text-decoration:none;
+            border-radius:12px;
         }
 
-        .menu a {
-            display: block;
-            padding: 10px 15px;
-            margin: 3px 0;
-            color: #aaa;
-            text-decoration: none;
-            border-radius: 5px;
-            border-left: 3px solid transparent;
-            font-size: 14px;
+        .menu a:hover{
+            background:rgba(255,255,255,0.08);
         }
 
-        .menu a:hover {
-            background: #3a3a3a;
-            color: white;
+        .menu a.active{
+            background:var(--indigo);
+            color:white;
+            font-weight:bold;
         }
 
-        .menu a.active {
-            background: #3a3a3a;
-            color: white;
-            border-left: 3px solid red;
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:84%;
         }
 
-        .logout {
-            position: absolute;
-            bottom: 20px;
-            width: 80%;
+        .btn-logout{
+            display:block;
+            text-align:center;
+            padding:13px;
+            background:var(--cream);
+            color:var(--navy);
+            text-decoration:none;
+            border-radius:12px;
+            font-weight:bold;
         }
 
-        .btn-logout {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background: red;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
+        .main{
+            flex:1;
+            padding:35px;
+            border-top:6px solid var(--indigo);
         }
 
-        .btn-logout:hover {
-            background: darkred;
+        .title{
+            font-size:28px;
+            font-weight:bold;
+            margin-bottom:5px;
         }
 
-        /* MAIN */
-        .main {
-            flex: 1;
-            padding: 25px;
+        .subtitle{
+            color:gray;
+            margin-bottom:25px;
         }
 
-        .title {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .search-box{
+            margin-bottom:20px;
         }
 
-        .subtitle {
-            color: #888;
-            font-size: 13px;
-            margin-bottom: 20px;
+        .search-box input{
+            padding:12px;
+            width:250px;
+            border:1px solid #ddd;
+            border-radius:10px;
         }
 
-        /* SEARCH */
-        .search-box {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
+        .table-wrap{
+            background:white;
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 8px 24px rgba(16,25,79,0.08);
         }
 
-        .search-box input {
-            padding: 7px 15px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            font-size: 13px;
-            outline: none;
-            width: 220px;
+        table{
+            width:100%;
+            border-collapse:collapse;
         }
 
-        /* TABLE */
-        .table-wrap {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        th{
+            background:#f3f4f6;
+            padding:15px;
+            text-align:left;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        td{
+            padding:15px;
+            border-bottom:1px solid #eee;
         }
 
-        th {
-            background: #f0f0f0;
-            padding: 12px 15px;
-            text-align: left;
-            font-size: 12px;
-            color: gray;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .status{
+            padding:6px 12px;
+            border-radius:20px;
+            font-size:12px;
+            font-weight:bold;
         }
 
-        td {
-            padding: 14px 15px;
-            font-size: 13px;
-            border-bottom: 1px solid #f0f0f0;
+        .lunas{
+            background:#DCFCE7;
+            color:#166534;
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        .pending{
+            background:#FEF3C7;
+            color:#92400E;
         }
 
-        tr:hover td {
-            background: #fafafa;
-        }
-
-        .status {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .lunas {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .batal {
-            background: #f8d7da;
-            color: #721c24;
+        .batal{
+            background:#FEE2E2;
+            color:#991B1B;
         }
     </style>
 </head>
@@ -177,15 +159,13 @@
 
 <div class="container">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
-        <h2>DASHBOARD USER</h2>
+        <h2>🎫 STEVENtix</h2>
 
         <div class="menu">
             <a href="{{ route('dashboard_user') }}">Dashboard</a>
-            <a href="{{ route('user.tiket') }}" 
-   class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
-            <a href="{{ route('events') }}">Event</a>
+            <a href="{{ route('user.tiket') }}">Tiket Saya</a>
+            <a href="{{ route('events.index') }}">Event</a>
             <a href="{{ route('user.riwayat') }}" class="active">Riwayat</a>
             <a href="{{ route('user.profile') }}">Profil</a>
         </div>
@@ -195,10 +175,9 @@
         </div>
     </div>
 
-    <!-- MAIN -->
     <div class="main">
         <div class="title">Riwayat Transaksi</div>
-        <div class="subtitle">Semua catatan pembayaran tiket kamu.</div>
+        <div class="subtitle">Semua catatan pembayaran tiket kamu</div>
 
         <div class="search-box">
             <input type="text" placeholder="Cari transaksi..." onkeyup="cariTransaksi()">
@@ -207,50 +186,40 @@
         <div class="table-wrap">
             <table id="tabelRiwayat">
                 <tr>
-                    <th>ID Transaksi</th>
-                    <th>Tanggal Beli</th>
-                    <th>Nama Event</th>
-                    <th>Total Bayar</th>
+                    <th>ID</th>
+                    <th>Tanggal</th>
+                    <th>Event</th>
+                    <th>Total</th>
                     <th>Metode</th>
                     <th>Status</th>
                 </tr>
 
                 <tr>
-                    <td>#INV-20260404</td>
+                    <td>#INV001</td>
                     <td>01 April 2026</td>
-                    <td>Java Jazz Festival</td>
-                    <td>(1 Tiket) Rp 250.000</td>
+                    <td>Java Jazz</td>
+                    <td>Rp 250.000</td>
                     <td>GoPay</td>
                     <td><span class="status lunas">Lunas</span></td>
                 </tr>
 
                 <tr>
-                    <td>#INV-20260403</td>
+                    <td>#INV002</td>
                     <td>03 Maret 2026</td>
-                    <td>Workshop Fullstack Web</td>
-                    <td>(1 Tiket) Rp 150.000</td>
+                    <td>Workshop Web</td>
+                    <td>Rp 150.000</td>
                     <td>Dana</td>
-                    <td><span class="status pending">Menunggu</span></td>
+                    <td><span class="status pending">Pending</span></td>
                 </tr>
 
                 <tr>
-                    <td>#INV-20260402</td>
+                    <td>#INV003</td>
                     <td>10 Februari 2026</td>
-                    <td>Seminar Nasional IT</td>
-                    <td>(1 Tiket) Rp 50.000</td>
-                    <td>Bank BNI</td>
-                    <td><span class="status batal">Kadaluarsa</span></td>
+                    <td>Seminar IT</td>
+                    <td>Rp 50.000</td>
+                    <td>BNI</td>
+                    <td><span class="status batal">Batal</span></td>
                 </tr>
-
-                <tr>
-                    <td>#INV-20260401</td>
-                    <td>25 Januari 2026</td>
-                    <td>Fun Run Batam 5K</td>
-                    <td>(2 Tiket) Rp 150.000</td>
-                    <td>Bank BCA</td>
-                    <td><span class="status lunas">Lunas</span></td>
-                </tr>
-
             </table>
         </div>
     </div>
@@ -258,15 +227,15 @@
 </div>
 
 <script>
-    function cariTransaksi() {
-        var input = document.querySelector('input').value.toLowerCase();
-        var rows = document.querySelectorAll('#tabelRiwayat tr:not(:first-child)');
+function cariTransaksi(){
+    let input=document.querySelector("input").value.toLowerCase();
+    let rows=document.querySelectorAll("#tabelRiwayat tr:not(:first-child)");
 
-        rows.forEach(function(row) {
-            var teks = row.innerText.toLowerCase();
-            row.style.display = teks.includes(input) ? '' : 'none';
-        });
-    }
+    rows.forEach(function(row){
+        let teks=row.innerText.toLowerCase();
+        row.style.display=teks.includes(input) ? "" : "none";
+    });
+}
 </script>
 
 </body>

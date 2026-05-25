@@ -6,101 +6,130 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 
     <style>
-        body {
-            margin: 0;
+        :root{
+            --navy:#10194F;
+            --indigo:#5661A4;
+            --soft-blue:#7E92B8;
+            --cream:#D9D0BF;
+            --bg:#F8F9FC;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: var(--bg);
+            color: var(--navy);
         }
 
-        .container {
-            display: flex;
+        .container{
+            display:flex;
+            min-height:100vh;
         }
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #3d3d3d;
-            color: white;
-            padding: 20px;
-            position: relative;
+        .sidebar{
+            width:250px;
+            background: var(--navy);
+            color:white;
+            padding:25px 20px;
+            position:relative;
         }
 
-        .sidebar h2 {
-            margin: 0;
-            font-size: 18px;
+        .sidebar h2{
+            text-align:center;
+            color:var(--cream);
+            margin-bottom:30px;
         }
 
-        .menu {
-            margin-top: 20px;
+        .menu a{
+            display:block;
+            padding:14px 18px;
+            margin-bottom:8px;
+            color:rgba(255,255,255,0.8);
+            text-decoration:none;
+            border-radius:12px;
         }
 
-        .menu a {
-            display: block;
-            padding: 10px;
-            margin: 5px 0;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .menu a:hover{
+            background:rgba(255,255,255,0.08);
         }
 
-        .menu a:hover {
-            background: #575757;
+        .menu a.active{
+            background:var(--indigo);
+            color:white;
+            font-weight:bold;
         }
 
-        .logout {
-            position: absolute;
-            bottom: 20px;
-            width: 80%;
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:84%;
         }
 
-        .btn-logout {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background: red;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .btn-logout{
+            display:block;
+            text-align:center;
+            padding:13px;
+            background:var(--cream);
+            color:var(--navy);
+            text-decoration:none;
+            border-radius:12px;
+            font-weight:bold;
         }
 
-        /* MAIN */
-        .main {
-            flex: 1;
-            padding: 20px;
+        .main{
+            flex:1;
+            padding:35px;
+            border-top:6px solid var(--indigo);
         }
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .title{
+            font-size:28px;
+            font-weight:bold;
+            margin-bottom:25px;
         }
 
-        .card h3 {
-            margin-top: 0;
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            margin-bottom:20px;
+            box-shadow:0 8px 24px rgba(16,25,79,0.08);
         }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .card h3{
+            margin-bottom:20px;
+            color:var(--navy);
         }
 
-        button {
-            background: navy;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .card p{
+            margin-bottom:10px;
         }
 
-        button:hover {
-            background: darkblue;
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ddd;
+            border-radius:10px;
+            font-size:14px;
+        }
+
+        button{
+            background:var(--indigo);
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:var(--soft-blue);
         }
     </style>
 </head>
@@ -108,17 +137,15 @@
 
 <div class="container">
 
-    <!-- SIDEBAR -->
     <div class="sidebar">
-        <h2>DASHBOARD USER</h2>
+        <h2>🎫 STEVENtix</h2>
 
         <div class="menu">
             <a href="{{ route('dashboard_user') }}">Dashboard</a>
-            <a href="{{ route('user.tiket') }}" 
-   class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
-            <a href="{{ route('events') }}">Event</a>
+            <a href="{{ route('user.tiket') }}">Tiket Saya</a>
+            <a href="{{ route('events.index') }}">Event</a>
             <a href="{{ route('user.riwayat') }}">Riwayat</a>
-            <a href="{{ route('user.profile') }}">Profil</a>
+            <a href="{{ route('user.profile') }}" class="active">Profil</a>
         </div>
 
         <div class="logout">
@@ -126,32 +153,27 @@
         </div>
     </div>
 
-    <!-- MAIN -->
     <div class="main">
-        <h2>Profil Saya</h2>
+        <div class="title">Profil Saya</div>
 
-        <!-- INFO -->
         <div class="card">
             <h3>Informasi Akun</h3>
-            <p><b>Nama:</b> {{ session('user') ?? 'Mirza' }}</p>
-            <p><b>Email:</b> user@email.com</p>
-            <p><b>No HP:</b> 08123456789</p>
+            <p><b>Nama:</b> {{ auth()->user()->name }}</p>
+            <p><b>Email:</b> {{ auth()->user()->email }}</p>
+            <p><b>Role:</b> {{ auth()->user()->role }}</p>
         </div>
 
-        <!-- EDIT -->
         <div class="card">
             <h3>Edit Profil</h3>
 
             <form method="POST" action="#">
                 @csrf
-                <input type="text" name="nama" placeholder="Nama Baru">
-                <input type="email" name="email" placeholder="Email Baru">
-                <input type="password" name="password" placeholder="Password Baru">
-                <br><br>
+                <input type="text" placeholder="Nama Baru">
+                <input type="email" placeholder="Email Baru">
+                <input type="password" placeholder="Password Baru">
                 <button type="submit">Simpan Perubahan</button>
             </form>
         </div>
-
     </div>
 
 </div>

@@ -2,82 +2,159 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>@yield('title')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
 
     <style>
-        body {
-            margin: 0;
+        :root{
+            --navy:#10194F;
+            --indigo:#5661A4;
+            --soft-blue:#7E92B8;
+            --cream:#D9D0BF;
+            --bg:#F8F9FC;
+            --white:#FFFFFF;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
             font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--navy);
         }
 
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background: #333;
-            color: white;
-            position: fixed;
+        .container{
+            display:flex;
+            min-height:100vh;
         }
 
-        .sidebar h2 {
-            text-align: center;
-            padding: 20px 0;
+        .sidebar{
+            width:250px;
+            background: var(--navy);
+            color:white;
+            padding:25px 20px;
+            position:relative;
         }
 
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
+        .sidebar h2{
+            text-align:center;
+            color: var(--cream);
+            margin-bottom:30px;
+            font-size:18px;
         }
 
-        .sidebar a:hover {
-            background: #444;
+        .menu a{
+            display:block;
+            padding:14px 18px;
+            margin-bottom:8px;
+            color:rgba(255,255,255,.8);
+            text-decoration:none;
+            border-radius:12px;
         }
 
-        .active {
-            background: #555;
+        .menu a:hover{
+            background:rgba(255,255,255,.08);
+            color:white;
         }
 
-        .main {
-            margin-left: 220px;
-            padding: 20px;
-            background: #e5e5e5;
-            min-height: 100vh;
+        .menu a.active{
+            background:var(--indigo);
+            color:white;
+            font-weight:bold;
+        }
+
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:84%;
+        }
+
+        .btn-logout{
+            display:block;
+            text-align:center;
+            padding:13px;
+            background:var(--cream);
+            color:var(--navy);
+            text-decoration:none;
+            border-radius:12px;
+            font-weight:bold;
+        }
+
+        .main{
+            flex:1;
+            padding:35px;
+            border-top:6px solid var(--indigo);
+        }
+
+        .page-title{
+            font-size:30px;
+            font-weight:bold;
+            margin-bottom:8px;
+        }
+
+        .subtitle{
+            color:gray;
+            margin-bottom:25px;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:18px;
+            box-shadow:0 8px 24px rgba(16,25,79,.08);
+            margin-bottom:20px;
         }
     </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>DASHBOARD USER</h2>
+<div class="container">
 
-    <div class="menu">
-        <a href="/">Beranda</a>
-            <a href="{{ route('dashboard_user') }}">Dashboard</a>
-        <a href="{{ route('dashboard_user') }}" 
-           class="{{ request()->is('dashboard-user') ? 'active' : '' }}">Dashboard</a>
+    <div class="sidebar">
+        <h2>🎫 STEVENtix</h2>
 
-        <a href="{{ route('user.tiket') }}" 
-           class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
+        <div class="menu">
+            <a href="{{ route('dashboard_user') }}"
+               class="{{ request()->routeIs('dashboard_user') ? 'active' : '' }}">
+               Dashboard
+            </a>
 
-        <a href="{{ route('events') }}" 
-           class="{{ request()->is('events') ? 'active' : '' }}">Event</a>
+            <a href="{{ route('user.tiket') }}"
+               class="{{ request()->routeIs('user.tiket') ? 'active' : '' }}">
+               Tiket Saya
+            </a>
 
-        <a href="{{ route('user.riwayat') }}" 
-           class="{{ request()->is('user/riwayat') ? 'active' : '' }}">Riwayat</a>
+            <a href="{{ route('events.index') }}"
+               class="{{ request()->routeIs('events.index') ? 'active' : '' }}">
+               Event
+            </a>
 
-        <a href="{{ route('user.profile') }}" 
-           class="{{ request()->is('user/profile') ? 'active' : '' }}">Profil</a>
+            <a href="{{ route('user.riwayat') }}"
+               class="{{ request()->routeIs('user.riwayat') ? 'active' : '' }}">
+               Riwayat
+            </a>
+
+            <a href="{{ route('user.profile') }}"
+               class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">
+               Profil
+            </a>
+        </div>
+
+        <div class="logout">
+            <a href="{{ route('logout') }}" class="btn-logout">
+                Logout
+            </a>
+        </div>
     </div>
 
-    <div class="logout">
-        <a href="{{ route('logout') }}" class="btn-logout">Logout</a>
+    <div class="main">
+        @yield('content')
     </div>
-</div>
-<!-- CONTENT -->
-<div class="main">
-    @yield('content')
+
 </div>
 
 </body>

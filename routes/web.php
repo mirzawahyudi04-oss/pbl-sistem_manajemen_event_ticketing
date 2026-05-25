@@ -41,4 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/manajemen-event', [EventController::class, 'store'])->name('manajemen.store');
     Route::resource('events', EventController::class);
 });
-    
+    Route::get('/app', function () {
+    return view('app');
+});
