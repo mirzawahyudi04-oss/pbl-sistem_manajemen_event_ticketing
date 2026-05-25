@@ -50,21 +50,30 @@ class AuthController extends Controller
     public function register(Request $request)
 {
     $request->validate([
-        'name' => ['required'],
-        'email' => ['required', 'email', 'unique:users,email'],
+        'name'     => ['required'],
+        'email'    => ['required', 'email', 'unique:users,email'],
         'password' => ['required', 'min:3'],
-        'role' => ['required']
+        'role'     => ['required']
     ]);
 
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
+    $user = User::create([
+        'name'     => $request->name,
+        'email'    => $request->email,
         'password' => Hash::make($request->password),
-        'role' => $request->role
+        'role'     => $request->role
     ]);
+
+    // Otomatis buat data organizer kalau role organizer
+    if ($request->role === 'organizer') {
+        \App\Models\Organizer::create([
+            'id_user'        => $user->id,
+            'nama_organizer' => $request->name,
+            'kontak'         => '-',
+        ]);
+    }
 
     return redirect()->route('login')
-            ->with('success', 'Registrasi berhasil, silakan login');
+        ->with('success', 'Registrasi berhasil, silakan login');
 }
     /*
     |--------------------------------------------------------------------------

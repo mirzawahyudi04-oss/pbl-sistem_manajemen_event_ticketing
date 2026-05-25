@@ -167,6 +167,15 @@
         padding:25px;
         margin-top:40px;
     }
+    body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.event-grid {
+    flex: 1; 
+}
 
     @media(max-width:1000px){
         .event-grid{
@@ -218,45 +227,37 @@
 </div>
 
 <!-- DATA EVENT -->
-@php
-$events = [
-    ['kategori'=>'Konser',    'nama'=>'Java Jazz Festival',         'tanggal'=>'25 Mei 2026',    'lokasi'=>'Jakarta',    'harga'=>'Rp 250.000',   'organizer'=>'Jazz Fest',    'img'=>'musik1.jpg'],
-    ['kategori'=>'Konser',    'nama'=>'We The Fest',                'tanggal'=>'20 Juli 2026',   'lokasi'=>'Jakarta',    'harga'=>'Rp 500.000',   'organizer'=>'Ismaya Live',  'img'=>'musik2.jpg'],
-    ['kategori'=>'Konser',    'nama'=>'Coldplay Live',              'tanggal'=>'10 Sept 2026',   'lokasi'=>'Jakarta',    'harga'=>'Rp 1.500.000', 'organizer'=>'Music Asia',   'img'=>'musik3.jpg'],
-    ['kategori'=>'Festival',  'nama'=>'Djakarta Warehouse Project', 'tanggal'=>'12 Des 2026',    'lokasi'=>'Jakarta',    'harga'=>'Rp 750.000',   'organizer'=>'DWP',          'img'=>'festival.jpg'],
-    ['kategori'=>'Olahraga',  'nama'=>'Liga 1 Indonesia',           'tanggal'=>'05 Mei 2026',    'lokasi'=>'Bandung',    'harga'=>'Rp 100.000',   'organizer'=>'PSSI',         'img'=>'liga.jpg'],
-    ['kategori'=>'Olahraga',  'nama'=>'Fun Run Batam 5K',           'tanggal'=>'30 Mei 2026',    'lokasi'=>'Batam',      'harga'=>'Rp 75.000',    'organizer'=>'GoRun',        'img'=>'funrun3.jpg'],
-    ['kategori'=>'Seminar',   'nama'=>'Seminar Nasional IT',        'tanggal'=>'15 Juni 2026',   'lokasi'=>'Surabaya',   'harga'=>'Rp 50.000',    'organizer'=>'TechTalk',     'img'=>'seminar4.jpg'],
-    ['kategori'=>'Workshop',  'nama'=>'Bootcamp Coding',            'tanggal'=>'18 Juni 2026',   'lokasi'=>'Online',     'harga'=>'Rp 150.000',   'organizer'=>'Code Academy', 'img'=>'ws.jpg'],
-    ['kategori'=>'Expo',      'nama'=>'Indonesia Comic Con',        'tanggal'=>'01 Juli 2026',   'lokasi'=>'Jakarta',    'harga'=>'Rp 120.000',   'organizer'=>'Comic ID',     'img'=>'expo.jpg'],
-    ['kategori'=>'Teater',    'nama'=>'Pentas Drama Musikal',       'tanggal'=>'22 Juni 2026',   'lokasi'=>'Yogyakarta', 'harga'=>'Rp 80.000',    'organizer'=>'ArtStage',     'img'=>'teater.jpg'],
-    ['kategori'=>'Pameran',   'nama'=>'Art Exhibition 2026',        'tanggal'=>'28 Juni 2026',   'lokasi'=>'Bali',       'harga'=>'Rp 60.000',    'organizer'=>'ArtSpace',     'img'=>'pameran.jpg'],
-    ['kategori'=>'Kompetisi', 'nama'=>'Turnamen E-Sport MLBB',      'tanggal'=>'10 Juli 2026',   'lokasi'=>'Online',     'harga'=>'Gratis',       'organizer'=>'E-Sport ID',   'img'=>'turnamenml.jpg'],
-];
-@endphp
+@php $events = $events ?? []; @endphp
 
 <div class="event-grid" id="eventContainer">
-    @foreach($events as $e)
-    <div class="card" 
-         data-search="{{ strtolower($e['kategori'].' '.$e['nama'].' '.$e['lokasi']) }}"
-         data-kategori="{{ strtolower($e['kategori']) }}">
+    @forelse($events as $event)
+<div class="card"
+     data-search="{{ strtolower($event->nama_event.' '.$event->lokasi) }}"
+     data-kategori="{{ strtolower($event->kategori ?? 'umum') }}">
 
-        <img src="{{ asset('images/' . $e['img']) }}" alt="{{ $e['nama'] }}">
+    <img src="{{ asset('images/default.jpg') }}" alt="{{ $event->nama_event }}">
 
-        <div class="card-body">
-            <span class="kategori">{{ $e['kategori'] }}</span>
-            <h3>{{ $e['nama'] }}</h3>
-            <p>📅 {{ $e['tanggal'] }}</p>
-            <p>📍 {{ $e['lokasi'] }}</p>
-            <p class="harga">{{ $e['harga'] }}</p>
-            <a href="/detail?nama={{ urlencode($e['nama']) }}&tanggal={{ urlencode($e['tanggal']) }}&lokasi={{ urlencode($e['lokasi']) }}&harga={{ urlencode($e['harga']) }}&img={{ urlencode($e['img']) }}&organizer={{ urlencode($e['organizer']) }}" class="btn-detail">Lihat Tiket</a>
-        </div>
-
-        <div class="footer-card">
-            <span>{{ $e['organizer'] }}</span>
-        </div>
+    <div class="card-body">
+        <span class="kategori">{{ $event->kategori ?? 'Umum' }}</span>
+        <h3>{{ $event->nama_event }}</h3>
+        <p>📅 {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</p>
+        <p>📍 {{ $event->lokasi }}</p>
+        <p class="harga">
+            Rp {{ number_format($event->tikets->min('harga'), 0, ',', '.') }}
+        </p>
+        <a href="{{ route('events.show', $event->id_event) }}" class="btn-detail">
+    Lihat Tiket
+</a>
     </div>
-    @endforeach
+
+    <div class="footer-card">
+        <span>{{ $event->organizer->nama_organizer ?? '-' }}</span>
+    </div>
+</div>
+
+@empty
+<p class="text-center">Belum ada event tersedia.</p>
+@endforelse
 </div>
 
 <!-- FOOTER -->

@@ -220,7 +220,7 @@
             <a href="{{ route('dashboard_user') }}" class="active">Dashboard</a>
             <a href="{{ route('user.tiket') }}" 
    class="{{ request()->is('user/tiket') ? 'active' : '' }}">Tiket Saya</a>
-            <a href="{{ route('events') }}">Event</a>
+            <a href="{{ route('events.index') }}">Event</a>
             <a href="{{ route('user.riwayat') }}">Riwayat</a>
             <a href="{{ route('user.profile') }}">Profil</a>
         </div>

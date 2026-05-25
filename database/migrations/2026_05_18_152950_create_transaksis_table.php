@@ -12,27 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksis', function (Blueprint $table) {
-
-            $table->id();
-
-            $table->string('nama_pembeli');
-
-            $table->string('nama_event');
-
-            $table->integer('jumlah_tiket');
-
-            $table->integer('harga_tiket');
-
+            $table->id('id_transaksi');
+            
+            $table->foreignId('id_user')
+                ->constrained('users')
+                ->onDelete('cascade');
+            
+            $table->string('metode_pembayaran');
             $table->integer('total_harga');
-
-            $table->enum('status', [
-                'pending',
-                'dibayar',
-                'dibatalkan'
-            ])->default('pending');
-
+            $table->date('tanggal_transaksi');
+            $table->enum('status', ['pending','dibayar','dibatalkan'])
+                ->default('pending');
+            
             $table->timestamps();
-        });
+});
     }
 
     /**

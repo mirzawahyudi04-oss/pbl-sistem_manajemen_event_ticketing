@@ -9,18 +9,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id('id_event');
+    $table->id('id_event');
 
-            $table->foreignId('id_user')
-                  ->constrained('users')
-                  ->onDelete('cascade');
+    $table->foreignId('id_organizer')
+          ->constrained('organizers', 'id_organizer')
+          ->onDelete('cascade');
 
-            $table->string('nama_event');
-            $table->date('tanggal');
-            $table->string('lokasi');
+    $table->string('nama_event');
+    $table->text('deskripsi');      
+    $table->date('tanggal');
+    $table->string('lokasi');
 
-            $table->timestamps();
-        });
+    $table->timestamps();
+});
     }
 
     public function down(): void

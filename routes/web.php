@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SimplePasswordResetController;
+use App\Http\Controllers\EventController;
+
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -30,11 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/riwayat', fn() => view('pages.riwayat_user'))->name('user.riwayat');
     Route::get('/user/profile', fn() => view('pages.profile_user'))->name('user.profile');
     Route::get('/user/tiket', fn() => view('pages.tiket_user'))->name('user.tiket');
-    Route::get('/events', fn() => view('pages.events'))->name('events');
     Route::get('/transaksi', fn() => view('pages.transaksi'))->name('transaksi');
     Route::get('/peserta', fn() => view('pages.dashboard_user'))->name('peserta');
     Route::get('/laporan', fn() => view('pages.dashboard'))->name('laporan');
     Route::get('/profile-organizer', fn() => view('pages.profile_user'))->name('profile.organizer');
     Route::get('/tiket', fn() => view('pages.kategori_tiket'))->name('tiket');
-    Route::get('/manajemen-event', fn() => view('pages.kelola_event'))->name('manajemen');
+    Route::get('/manajemen-event', [EventController::class, 'kelolaEvent'])->name('manajemen');
+    Route::post('/manajemen-event', [EventController::class, 'store'])->name('manajemen.store');
+    Route::resource('events', EventController::class);
 });
+    
