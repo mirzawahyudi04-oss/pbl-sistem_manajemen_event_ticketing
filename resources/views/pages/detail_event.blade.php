@@ -6,225 +6,277 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --navy: #0F172A;
-            --blue: #2563EB;
-            --blue-hover: #1D4ED8;
-            --blue-light: #DBEAFE;
-            --bg: #F1F5F9;
-        }
+    :root {
+        --navy: #1E293B;
+        --navy-soft: #334155;
+        --indigo: #4F46E5;
+        --indigo-hover: #4338CA;
+        --indigo-light: #EEF2FF;
+        --bg: #F8FAFC;
+        --white: #FFFFFF;
+        --text: #0F172A;
+        --text-soft: #64748B;
+        --border: #E2E8F0;
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg);
-            color: #1e293b;
-        }
+    body{
+        font-family:'Poppins',sans-serif;
+        background:var(--bg);
+        color:var(--text);
+    }
 
-        /* NAVBAR */
-        .navbar {
-            background: var(--navy);
-            padding: 14px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .navbar .back-btn {
-            font-size: 14px;
-            font-weight: normal;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 16px;
-            border-radius: 20px;
-        }
+    /* NAVBAR */
+    .navbar{
+        background:var(--navy);
+        padding:16px 32px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
 
-        /* BANNER */
-        .banner {
-            background: linear-gradient(135deg, var(--navy), var(--blue));
-            padding: 50px 40px 35px;
-            color: white;
-        }
-        .banner h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        .banner .meta {
-            display: flex;
-            gap: 25px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
+    .navbar a{
+        color:white;
+        text-decoration:none;
+        font-weight:600;
+    }
 
-        /* CONTENT LAYOUT */
-        .content {
-            display: flex;
-            gap: 24px;
-            padding: 24px 40px;
-            align-items: flex-start;
-        }
-        .main { flex: 2; }
-        .sidebar {
-            flex: 1;
-            position: sticky;
-            top: 20px;
-        }
+    .back-btn{
+        font-size:14px;
+        background:rgba(255,255,255,.08);
+        padding:8px 16px;
+        border-radius:999px;
+        transition:.2s;
+    }
 
-        /* SECTION BOX */
-        .section-box {
-            background: white;
-            border-radius: 14px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,.06);
-        }
-        .section-box h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--navy);
-            border-left: 4px solid var(--blue);
-            padding-left: 10px;
-        }
+    .back-btn:hover{
+        background:rgba(255,255,255,.15);
+    }
 
-        /* TIKET ITEM */
-        .ticket-item {
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: .2s;
-        }
-        .ticket-item:hover {
-            border-color: var(--blue);
-            box-shadow: 0 2px 10px rgba(37,99,235,.1);
-        }
-        .ticket-name {
-            font-weight: 600;
-            font-size: 15px;
-            margin-bottom: 4px;
-        }
-        .ticket-price {
-            color: var(--blue);
-            font-weight: 700;
-            font-size: 16px;
-        }
-        .ticket-quota {
-            font-size: 12px;
-            color: #94a3b8;
-        }
-        .status-badge {
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .status-available { background: #dcfce7; color: #16a34a; }
-        .status-soldout   { background: #fee2e2; color: #dc2626; }
+    /* BANNER */
+    .banner{
+    background:linear-gradient(135deg,#1E293B,#334155);
+    padding:42px 40px 34px;
+    color:white;
+    border-radius:0 0 24px 24px;
+    margin-bottom:24px;
+}
 
-        /* SYARAT */
-        .syarat-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 14px;
-            color: #475569;
-            list-style: none;
-            padding-left: 20px;
-            position: relative;
-        }
-        .syarat-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--blue);
-            font-weight: bold;
-        }
+.banner h1{
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:14px;
+}
 
-        /* DESKRIPSI */
-        .deskripsi-text {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #475569;
-        }
+.meta{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-size:14px;
+    opacity:.9;
+}
 
-        /* ORGANIZER */
-        .organizer-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .org-avatar {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: var(--blue-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--blue);
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .org-name   { font-weight: 600; font-size: 15px; }
-        .org-kontak { font-size: 13px; color: #94a3b8; }
+    /* LAYOUT */
+    .content{
+        display:flex;
+        gap:24px;
+        padding:24px 40px;
+        align-items:flex-start;
+    }
 
-        /* SIDEBAR CARD */
-        .sidebar-card {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,.1);
-        }
-        .sidebar-banner {
-            background: linear-gradient(135deg, var(--navy), var(--blue));
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            text-align: center;
-            padding: 20px;
-        }
-        .sidebar-info { padding: 20px; }
-        .harga-mulai  { font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
-        .harga        { font-size: 22px; font-weight: 700; color: var(--blue); margin-bottom: 16px; }
+    .main{
+        flex:2;
+    }
 
-        .btn-buy {
-            background: var(--blue);
-            color: white;
-            padding: 13px;
-            border-radius: 10px;
-            border: none;
-            width: 100%;
-            font-family: 'Poppins', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: .2s;
-        }
-        .btn-buy:hover { background: var(--blue-hover); }
+    .sidebar{
+        flex:1;
+        position:sticky;
+        top:20px;
+    }
 
-        .sidebar-meta {
-            margin-top: 16px;
-            font-size: 13px;
-            color: #64748b;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-    </style>
+    /* CARD */
+    .section-box,
+    .sidebar-card{
+        background:white;
+        border:1px solid var(--border);
+        border-radius:18px;
+        box-shadow:0 2px 10px rgba(15,23,42,.04);
+    }
+
+    .section-box{
+        padding:24px;
+        margin-bottom:20px;
+    }
+
+    .section-box h3{
+        font-size:16px;
+        margin-bottom:18px;
+        padding-left:12px;
+        border-left:4px solid var(--indigo);
+        color:var(--navy);
+    }
+
+    /* DESKRIPSI */
+    .deskripsi-text{
+        font-size:14px;
+        line-height:1.8;
+        color:var(--text-soft);
+    }
+
+    /* TIKET */
+    .ticket-item{
+        border:1px solid var(--border);
+        border-radius:14px;
+        padding:18px;
+        margin-bottom:14px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        transition:.2s;
+    }
+
+    .ticket-item:hover{
+        border-color:var(--indigo);
+    }
+
+    .ticket-name{
+        font-weight:600;
+        margin-bottom:4px;
+    }
+
+    .ticket-price{
+        color:var(--indigo);
+        font-weight:700;
+        margin-bottom:4px;
+    }
+
+    .ticket-quota{
+        font-size:12px;
+        color:var(--text-soft);
+    }
+
+    .status-badge{
+        padding:6px 14px;
+        border-radius:999px;
+        font-size:12px;
+        font-weight:600;
+    }
+
+    .status-available{
+        background:#DCFCE7;
+        color:#166534;
+    }
+
+    .status-soldout{
+        background:#FEE2E2;
+        color:#DC2626;
+    }
+
+    /* ORGANIZER */
+    .organizer-info{
+        display:flex;
+        align-items:center;
+        gap:14px;
+    }
+
+    .org-avatar{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+        background:var(--indigo-light);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:700;
+        color:var(--indigo);
+    }
+
+    .org-name{
+        font-weight:600;
+    }
+
+    .org-kontak{
+        font-size:13px;
+        color:var(--text-soft);
+    }
+
+    /* SYARAT */
+    .syarat-list{
+        list-style:none;
+    }
+
+    .syarat-list li{
+        padding:10px 0;
+        border-bottom:1px solid #f1f5f9;
+        font-size:14px;
+        color:var(--text-soft);
+    }
+
+    /* SIDEBAR */
+    .sidebar-card{
+        overflow:hidden;
+    }
+
+    .sidebar-banner{
+    height:180px;
+    overflow:hidden;
+    background:#1E293B;
+}
+
+.sidebar-banner img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+    .sidebar-info{
+        padding:22px;
+    }
+
+    .harga-mulai{
+        font-size:12px;
+        color:var(--text-soft);
+        margin-bottom:4px;
+    }
+
+    .harga{
+        font-size:28px;
+        font-weight:700;
+        color:var(--indigo);
+        margin-bottom:18px;
+    }
+
+    .btn-buy{
+        width:100%;
+        border:none;
+        background:var(--indigo);
+        color:white;
+        padding:14px;
+        border-radius:14px;
+        font-family:'Poppins',sans-serif;
+        font-weight:600;
+        cursor:pointer;
+        transition:.2s;
+    }
+
+    .btn-buy:hover{
+        background:var(--indigo-hover);
+    }
+
+    .sidebar-meta{
+        margin-top:18px;
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        font-size:13px;
+        color:var(--text-soft);
+    }
+</style>
 </head>
 <body>
 
@@ -237,11 +289,13 @@
 <!-- BANNER -->
 <div class="banner">
     <h1>{{ strtoupper($event->nama_event) }}</h1>
+
     <div class="meta">
-        <span>📅 {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</span>
-        <span>📍 {{ $event->lokasi }}</span>
-        <span>👤 {{ $event->organizer->nama_organizer ?? '-' }}</span>
+        <span>| {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</span>
+        <span>| {{ $event->lokasi }}</span>
+        <span>| {{ $event->organizer->nama_organizer ?? '-' }}</span>
     </div>
+</div>
 </div>
 
 <!-- CONTENT -->
@@ -302,7 +356,8 @@
     <div class="sidebar">
         <div class="sidebar-card">
             <div class="sidebar-banner">
-                🎵 {{ $event->nama_event }}
+                 <img src="{{ asset('images/' . $event->gambar) }}"
+                        alt="{{ $event->nama_event }}">
             </div>
             <div class="sidebar-info">
                 <div class="harga-mulai">Harga mulai dari</div>

@@ -14,21 +14,14 @@ class Event extends Model
         'deskripsi',
         'tanggal',
         'lokasi',
+        'gambar',
     ];
-public function index()
-{
-    $events = Event::with(['organizer', 'tikets'])->get();
-    return view('pages.events', compact('events'));
-}
-    
 
-    // Relasi ke Organizer
     public function organizer()
     {
         return $this->belongsTo(Organizer::class, 'id_organizer', 'id_organizer');
     }
 
-    // Relasi ke Tiket
     public function tikets()
     {
         return $this->hasMany(Tiket::class, 'id_event', 'id_event');

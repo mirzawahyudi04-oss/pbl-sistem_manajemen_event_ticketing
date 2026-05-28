@@ -1,129 +1,63 @@
 @extends('layouts.app')
-
 @section('title', 'Tiket Saya')
+
+@section('sidebar')
+    <a href="{{ route('dashboard_user') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition
+              {{ request()->routeIs('dashboard_user') ? 'bg-indigo-600 text-white font-medium' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+        Dashboard
+    </a>
+    <a href="{{ route('user.tiket') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition
+              {{ request()->routeIs('user.tiket') ? 'bg-indigo-600 text-white font-medium' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+        Tiket Saya
+    </a>
+    <a href="{{ route('events.index') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition
+              {{ request()->routeIs('events.index') ? 'bg-indigo-600 text-white font-medium' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+        Event
+    </a>
+    <a href="{{ route('user.riwayat') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition
+              {{ request()->routeIs('user.riwayat') ? 'bg-indigo-600 text-white font-medium' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+        Riwayat
+    </a>
+    <a href="{{ route('user.profile') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition
+              {{ request()->routeIs('user.profile') ? 'bg-indigo-600 text-white font-medium' : 'text-slate-300 hover:bg-slate-700 hover:text-white' }}">
+        Profil
+    </a>
+@endsection
 
 @section('content')
 
-<style>
-    .title{
-        font-size:30px;
-        font-weight:bold;
-        margin-bottom:8px;
-        color: var(--navy);
-    }
-
-    .subtitle{
-        color:gray;
-        margin-bottom:25px;
-    }
-
-    .tiket-card{
-        background:white;
-        border-radius:18px;
-        padding:25px;
-        margin-bottom:20px;
-        box-shadow:0 8px 24px rgba(16,25,79,.08);
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        transition:.3s;
-    }
-
-    .tiket-card:hover{
-        transform: translateY(-5px);
-        box-shadow:0 14px 30px rgba(16,25,79,.15);
-    }
-
-    .tiket-info h4{
-        margin:0 0 8px;
-        color:var(--navy);
-        font-size:20px;
-    }
-
-    .tiket-info p{
-        margin:4px 0;
-        color:gray;
-        font-size:14px;
-    }
-
-    .tiket-action{
-        display:flex;
-        align-items:center;
-        gap:12px;
-    }
-
-    .status-lunas{
-        background:#DCFCE7;
-        color:#166534;
-        padding:8px 14px;
-        border-radius:20px;
-        font-size:12px;
-        font-weight:bold;
-    }
-
-    .status-pending{
-        background:#FEF3C7;
-        color:#92400E;
-        padding:8px 14px;
-        border-radius:20px;
-        font-size:12px;
-        font-weight:bold;
-    }
-
-    .btn-etiket{
-        background:var(--indigo);
-        color:white;
-        padding:10px 18px;
-        border-radius:20px;
-        text-decoration:none;
-        font-size:13px;
-        transition:.3s;
-    }
-
-    .btn-etiket:hover{
-        background:var(--soft-blue);
-    }
-</style>
-
-<div class="title">🎟 Tiket Saya</div>
-<div class="subtitle">Tiket event yang kamu miliki.</div>
-
-<div class="tiket-card">
-    <div class="tiket-info">
-        <h4>Java Jazz Festival</h4>
-        <p>📅 25 Mei 2026</p>
-        <p>📍 Jakarta</p>
-        <p>🎟 1 Tiket · Regular</p>
+    <div class="mb-6">
+        <h1 class="text-2xl font-semibold">Tiket Saya</h1>
+        <p class="text-sm text-slate-500 mt-1">Daftar tiket event yang kamu miliki</p>
     </div>
-    <div class="tiket-action">
-        <span class="status-lunas">Lunas</span>
-        <a href="#" class="btn-etiket">E-Tiket</a>
-    </div>
-</div>
 
-<div class="tiket-card">
-    <div class="tiket-info">
-        <h4>Fun Run Batam 5K</h4>
-        <p>📅 30 Mei 2026</p>
-        <p>📍 Batam</p>
-        <p>🎟 2 Tiket · Regular</p>
-    </div>
-    <div class="tiket-action">
-        <span class="status-lunas">Lunas</span>
-        <a href="#" class="btn-etiket">E-Tiket</a>
-    </div>
-</div>
+    <div class="bg-white rounded-xl border border-slate-100 p-5">
 
-<div class="tiket-card">
-    <div class="tiket-info">
-        <h4>Konser Indie Night</h4>
-        <p>📅 12 Juni 2026</p>
-        <p>📍 Batam</p>
-        <p>🎟 1 Tiket · VIP</p>
+        {{-- Jika ada tiket --}}
+        @forelse($tikets ?? [] as $tiket)
+        <div class="flex justify-between items-center py-3 border-b border-slate-50 last:border-0">
+            <div>
+                <p class="font-medium text-sm">{{ $tiket->event->nama_event ?? '-' }}</p>
+                <p class="text-xs text-slate-400 mt-0.5">
+                    {{ \Carbon\Carbon::parse($tiket->event->tanggal)->format('d M Y') }} · {{ $tiket->event->lokasi }}
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">Lunas</span>
+                <a href="#" class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition">
+                    E-Tiket
+                </a>
+            </div>
+        </div>
+        @empty
+        <p class="text-sm text-slate-400 text-center py-6">Kamu belum memiliki tiket.</p>
+        @endforelse
+
     </div>
-    <div class="tiket-action">
-        <span class="status-pending">Pending</span>
-    </div>
-</div>
 
 @endsection

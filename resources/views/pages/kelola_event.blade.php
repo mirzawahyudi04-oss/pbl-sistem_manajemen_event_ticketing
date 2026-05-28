@@ -134,7 +134,7 @@
         <div class="form-box" id="formBox">
             <h2>Form Tambah Event</h2>
 
-            <form action="{{ route('manajemen.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">

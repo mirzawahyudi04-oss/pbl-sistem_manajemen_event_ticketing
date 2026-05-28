@@ -4,99 +4,98 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Tiket;
+use App\Models\Organizer;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    // Tampil semua event (halaman utama)
+    // READ - Tampil semua event
     public function index()
     {
         $events = Event::with(['organizer', 'tikets'])->get();
         return view('pages.events', compact('events'));
     }
-    
 
-    // Tampil detail 1 event
+    // READ - Detail 1 event
     public function show($id)
     {
-        $event = Event::with(['organizer', 'tikets'])
-                      ->findOrFail($id);
+        $event = Event::with(['organizer', 'tikets'])->findOrFail($id);
         return view('pages.detail_event', compact('event'));
     }
 
-    // Form tambah event
+    // READ - Kelola event milik organizer
+    public function kelolaEvent()
+    {
+        $organizer = Organizer::where('id_user', auth()->id())->first();
+        $events = $organizer
+            ? Event::where('id_organizer', $organizer->id_organizer)->with('tikets')->get()
+            : collect();
+        return view('pages.kelola_event', compact('events'));
+    }
+
+    // CREATE - Form tambah event
     public function create()
     {
         return view('events.create');
     }
 
-    // Simpan event baru
+    // CREATE - Simpan event baru ke database
     public function store(Request $request)
-{
-    $request->validate([
-        'nama_event'  => 'required|string',
-        'deskripsi'   => 'required|string',
-        'tanggal'     => 'required|date',
-        'lokasi'      => 'required|string',
-        'gambar'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        'tiket'       => 'required|array|min:1',
-        'tiket.*.nama_tiket' => 'required|string',
-        'tiket.*.harga'      => 'required|numeric|min:0',
-        'tiket.*.kuota'      => 'required|integer|min:1',
-    ]);
-
-    // Upload gambar
-    $gambar = null;
-    if ($request->hasFile('gambar')) {
-        $gambar = $request->file('gambar')->getClientOriginalName();
-        $request->file('gambar')->move(public_path('images'), $gambar);
-    }
-    $path = $request->file('gambar')->store('events', 'public');
-
-    $event->gambar = $path;
-    $event->save();
-
-    // Ambil organizer milik user yang login
-    $organizer = \App\Models\Organizer::where('id_user', auth()->id())->first();
-
-    // Simpan event
-    $event = Event::create([
-        'id_organizer' => $organizer->id_organizer,
-        'nama_event'   => $request->nama_event,
-        'deskripsi'    => $request->deskripsi,
-        'tanggal'      => $request->tanggal,
-        'lokasi'       => $request->lokasi,
-        'gambar'       => $gambar,
-    ]);
-
-    // Simpan tiket
-    foreach ($request->tiket as $t) {
-        Tiket::create([
-            'id_event'   => $event->id_event,
-            'nama_tiket' => $t['nama_tiket'],
-            'harga'      => $t['harga'],
-            'kuota'      => $t['kuota'],
+    {
+        $request->validate([
+            'nama_event'         => 'required|string',
+            'deskripsi'          => 'required|string',
+            'tanggal'            => 'required|date',
+            'lokasi'             => 'required|string',
+            'gambar'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'tiket'              => 'required|array|min:1',
+            'tiket.*.nama_tiket' => 'required|string',
+            'tiket.*.harga'      => 'required|numeric|min:0',
+            'tiket.*.kuota'      => 'required|integer|min:1',
         ]);
+
+        // Upload gambar jika ada
+        $gambar = null;
+        if ($request->hasFile('gambar')) {
+            $file   = $request->file('gambar');
+            $gambar = $file->getClientOriginalName();
+            $file->move(public_path('images'), $gambar);
+        }
+
+        // Ambil organizer milik user yang login
+        $organizer = Organizer::where('id_user', auth()->id())->first();
+
+        // Simpan event
+        $event = Event::create([
+            'id_organizer' => $organizer->id_organizer,
+            'nama_event'   => $request->nama_event,
+            'deskripsi'    => $request->deskripsi,
+            'tanggal'      => $request->tanggal,
+            'lokasi'       => $request->lokasi,
+            'gambar'       => $gambar,
+        ]);
+
+        // Simpan tiket-tiket yang terkait
+        foreach ($request->tiket as $t) {
+            Tiket::create([
+                'id_event'   => $event->id_event,
+                'nama_tiket' => $t['nama_tiket'],
+                'harga'      => $t['harga'],
+                'kuota'      => $t['kuota'],
+            ]);
+        }
+
+        return redirect()->route('manajemen')->with('success', 'Event berhasil ditambahkan!');
     }
 
-    return redirect()->route('manajemen')->with('success', 'Event berhasil ditambahkan!');
-}
-
-    // Form edit event
+    // UPDATE - Form edit event
     public function edit($id)
     {
         $event = Event::findOrFail($id);
         return view('events.edit', compact('event'));
     }
 
-    public function kelolaEvent()
-{
-    $organizer = \App\Models\Organizer::where('id_user', auth()->id())->first();
-    $events = $organizer ? Event::where('id_organizer', $organizer->id_organizer)->with('tikets')->get() : collect();
-    return view('pages.kelola_event', compact('events'));
-}
-
-    // Update event
+    // UPDATE - Simpan perubahan event
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -107,17 +106,17 @@ class EventController extends Controller
         ]);
 
         $event = Event::findOrFail($id);
-        $event->update($request->all());
+        $event->update($request->only([
+            'nama_event', 'deskripsi', 'tanggal', 'lokasi'
+        ]));
 
-        return redirect()->route('events.index')
-                         ->with('success', 'Event berhasil diupdate!');
+        return redirect()->route('manajemen')->with('success', 'Event berhasil diupdate!');
     }
 
-    // Hapus event
+    // DELETE - Hapus event
     public function destroy($id)
     {
         Event::findOrFail($id)->delete();
-        return redirect()->route('events.index')
-                         ->with('success', 'Event berhasil dihapus!');
+        return redirect()->route('manajemen')->with('success', 'Event berhasil dihapus!');
     }
 }
