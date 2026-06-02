@@ -112,10 +112,10 @@ footer {
     <h2>ADMIN</h2>
 
     <!-- ✅ pakai route -->
-    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="{{ route('dashboard_admin') }}">Dashboard</a>
     <a href="{{ route('manajemen') }}">Manajemen Event</a>
     <a href="{{ route('transaksi') }}">Data Transaksi</a>
-    <a href="{{ route('kategori') }}">Kategori Tiket</a>
+    <a href="#">Kategori Tiket</a>
     <a href="{{ route('logout') }}">Keluar</a>
 </div>
 
