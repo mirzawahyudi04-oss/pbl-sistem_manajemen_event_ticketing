@@ -24,7 +24,10 @@ Route::post('/reset-password', [SimplePasswordResetController::class, 'updatePas
 Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.login.form');
 Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
 Route::get('/dashboard-admin', function () {
-    if (!session()->has('admin')) return redirect()->route('admin.login.form');
+    if (!session()->has('admin')) {
+        return redirect()->route('admin.login.form');
+    }
+
     return view('pages.dashboard');
 })->name('dashboard_admin');
 
@@ -48,3 +51,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/app', fn() => view('app'));
+
