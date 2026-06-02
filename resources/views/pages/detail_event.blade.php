@@ -365,7 +365,7 @@
                     @php $minHarga = $event->tikets->min('harga'); @endphp
                     {{ $minHarga == 0 ? 'Gratis' : 'Rp ' . number_format($minHarga, 0, ',', '.') }}
                 </div>
-                <button class="btn-buy">🎟️ Beli Tiket</button>
+                <button class="btn-buy"> Beli Tiket</button>
                 <div class="sidebar-meta">
                     <span>📅 {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</span>
                     <span>📍 {{ $event->lokasi }}</span>

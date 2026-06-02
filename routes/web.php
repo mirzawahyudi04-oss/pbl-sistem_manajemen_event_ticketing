@@ -31,7 +31,8 @@ Route::get('/dashboard-admin', function () {
 // Protected Routes (perlu login)
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard-user', fn() => view('pages.dashboard_user'))->name('dashboard_user');
-    Route::get('/dashboard-organizer', fn() => view('pages.dashboard_organizer'))->name('dashboard_organizer');
+    Route::get('/dashboard-organizer',
+    [EventController::class, 'dashboardOrganizer'])->name('dashboard_organizer');
     Route::get('/user/riwayat', fn() => view('pages.riwayat_user'))->name('user.riwayat');
     Route::get('/user/profile', fn() => view('pages.profile_user'))->name('user.profile');
     Route::get('/user/tiket', fn() => view('pages.tiket_user'))->name('user.tiket');

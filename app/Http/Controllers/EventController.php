@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
+    public function dashboardOrganizer()
+{
+    $organizer = Organizer::where('id_user', auth()->id())->first();
+
+    $events = $organizer
+        ? Event::where('id_organizer', $organizer->id_organizer)->get()
+        : collect();
+
+    return view('pages.dashboard_organizer', compact('events'));
+}
     // READ - Tampil semua event
     public function index()
     {
@@ -119,4 +129,5 @@ class EventController extends Controller
         Event::findOrFail($id)->delete();
         return redirect()->route('manajemen')->with('success', 'Event berhasil dihapus!');
     }
-}
+}   
+    

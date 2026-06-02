@@ -1,303 +1,141 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Organizer</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
+@extends('layouts.app')
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+@section('title', 'Dashboard Organizer')
 
-        body{
-            background:#f3f4f6;
-        }
+@section('sidebar')
+    <a href="{{ route('dashboard_organizer') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm transition bg-indigo-600 text-white font-medium">
+        Dashboard
+    </a>
 
-        .container{
-            display:flex;
-        }
+    <a href="{{ route('manajemen') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Kelola Event
+    </a>
 
-        /* SIDEBAR */
-        .sidebar{
-            width:270px;
-            height:100vh;
-            background:#2f3640;
-            position:fixed;
-            left:0;
-            top:0;
-        }
+    <a href="{{ route('transaksi') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Transaksi
+    </a>
 
-        .sidebar h2{
-            color:white;
-            padding:35px 25px;
-            font-size:24px;
-        }
+    <a href="{{ route('peserta') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Peserta
+    </a>
 
-        .sidebar ul{
-            list-style:none;
-        }
+    <a href="{{ route('laporan') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Laporan
+    </a>
+    <a href="{{ route('laporan') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+       Profil
+    </a>
+    
+    
+@endsection
 
-        .sidebar ul li{
-            width:100%;
-        }
+@section('content')
 
-        .sidebar ul li a{
-            display:block;
-            padding:18px 25px;
-            color:white;
-            text-decoration:none;
-            transition:0.3s;
-            font-size:18px;
-        }
-
-        .sidebar ul li a:hover{
-            background:#4b5563;
-        }
-
-        .active{
-            background:#4b5563;
-        }
-
-        /* CONTENT */
-        .main{
-            margin-left:270px;
-            width:100%;
-            padding:30px;
-        }
-
-        .main h1{
-            margin-bottom:30px;
-            font-size:50px;
-        }
-
-        .cards{
-            display:flex;
-            gap:25px;
-            flex-wrap:wrap;
-            margin-bottom:40px;
-        }
-
-        .card{
-            flex:1;
-            min-width:220px;
-            padding:30px;
-            border-radius:15px;
-            color:white;
-        }
-
-        .blue{
-            background:#4f6edb;
-        }
-
-        .green{
-            background:#22c55e;
-        }
-
-        .yellow{
-            background:#f4c542;
-        }
-
-        .red{
-            background:#ef4444;
-        }
-
-        .card h3{
-            margin-bottom:15px;
-            font-size:20px;
-        }
-
-        .card p{
-            font-size:40px;
-            font-weight:bold;
-        }
-
-        /* TABLE */
-        .table-box{
-            background:white;
-            padding:20px;
-            border-radius:12px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .table-box h2{
-            margin-bottom:20px;
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
-
-        table th{
-            background:#f3f4f6;
-            padding:15px;
-            text-align:left;
-        }
-
-        table td{
-            padding:15px;
-            border-top:1px solid #ddd;
-        }
-
-        .badge{
-            padding:6px 12px;
-            border-radius:8px;
-            color:white;
-            font-size:14px;
-        }
-
-        .success{
-            background:green;
-        }
-
-        .warning{
-            background:orange;
-        }
-
-    </style>
-</head>
-<body>
-
-<div class="container">
-
-    <!-- SIDEBAR -->
-<div class="sidebar">
-
-    <h2>Organizer</h2>
-
-    <ul>
-
-        <li>
-            <a href="/dashboard-organizer">
-                Dashboard
-            </a>
-        </li>
-
-        <li>
-            <a href="/manajemen-event">
-                Kelola Event
-            </a>
-        </li>
-
-        <li>
-            <a href="/tiket">
-                Tiket
-            </a>
-        </li>
-
-        <li>
-            <a href="/peserta">
-                Peserta
-            </a>
-        </li>
-
-        <li>
-            <a href="/transaksi">
-                Transaksi
-            </a>
-        </li>
-
-        <li>
-            <a href="/laporan">
-                Laporan
-            </a>
-        </li>
-
-        <li>
-            <a href="/profile-organizer">
-                Profile
-            </a>
-        </li>
-
-        <li>
-            <a href="/logout">
-                Logout
-            </a>
-        </li>
-
-    </ul>
-
+<div class="mb-6">
+    <h1 class="text-2xl font-semibold">
+        Halo, Organizer
+    </h1>
+    <p class="text-sm text-slate-500 mt-1">
+        Kelola event dan pantau performa penjualan tiket
+    </p>
 </div>
-    <!-- CONTENT -->
-    <div class="main">
 
-        <h1>Dashboard Organizer</h1>
+<!-- STAT CARD -->
+<div class="grid grid-cols-4 gap-4 mb-6">
 
-        <div class="cards">
+    <div class="bg-white rounded-xl p-5 border border-slate-100">
+        <p class="text-3xl font-semibold">
+        {{ $events->count() }}</p>Total Event</p>
+        <p class="text-3xl font-semibold">12</p>
+    </div>
 
-            <div class="card blue">
-                <h3>Total Event</h3>
-                <p>12</p>
-            </div>
+    <div class="bg-white rounded-xl p-5 border border-slate-100">
+        <p class="text-xs text-slate-500 mb-1">Tiket Terjual</p>
+        <p class="text-3xl font-semibold">540</p>
+    </div>
 
-            <div class="card green">
-                <h3>Tiket Terjual</h3>
-                <p>540</p>
-            </div>
+    <div class="bg-white rounded-xl p-5 border border-slate-100">
+        <p class="text-xs text-slate-500 mb-1">Pendapatan</p>
+        <p class="text-3xl font-semibold">Rp12JT</p>
+    </div>
 
-            <div class="card yellow">
-                <h3>Pendapatan</h3>
-                <p>Rp12JT</p>
-            </div>
-
-            <div class="card red">
-                <h3>Pengunjung</h3>
-                <p>1.200</p>
-            </div>
-
-        </div>
-
-        <!-- TABLE -->
-        <div class="table-box">
-
-            <h2>Data Event</h2>
-
-            <table>
-
-                <tr>
-                    <th>No</th>
-                    <th>Nama Event</th>
-                    <th>Tanggal</th>
-                    <th>Lokasi</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td>Music Festival</td>
-                    <td>20 Juni 2026</td>
-                    <td>Batam</td>
-                    <td>
-                        <span class="badge success">
-                            Aktif
-                        </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2</td>
-                    <td>Seminar Teknologi</td>
-                    <td>25 Juni 2026</td>
-                    <td>Batam Center</td>
-                    <td>
-                        <span class="badge warning">
-                            Pending
-                        </span>
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
+    <div class="bg-white rounded-xl p-5 border border-slate-100">
+        <p class="text-xs text-slate-500 mb-1">Pengunjung</p>
+        <p class="text-3xl font-semibold">1.200</p>
     </div>
 
 </div>
 
-</body>
-</html>
+<!-- DATA EVENT -->
+<!-- DATA EVENT -->
+<div class="bg-white rounded-xl border border-slate-100 p-5">
+
+    <div class="pb-3 mb-4 border-b border-slate-100">
+        <p class="text-xs uppercase tracking-wide text-slate-400">
+            Data Event Saya
+        </p>
+    </div>
+
+    <table class="w-full">
+
+        <thead>
+            <tr class="border-b border-slate-100">
+                <th class="text-left py-3">No</th>
+                <th class="text-left py-3">Nama Event</th>
+                <th class="text-left py-3">Tanggal</th>
+                <th class="text-left py-3">Lokasi</th>
+                <th class="text-left py-3">Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @forelse($events as $index => $event)
+
+            <tr class="border-b border-slate-50">
+
+                <td class="py-3">{{ $index + 1 }}</td>
+
+                <td class="py-3">
+                    {{ $event->nama_event }}
+                </td>
+
+                <td class="py-3">
+                    {{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}
+                </td>
+
+                <td class="py-3">
+                    {{ $event->lokasi }}
+                </td>
+
+                <td class="py-3">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+                        Aktif
+                    </span>
+                </td>
+
+            </tr>
+
+            @empty
+
+            <tr>
+                <td colspan="5" class="py-5 text-center text-slate-400">
+                    Belum ada event
+                </td>
+            </tr>
+
+            @endforelse
+
+        </tbody>
+
+    </table>
+
+</div>
+
+@endsection
