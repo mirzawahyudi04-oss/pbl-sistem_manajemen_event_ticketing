@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SimplePasswordResetController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PesertaController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -48,7 +49,12 @@ Route::middleware('auth')->group(function () {
     // Event CRUD
     Route::get('/manajemen-event', [EventController::class, 'kelolaEvent'])->name('manajemen');
     Route::resource('events', EventController::class);
+
+    //pesserta
+    Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
+    Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
 });
 
 Route::get('/app', fn() => view('app'));
+
 

@@ -18,7 +18,7 @@
         Transaksi
     </a>
 
-    <a href="{{ route('peserta') }}"
+    <a href="{{ route('peserta.index') }}"
        class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
         Peserta
     </a>
