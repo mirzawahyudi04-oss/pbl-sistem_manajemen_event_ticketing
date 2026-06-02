@@ -48,3 +48,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/app', fn() => view('app'));
+
