@@ -34,7 +34,29 @@ Route::get('/dashboard-admin', function () {
 Route::get('/admin/manajemen', function () {
     return view('pages.manajemen.admin');
 })->name('admin.manajemen');
+Route::get('/admin/organizer', function () {
+    return view('pages.organizer_admin');
+})->name('admin.organizer');
+// Admin Pages
+Route::get('/admin/manajemen', function () {
+    return view('pages.manajemen_admin');
+})->name('admin.manajemen');
 
+Route::get('/admin/organizer', function () {
+    return view('pages.organizer_admin');
+})->name('admin.organizer');
+
+Route::get('/admin/peserta', function () {
+    return view('pages.peserta_admin');
+})->name('admin.peserta');
+
+Route::get('/admin/tiket', function () {
+    return view('pages.tiket_admin');
+})->name('admin.tiket');
+
+Route::get('/admin/laporan', function () {
+    return view('pages.laporan_admin');
+})->name('admin.laporan');
 
 
 // Protected Routes (perlu login)
