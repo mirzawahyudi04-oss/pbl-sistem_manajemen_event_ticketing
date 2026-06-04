@@ -165,8 +165,8 @@
     <div class="logo">STEVENTix</div>
 
     <h1>
-        Temukan event terbaik,<br>
-        pesan tiket dalam <span>hitungan detik.</span>
+        Temukan event terbaik<br>
+            
     </h1>
 
     <p>

@@ -29,8 +29,13 @@ Route::get('/dashboard-admin', function () {
         return redirect()->route('admin.login.form');
     }
 
-    return view('pages.dashboard');
+    return view('pages.dashboard_admin');
 })->name('dashboard_admin');
+Route::get('/admin/manajemen', function () {
+    return view('pages.manajemen.admin');
+})->name('admin.manajemen');
+
+
 
 // Protected Routes (perlu login)
 Route::middleware('auth')->group(function () {
@@ -53,6 +58,8 @@ Route::middleware('auth')->group(function () {
     //pesserta
     Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
     Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
+    //admin
+    
 });
 
 Route::get('/app', fn() => view('app'));
