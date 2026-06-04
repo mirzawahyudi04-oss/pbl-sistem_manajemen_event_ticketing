@@ -6,6 +6,7 @@ use App\Http\Controllers\SimplePasswordResetController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
+use App\Http\Controllers\UserProfileController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -73,6 +74,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan', fn() => view('pages.dashboard'))->name('laporan');
     Route::get('/profile-organizer', fn() => view('pages.profile_user'))->name('profile.organizer');
     Route::get('/tiket', fn() => view('pages.kategori_tiket'))->name('tiket');
+    Route::get('/user/profile', [UserProfileController::class, 'index'])
+        ->name('user.profile');
+
+    Route::put('/user/profile/update', [UserProfileController::class, 'update'])
+        ->name('user.profile.update');
+    Route::delete('/user/profile/delete', [UserProfileController::class, 'destroy'])
+    ->name('user.profile.delete');
 
     // Event CRUD
     Route::get('/manajemen-event', [EventController::class, 'kelolaEvent'])->name('manajemen');

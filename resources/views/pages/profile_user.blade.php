@@ -74,17 +74,31 @@
         </div>
 
         {{-- EDIT PROFIL --}}
-        <div class="bg-white rounded-xl border border-slate-100 p-6">
-            <p class="text-xs uppercase tracking-wide text-slate-400 mb-4">Edit Profil</p>
+<div class="bg-white rounded-xl border border-slate-100 p-6">
+    <p class="text-xs uppercase tracking-wide text-slate-400 mb-4">Edit Profil</p>
 
-            @if(session('success'))
-            <div class="text-xs bg-green-100 text-green-700 px-4 py-2 rounded-lg mb-4">
-                {{ session('success') }}
-            </div>
-            @endif
+    @if(session('success'))
+    <div class="text-xs bg-green-100 text-green-700 px-4 py-2 rounded-lg mb-4">
+        {{ session('success') }}
+    </div>
+    @endif
 
-            <form method="POST" action="#">
-                @csrf
+    @if ($errors->any())
+    <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg mb-4">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>• {{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form method="POST" action="{{ route('user.profile.update') }}">
+        @csrf
+        @method('PUT')
+                @csrf<form method="POST" action="{{ route('user.profile.update') }}">
+         @csrf
+    @method('PUT')
                 <div class="space-y-3">
                     <div>
                         <label class="text-xs text-slate-500 mb-1 block">Nama Baru</label>
@@ -113,5 +127,18 @@
         </div>
 
     </div>
+    <form action="{{ route('user.profile.delete') }}"
+      method="POST"
+      onsubmit="return confirm('Yakin ingin menghapus akun ini?')"
+      class="mt-3">
+
+    @csrf
+    @method('DELETE')
+
+    <button type="submit"
+        class="w-full bg-red-600 text-white text-sm py-2.5 rounded-lg hover:bg-red-700 transition">
+        Hapus Akun
+    </button>
+</form>
 
 @endsection
