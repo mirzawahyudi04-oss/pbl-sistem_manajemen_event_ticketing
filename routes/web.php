@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SimplePasswordResetController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\AdminOrganizerController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -34,17 +35,17 @@ Route::get('/dashboard-admin', function () {
 Route::get('/admin/manajemen', function () {
     return view('pages.manajemen.admin');
 })->name('admin.manajemen');
-Route::get('/admin/organizer', function () {
-    return view('pages.organizer_admin');
-})->name('admin.organizer');
-// Admin Pages
-Route::get('/admin/manajemen', function () {
-    return view('pages.manajemen_admin');
-})->name('admin.manajemen');
+Route::get('/admin/organizer', [AdminOrganizerController::class, 'index'])
+    ->name('admin.organizer');
 
-Route::get('/admin/organizer', function () {
-    return view('pages.organizer_admin');
-})->name('admin.organizer');
+Route::get('/admin/organizer/{id}/edit', [AdminOrganizerController::class, 'edit'])
+    ->name('admin.organizer.edit');
+
+Route::put('/admin/organizer/{id}', [AdminOrganizerController::class, 'update'])
+    ->name('admin.organizer.update');
+
+Route::delete('/admin/organizer/{id}', [AdminOrganizerController::class, 'destroy'])
+    ->name('admin.organizer.destroy');
 
 Route::get('/admin/peserta', function () {
     return view('pages.peserta_admin');

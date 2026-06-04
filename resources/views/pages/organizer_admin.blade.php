@@ -81,43 +81,39 @@
             <select><option>Semua Status</option><option>Aktif</option><option>Pending</option><option>Nonaktif</option></select>
         </div>
         <table>
-            <tr><th>#</th><th>Nama Organizer</th><th>Email</th><th>No. HP</th><th>Total Event</th><th>Bergabung</th><th>Status</th><th>Aksi</th></tr>
-            <tr>
-                <td>1</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;">🏢</div><strong>PT Event Indonesia</strong></div></td>
-                <td>event.indonesia@mail.com</td><td>0812-3456-7890</td><td>8</td><td>Jan 2025</td>
-                <td><span class="badge badge-green">Aktif</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Nonaktif</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;">🏫</div><strong>Polibatam</strong></div></td>
-                <td>polibatam@edu.id</td><td>0778-123-456</td><td>3</td><td>Mar 2025</td>
-                <td><span class="badge badge-yellow">Pending</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-success">Verifikasi</a><a href="#" class="btn btn-danger">Tolak</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;">🎨</div><strong>Batam Creative Hub</strong></div></td>
-                <td>creative@batam.id</td><td>0812-9988-7766</td><td>5</td><td>Jun 2025</td>
-                <td><span class="badge badge-green">Aktif</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Nonaktif</a></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;">🎵</div><strong>Soundwave Org</strong></div></td>
-                <td>soundwave@music.id</td><td>0821-5544-3322</td><td>2</td><td>Sep 2025</td>
-                <td><span class="badge badge-gray">Nonaktif</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-success">Aktifkan</a></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#dbeafe;border-radius:50%;display:flex;align-items:center;justify-content:center;">🏃</div><strong>Sport Batam Club</strong></div></td>
-                <td>sport@batam.club</td><td>0852-1122-3344</td><td>1</td><td>Nov 2025</td>
-                <td><span class="badge badge-yellow">Pending</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-success">Verifikasi</a><a href="#" class="btn btn-danger">Tolak</a></td>
-            </tr>
-        </table>
+    <tr>
+    <th>ID</th>
+    <th>NAMA ORGANIZER</th>
+    <th>KONTAK</th>
+    <th>AKSI</th>
+</tr>
+
+@foreach($organizers as $organizer)
+<tr>
+    <td>{{ $organizer->id_organizer }}</td>
+    <td>{{ $organizer->nama_organizer }}</td>
+    <td>{{ $organizer->kontak }}</td>
+
+    <td>
+        <a href="{{ route('admin.organizer.edit', $organizer->id_organizer) }}"
+           class="btn btn-primary">
+            Edit
+        </a>
+
+        <form action="{{ route('admin.organizer.destroy', $organizer->id_organizer) }}"
+              method="POST"
+              style="display:inline;">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger">
+                Hapus
+            </button>
+        </form>
+    </td>
+</tr>
+@endforeach
+</table>
     </div>
 </div>
 
