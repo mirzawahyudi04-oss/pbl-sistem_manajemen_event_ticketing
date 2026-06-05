@@ -82,16 +82,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/profile/delete', [UserProfileController::class, 'destroy'])
     ->name('user.profile.delete');
 
-    // Event CRUD
+    // CRUD Event
     Route::get('/manajemen-event', [EventController::class, 'kelolaEvent'])->name('manajemen');
-    Route::resource('events', EventController::class);
+    Route::post('/events-store', [EventController::class, 'store'])->name('events.store');
+    Route::put('/events-update/{id}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/events-delete/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
     //pesserta
     Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
     Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
-    //admin
+   
     
 });
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/app', fn() => view('app'));
 
