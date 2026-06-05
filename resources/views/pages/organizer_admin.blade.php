@@ -51,22 +51,22 @@
 
 <div class="sidebar">
     <div class="sidebar-brand">
-        <div class="brand-icon">🎫</div>
+        <div class="brand-icon"></div>
         <div><h2>EVENTHUB</h2><span>Admin Panel</span></div>
     </div>
     <div class="sidebar-menu">
         <div class="menu-label">Main</div>
-        <a href="{{ route('dashboard_admin') }}"><span class="icon">📊</span> Dashboard</a>
-        <a href="{{ route('admin.manajemen') }}"><span class="icon">🗓️</span> Manajemen Event</a>
+        <a href="{{ route('dashboard_admin') }}"><span class="icon"></span> Dashboard</a>
+        <a href="{{ route('admin.manajemen') }}"><span class="icon"></span> Manajemen Event</a>
         <div class="menu-label">Kelola</div>
-        <a href="{{ route('admin.organizer') }}" class="active"><span class="icon">🏢</span> Organizer</a>
-        <a href="{{ route('admin.peserta') }}"><span class="icon">👥</span> Peserta</a>
-        <a href="{{ route('admin.tiket') }}"><span class="icon">🎟️</span> Tiket</a>
+        <a href="{{ route('admin.organizer') }}" class="active"><span class="icon"></span> Organizer</a>
+        <a href="{{ route('admin.peserta') }}"><span class="icon"></span> Peserta</a>
+        <a href="{{ route('admin.tiket') }}"><span class="icon"></span> Tiket</a>
         <div class="menu-label">Analitik</div>
-        <a href="{{ route('admin.laporan') }}"><span class="icon">📈</span> Laporan</a>
+        <a href="{{ route('admin.laporan') }}"><span class="icon"></span> Laporan</a>
     </div>
     <div class="sidebar-footer">
-        <a href="{{ route('admin.login') }}"><span class="icon">🚪</span> Logout</a>
+        <a href="{{ route('admin.login') }}"><span class="icon"></span> Logout</a>
     </div>
 </div>
 
@@ -77,7 +77,7 @@
 
     <div class="box">
         <div class="search-bar">
-            <input type="text" placeholder="🔍  Cari nama organizer...">
+            <input type="text" placeholder="  Cari nama organizer...">
             <select><option>Semua Status</option><option>Aktif</option><option>Pending</option><option>Nonaktif</option></select>
         </div>
         <table>

@@ -68,7 +68,7 @@ class AuthController extends Controller
         \App\Models\Organizer::create([
             'id_user'        => $user->id,
             'nama_organizer' => $request->name,
-            'kontak'         => '-',
+            'kontak'         => $request->phone,
         ]);
     }
 

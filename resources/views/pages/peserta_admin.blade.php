@@ -51,22 +51,22 @@
 
 <div class="sidebar">
     <div class="sidebar-brand">
-        <div class="brand-icon">🎫</div>
+        <div class="brand-icon"></div>
         <div><h2>EVENTHUB</h2><span>Admin Panel</span></div>
     </div>
     <div class="sidebar-menu">
         <div class="menu-label">Main</div>
-        <a href="{{ route('dashboard_admin') }}"><span class="icon">📊</span> Dashboard</a>
-        <a href="{{ route('admin.manajemen') }}"><span class="icon">🗓️</span> Manajemen Event</a>
+        <a href="{{ route('dashboard_admin') }}"><span class="icon"></span> Dashboard</a>
+        <a href="{{ route('admin.manajemen') }}"><span class="icon"></span> Manajemen Event</a>
         <div class="menu-label">Kelola</div>
-        <a href="{{ route('admin.organizer') }}"><span class="icon">🏢</span> Organizer</a>
-        <a href="{{ route('admin.peserta') }}" class="active"><span class="icon">👥</span> Peserta</a>
-        <a href="{{ route('admin.tiket') }}"><span class="icon">🎟️</span> Tiket</a>
+        <a href="{{ route('admin.organizer') }}"><span class="icon"></span> Organizer</a>
+        <a href="{{ route('admin.peserta') }}" class="active"><span class="icon"></span> Peserta</a>
+        <a href="{{ route('admin.tiket') }}"><span class="icon"></span> Tiket</a>
         <div class="menu-label">Analitik</div>
-        <a href="{{ route('admin.laporan') }}"><span class="icon">📈</span> Laporan</a>
+        <a href="{{ route('admin.laporan') }}"><span class="icon"></span> Laporan</a>
     </div>
     <div class="sidebar-footer">
-        <a href="{{ route('admin.login') }}"><span class="icon">🚪</span> Logout</a>
+        <a href="{{ route('admin.login') }}"><span class="icon"></span> Logout</a>
     </div>
 </div>
 
@@ -78,7 +78,7 @@
 
     <div class="box">
         <div class="search-bar">
-            <input type="text" placeholder="🔍  Cari nama atau email...">
+            <input type="text" placeholder="  Cari nama atau email...">
             <select><option>Semua Status</option><option>Aktif</option><option>Nonaktif</option></select>
         </div>
         <table>
@@ -97,13 +97,7 @@
                 <td><span class="badge badge-green">Aktif</span></td>
                 <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Blokir</a></td>
             </tr>
-            <tr>
-                <td>3</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#d1fae5;border-radius:50%;display:flex;align-items:center;justify-content:center;">👤</div><strong>Budi Santoso</strong></div></td>
-                <td>budi.s@yahoo.com</td><td>0821-5555-6666</td><td>8</td><td>Apr 2025</td>
-                <td><span class="badge badge-green">Aktif</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Blokir</a></td>
-            </tr>
+            
             <tr>
                 <td>4</td>
                 <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#fee2e2;border-radius:50%;display:flex;align-items:center;justify-content:center;">👤</div><strong>Dewi Lestari</strong></div></td>
@@ -111,13 +105,7 @@
                 <td><span class="badge badge-gray">Nonaktif</span></td>
                 <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-success">Aktifkan</a></td>
             </tr>
-            <tr>
-                <td>5</td>
-                <td><div style="display:flex;align-items:center;gap:10px;"><div style="width:34px;height:34px;background:#d1fae5;border-radius:50%;display:flex;align-items:center;justify-content:center;">👤</div><strong>Rizky Fadhlan</strong></div></td>
-                <td>rizky.f@hotmail.com</td><td>0812-9999-0000</td><td>12</td><td>Jun 2025</td>
-                <td><span class="badge badge-green">Aktif</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Blokir</a></td>
-            </tr>
+           
         </table>
     </div>
 </div>

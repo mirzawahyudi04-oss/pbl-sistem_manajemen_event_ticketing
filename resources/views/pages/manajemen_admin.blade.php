@@ -56,22 +56,22 @@
 
 <div class="sidebar">
     <div class="sidebar-brand">
-        <div class="brand-icon">🎫</div>
+        <div class="brand-icon"></div>
         <div><h2>EVENTHUB</h2><span>Admin Panel</span></div>
     </div>
     <div class="sidebar-menu">
         <div class="menu-label">Main</div>
-        <a href="{{ route('dashboard_admin') }}"><span class="icon">📊</span> Dashboard</a>
-        <a href="{{ route('admin.manajemen') }}" class="active"><span class="icon">🗓️</span> Manajemen Event</a>
+        <a href="{{ route('dashboard_admin') }}"><span class="icon"></span> Dashboard</a>
+        <a href="{{ route('admin.manajemen') }}" class="active"><span class="icon"></span> Manajemen Event</a>
         <div class="menu-label">Kelola</div>
-        <a href="{{ route('admin.organizer') }}"><span class="icon">🏢</span> Organizer</a>
-        <a href="{{ route('admin.peserta') }}"><span class="icon">👥</span> Peserta</a>
-        <a href="{{ route('admin.tiket') }}"><span class="icon">🎟️</span> Tiket</a>
+        <a href="{{ route('admin.organizer') }}"><span class="icon"></span> Organizer</a>
+        <a href="{{ route('admin.peserta') }}"><span class="icon"></span> Peserta</a>
+        <a href="{{ route('admin.tiket') }}"><span class="icon"></span> Tiket</a>
         <div class="menu-label">Analitik</div>
-        <a href="{{ route('admin.laporan') }}"><span class="icon">📈</span> Laporan</a>
+        <a href="{{ route('admin.laporan') }}"><span class="icon"></span> Laporan</a>
     </div>
     <div class="sidebar-footer">
-        <a href="{{ route('admin.login') }}"><span class="icon">🚪</span> Logout</a>
+        <a href="{{ route('admin.login') }}"><span class="icon"></span> Logout</a>
     </div>
 </div>
 
@@ -82,10 +82,10 @@
     </div>
 
     <div class="mini-cards">
-        <div class="mini-card"><div class="mini-icon" style="background:#dbeafe;">🗓️</div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Total Event</p><p style="font-size:22px;font-weight:700;">25</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#dcfce7;">✅</div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Approved</p><p style="font-size:22px;font-weight:700;">18</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#fef9c3;">⏳</div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Pending</p><p style="font-size:22px;font-weight:700;">5</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#fee2e2;">❌</div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Rejected</p><p style="font-size:22px;font-weight:700;">2</p></div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:#dbeafe;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Total Event</p><p style="font-size:22px;font-weight:700;">25</p></div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:#dcfce7;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Approved</p><p style="font-size:22px;font-weight:700;">18</p></div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:#fef9c3;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Pending</p><p style="font-size:22px;font-weight:700;">5</p></div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:#fee2e2;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Rejected</p><p style="font-size:22px;font-weight:700;">2</p></div></div>
     </div>
 
     <div class="box">
