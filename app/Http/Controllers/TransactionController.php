@@ -13,7 +13,24 @@ class TransactionController extends Controller
     {
         $event = Event::findOrFail($id);
 
-        return view('pages.beli_tiket', compact('event'));
+        // total semua kuota tiket
+        $totalKuota = $event->tikets->sum('kuota');
+
+        // kalau tiket habis
+        if ($totalKuota <= 0) {
+
+            return redirect()
+                ->back()
+                ->with(
+                    'error',
+                    'Tiket sudah habis terjual'
+                );
+        }
+
+        return view(
+            'pages.beli_tiket',
+            compact('event')
+        );
     }
 
     public function store(Request $request, $id)
@@ -26,9 +43,15 @@ class TransactionController extends Controller
         ]);
 
         // cari tiket berdasarkan nama tiket
-        $tiket = Tiket::where('id_event', $event->id_event)
-                        ->where('nama_tiket', $request->ticket_type)
-                        ->first();
+        $tiket = Tiket::where(
+                        'id_event',
+                        $event->id_event
+                    )
+                    ->where(
+                        'nama_tiket',
+                        $request->ticket_type
+                    )
+                    ->first();
 
         // cek tiket ada atau tidak
         if (!$tiket) {
@@ -36,6 +59,15 @@ class TransactionController extends Controller
             return back()->with(
                 'error',
                 'Tiket tidak ditemukan'
+            );
+        }
+
+        // cek kuota habis
+        if ($tiket->kuota <= 0) {
+
+            return back()->with(
+                'error',
+                'Tiket sudah habis terjual'
             );
         }
 
@@ -64,7 +96,7 @@ class TransactionController extends Controller
         // kurangi kuota tiket
         $tiket->kuota -= $request->qty;
 
-        // simpan perubahan kuota
+        // simpan perubahan
         $tiket->save();
 
         return redirect()
