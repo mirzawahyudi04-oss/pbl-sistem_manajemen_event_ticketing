@@ -7,7 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TicketController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -99,27 +99,31 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/app', fn() => view('app'));
-Route::middleware('auth')->group(function () {
 
-    Route::get('/events/{id}/buy',
-        [TransactionController::class, 'create'])
-        ->name('transactions.create');
+Route::get('/events/{event}/buy', [TicketController::class, 'buy'])
+    ->name('tickets.buy');
 
-    Route::post('/events/{id}/buy',
-        [TransactionController::class, 'store'])
-        ->name('transactions.store');
+Route::post('/events/{event}/buy', [TicketController::class, 'store'])
+    ->name('tickets.store');
 
-});
-Route::middleware('auth')->group(function () {
+    Route::post('/events/{event}/payment',
+    [TicketController::class, 'payment'])
+    ->name('tickets.payment');
+    Route::get('/events/{event}/buy',
+    [TicketController::class, 'buy'])
+    ->name('tickets.buy');
 
-    Route::get('/events/{id}/buy',
-        [TransactionController::class, 'create'])
-        ->name('transactions.create');
+Route::post('/events/{event}/payment',
+    [TicketController::class, 'payment'])
+    ->name('tickets.payment');
 
-    Route::post('/events/{id}/buy',
-        [TransactionController::class, 'store'])
-        ->name('transactions.store');
-
-});
-
+Route::post('/events/{event}/store',
+    [TicketController::class, 'store'])
+    ->name('tickets.store');
+Route::get('/transactions/create', function () {
+    return view('transactions.create');
+})->name('transactions.create');
+Route::get('/transactions/create', function () {
+    return redirect()->route('tickets.buy', 1);
+})->name('transactions.create');
 
