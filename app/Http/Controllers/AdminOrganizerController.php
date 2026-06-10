@@ -25,16 +25,24 @@ class AdminOrganizerController extends Controller
 
     // UPDATE
     public function update(Request $request, $id)
-    {
-        $organizer = Organizer::findOrFail($id);
+{
+    $request->validate([
+        'nama_organizer' => 'required',
+        'kontak' => 'required',
+        'status' => 'required'
+    ]);
 
-        $organizer->nama_organizer = $request->nama_organizer;
-        $organizer->kontak = $request->kontak;
+    $organizer = Organizer::findOrFail($id);
 
-        $organizer->save();
+    $organizer->nama_organizer = $request->nama_organizer;
+    $organizer->kontak = $request->kontak;
+    $organizer->status = $request->status;
 
-        return redirect()->route('admin.organizer');
-    }
+    $organizer->save();
+
+    return redirect() ->route('admin.organizer')
+        ->with('success', 'Data organizer berhasil diperbarui');
+}
 
     // DELETE
     public function destroy($id)

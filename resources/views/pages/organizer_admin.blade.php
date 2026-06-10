@@ -85,14 +85,26 @@
     <th>ID</th>
     <th>NAMA ORGANIZER</th>
     <th>KONTAK</th>
+    <th>STATUS</th>
     <th>AKSI</th>
 </tr>
 
 @foreach($organizers as $organizer)
 <tr>
+
     <td>{{ $organizer->id_organizer }}</td>
+
     <td>{{ $organizer->nama_organizer }}</td>
+
     <td>{{ $organizer->kontak }}</td>
+
+    <td>
+        @if($organizer->status == 'Aktif')
+            <span class="badge badge-green">Aktif</span>
+        @else
+            <span class="badge badge-gray">Nonaktif</span>
+        @endif
+    </td>
 
     <td>
         <a href="{{ route('admin.organizer.edit', $organizer->id_organizer) }}"
@@ -111,6 +123,7 @@
             </button>
         </form>
     </td>
+
 </tr>
 @endforeach
 </table>

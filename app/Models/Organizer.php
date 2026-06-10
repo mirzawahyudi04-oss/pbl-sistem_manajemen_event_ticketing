@@ -12,6 +12,8 @@ class Organizer extends Model
         'id_user',
         'nama_organizer',
         'kontak',
+        'status'
+        
     ];
 
     // Relasi ke User
