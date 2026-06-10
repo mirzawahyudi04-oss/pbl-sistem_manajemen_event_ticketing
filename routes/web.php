@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -98,5 +99,27 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/app', fn() => view('app'));
+Route::middleware('auth')->group(function () {
+
+    Route::get('/events/{id}/buy',
+        [TransactionController::class, 'create'])
+        ->name('transactions.create');
+
+    Route::post('/events/{id}/buy',
+        [TransactionController::class, 'store'])
+        ->name('transactions.store');
+
+});
+Route::middleware('auth')->group(function () {
+
+    Route::get('/events/{id}/buy',
+        [TransactionController::class, 'create'])
+        ->name('transactions.create');
+
+    Route::post('/events/{id}/buy',
+        [TransactionController::class, 'store'])
+        ->name('transactions.store');
+
+});
 
 

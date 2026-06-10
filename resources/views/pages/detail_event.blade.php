@@ -353,28 +353,60 @@
     </div>
 
     <!-- KANAN: sticky card -->
-    <div class="sidebar">
-        <div class="sidebar-card">
-            <div class="sidebar-banner">
-                 <img src="{{ asset('images/' . $event->gambar) }}"
-                        alt="{{ $event->nama_event }}">
+<div class="sidebar">
+    <div class="sidebar-card">
+
+        <div class="sidebar-banner">
+            <img src="{{ asset('images/' . $event->gambar) }}"
+                 alt="{{ $event->nama_event }}">
+        </div>
+
+        <div class="sidebar-info">
+
+            <div class="harga-mulai">
+                Harga mulai dari
             </div>
-            <div class="sidebar-info">
-                <div class="harga-mulai">Harga mulai dari</div>
-                <div class="harga">
-                    @php $minHarga = $event->tikets->min('harga'); @endphp
-                    {{ $minHarga == 0 ? 'Gratis' : 'Rp ' . number_format($minHarga, 0, ',', '.') }}
-                </div>
-                <button class="btn-buy"> Beli Tiket</button>
-                <div class="sidebar-meta">
-                    <span>📅 {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}</span>
-                    <span>📍 {{ $event->lokasi }}</span>
-                    <span>👤 {{ $event->organizer->nama_organizer ?? '-' }}</span>
-                </div>
+
+            <div class="harga">
+                @php
+                    $minHarga = $event->tikets->min('harga');
+                @endphp
+
+                {{ $minHarga == 0
+                    ? 'Gratis'
+                    : 'Rp ' . number_format($minHarga, 0, ',', '.') }}
             </div>
+
+            <!-- BUTTON BELI -->
+            <a href="{{ route('transactions.create', $event->id_event) }}"
+               style="text-decoration:none;">
+
+                <button class="btn-buy">
+                    Beli Tiket
+                </button>
+
+            </a>
+
+            <div class="sidebar-meta">
+
+                <span>
+                    📅
+                    {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
+                </span>
+
+                <span>
+                    📍 {{ $event->lokasi }}
+                </span>
+
+                <span>
+                    👤 {{ $event->organizer->nama_organizer ?? '-' }}
+                </span>
+
+            </div>
+
         </div>
     </div>
-
+</div>
 </div>
 
 </body>
