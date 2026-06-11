@@ -8,6 +8,10 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\OrganizerProfileController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\AdminEventController;
+
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -34,9 +38,12 @@ Route::get('/dashboard-admin', function () {
 
     return view('pages.dashboard_admin');
 })->name('dashboard_admin');
-Route::get('/admin/manajemen', function () {
-    return view('pages.manajemen.admin');
-})->name('admin.manajemen');
+Route::get('/admin/manajemen', [AdminEventController::class, 'index'])
+    ->name('admin.manajemen');
+
+Route::get('/manajemen-event', 
+[AdminEventController::class,'index'])
+->name('admin.manajemen');
 Route::get('/admin/organizer', [AdminOrganizerController::class, 'index'])
     ->name('admin.organizer');
 
@@ -93,7 +100,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
     Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
    
-    
+    //laporan organizer nich gengs
+     Route::get('/laporan', [LaporanController::class, 'index'])
+        ->name('laporan');
 });
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
@@ -127,3 +136,19 @@ Route::get('/transactions/create', function () {
     return redirect()->route('tickets.buy', 1);
 })->name('transactions.create');
 
+//
+Route::get('/profile-organizer', [OrganizerProfileController::class, 'index'])
+    ->name('profile.organizer');
+
+Route::put('/profile-organizer/update', [OrganizerProfileController::class, 'update'])
+    ->name('profile.organizer.update');
+    
+//admin acc we
+Route::put('/admin/event/{id}/approve',
+[AdminEventController::class,'approve'])
+->name('admin.event.approve');
+
+//admin menolak wkwk
+Route::put('/admin/event/{id}/reject',
+[AdminEventController::class,'reject'])
+->name('admin.event.reject');

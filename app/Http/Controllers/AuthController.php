@@ -69,6 +69,7 @@ class AuthController extends Controller
             'id_user'        => $user->id,
             'nama_organizer' => $request->name,
             'kontak'         => $request->phone,
+            
         ]);
     }
 

@@ -19,10 +19,14 @@ class EventController extends Controller
     }
 
     public function index()
-    {
-        $events = Event::with(['organizer', 'tikets'])->get();
-        return view('pages.events', compact('events'));
-    }
+{
+    $events = Event::with('organizer','tikets')
+        ->where('status','approved')
+        ->latest()
+        ->get();
+
+    return view('pages.events', compact('events'));
+}
 
     public function show($id)
     {
@@ -68,6 +72,7 @@ class EventController extends Controller
             'tanggal'      => $request->tanggal,
             'lokasi'       => $request->lokasi,
             'gambar'       => $gambar,
+            'status'       => 'pending',
         ]);
 
         foreach ($request->tiket as $t) {
@@ -112,6 +117,7 @@ class EventController extends Controller
             'tanggal'    => $request->tanggal,
             'lokasi'     => $request->lokasi,
             'gambar'     => $gambar,
+            'status'     => $request->status,
         ]);
 
         Tiket::where('id_event', $id)->delete();

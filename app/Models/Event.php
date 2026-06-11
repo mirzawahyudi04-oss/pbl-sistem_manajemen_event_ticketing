@@ -15,6 +15,7 @@ class Event extends Model
         'tanggal',
         'lokasi',
         'gambar',
+        'status',
     ];
 
     public function organizer()
