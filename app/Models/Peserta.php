@@ -9,6 +9,11 @@ class Peserta extends Model
 {
     use HasFactory;
 
-    protected $table = 'tblpeserta';   
-    public $timestamps = false;         
+    protected $table = 'peserta';
+
+    protected $fillable = [
+        'nama',
+        'email',
+        'no_hp'
+    ];
 }

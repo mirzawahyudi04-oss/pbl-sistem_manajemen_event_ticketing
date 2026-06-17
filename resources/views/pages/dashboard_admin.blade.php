@@ -102,22 +102,30 @@
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Total Event</p>
-                <h2 class="text-3xl font-bold mt-2">25</h2>
+                <h2 class="text-3xl font-bold mt-2">
+    {{ $totalEvent }}
+</h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Organizer</p>
-                <h2 class="text-3xl font-bold mt-2">10</h2>
+                <h2 class="text-3xl font-bold mt-2">
+    {{ $totalOrganizer }}
+</h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Peserta</p>
-                <h2 class="text-3xl font-bold mt-2">320</h2>
+                <h2 class="text-3xl font-bold mt-2">
+    {{ $totalPeserta }}
+</h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Tiket Terjual</p>
-                <h2 class="text-3xl font-bold mt-2">1.250</h2>
+                <h2 class="text-3xl font-bold mt-2">
+    {{ $totalKuota }}
+</h2>
             </div>
 
         </div>
@@ -151,41 +159,47 @@
 
                     <tbody>
 
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4">Java Jazz Festival</td>
-                            <td class="p-4">PT Event Indonesia</td>
-                            <td class="p-4">01 April 2026</td>
-                            <td class="p-4">
-                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
+@foreach($eventTerbaru as $event)
 
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4">Tech Expo 2026</td>
-                            <td class="p-4">Polibatam</td>
-                            <td class="p-4">10 Mei 2026</td>
-                            <td class="p-4">
-                                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
-                                    Pending
-                                </span>
-                            </td>
-                        </tr>
+<tr class="border-t hover:bg-slate-50">
 
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4">Batam Food Festival</td>
-                            <td class="p-4">Batam Creative Hub</td>
-                            <td class="p-4">20 Juni 2026</td>
-                            <td class="p-4">
-                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-                                    Rejected
-                                </span>
-                            </td>
-                        </tr>
+    <td class="p-4">
+        {{ $event->nama_event }}
+    </td>
 
-                    </tbody>
+    <td class="p-4">
+        {{ $event->organizer->nama_organizer ?? '-' }}
+    </td>
 
+    <td class="p-4">
+        {{ $event->tanggal_event }}
+    </td>
+
+    <td class="p-4">
+
+        @if($event->status == 'Approved')
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+                Approved
+            </span>
+
+        @elseif($event->status == 'Pending')
+            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
+                Pending
+            </span>
+
+        @else
+            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
+                Rejected
+            </span>
+        @endif
+
+    </td>
+
+</tr>
+
+@endforeach
+
+</tbody>
                 </table>
 
             </div>

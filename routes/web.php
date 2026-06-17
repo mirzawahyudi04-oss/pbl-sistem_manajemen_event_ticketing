@@ -8,6 +8,7 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -27,13 +28,9 @@ Route::post('/reset-password', [SimplePasswordResetController::class, 'updatePas
 // Admin
 Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.login.form');
 Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
-Route::get('/dashboard-admin', function () {
-    if (!session()->has('admin')) {
-        return redirect()->route('admin.login.form');
-    }
-
-    return view('pages.dashboard_admin');
-})->name('dashboard_admin');
+Route::get('/dashboard-admin',
+    [AdminDashboardController::class, 'index']
+)->name('dashboard_admin');
 Route::get('/admin/manajemen', function () {
     return view('pages.manajemen.admin');
 })->name('admin.manajemen');

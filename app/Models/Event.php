@@ -11,19 +11,28 @@ class Event extends Model
     protected $fillable = [
         'id_organizer',
         'nama_event',
-        'deskripsi',
-        'tanggal',
         'lokasi',
-        'gambar',
+        'tanggal',
+        'gambar'
     ];
 
+    // Relasi ke Organizer
     public function organizer()
     {
-        return $this->belongsTo(Organizer::class, 'id_organizer', 'id_organizer');
+        return $this->belongsTo(
+            Organizer::class,
+            'id_organizer',
+            'id_organizer'
+        );
     }
 
+    // Relasi ke Tiket
     public function tikets()
     {
-        return $this->hasMany(Tiket::class, 'id_event', 'id_event');
+        return $this->hasMany(
+            Tiket::class,
+            'id_event',
+            'id_event'
+        );
     }
 }
