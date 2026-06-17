@@ -11,6 +11,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\OrganizerProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminEventController;
+use App\Http\Controllers\TransactionController;
 
 
 Route::get('/', fn() => view('pages.home'))->name('home');
@@ -129,13 +130,11 @@ Route::post('/events/{event}/payment',
 Route::post('/events/{event}/store',
     [TicketController::class, 'store'])
     ->name('tickets.store');
-Route::get('/transactions/create', function () {
-    return view('transactions.create');
-})->name('transactions.create');
-Route::get('/transactions/create', function () {
-    return redirect()->route('tickets.buy', 1);
-})->name('transactions.create');
+Route::get('/transactions/create/{id}', [TransactionController::class, 'create'])
+    ->name('transactions.create');
 
+Route::post('/transactions/store/{id}', [TransactionController::class, 'store'])
+    ->name('transactions.store');
 //
 Route::get('/profile-organizer', [OrganizerProfileController::class, 'index'])
     ->name('profile.organizer');

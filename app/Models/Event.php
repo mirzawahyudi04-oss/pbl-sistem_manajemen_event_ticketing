@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $table = 'events';
+
     protected $primaryKey = 'id_event';
 
     protected $fillable = [
@@ -14,14 +16,8 @@ class Event extends Model
         'deskripsi',
         'tanggal',
         'lokasi',
-        'gambar',
-        'status',
+        'gambar'
     ];
-
-    public function organizer()
-    {
-        return $this->belongsTo(Organizer::class, 'id_organizer', 'id_organizer');
-    }
 
     public function tikets()
     {

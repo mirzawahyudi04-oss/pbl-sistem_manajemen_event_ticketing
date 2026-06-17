@@ -20,19 +20,18 @@ class EventController extends Controller
 
     public function index()
 {
-    $events = Event::with('organizer','tikets')
-        ->where('status','approved')
-        ->latest()
+    $events = Event::orderBy('created_at', 'desc')
         ->get();
 
     return view('pages.events', compact('events'));
 }
 
     public function show($id)
-    {
-        $event = Event::with(['organizer', 'tikets'])->findOrFail($id);
-        return view('pages.detail_event', compact('event'));
-    }
+{
+    $event = Event::with('tikets')->findOrFail($id);
+
+    return view('pages.detail_event', compact('event'));
+}
 
     public function kelolaEvent()
     {

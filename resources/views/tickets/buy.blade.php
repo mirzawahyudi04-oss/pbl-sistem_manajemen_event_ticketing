@@ -65,15 +65,14 @@ button{
 
     <label>Jenis Tiket</label>
 
-    <select name="ticket_type" required>
-        <option value="Reguler">
-            Reguler - Rp100.000
+   <select name="ticket_type" required>
+    @foreach($tikets as $tiket)
+        <option value="{{ $tiket->nama_tiket }}">
+            {{ $tiket->nama_tiket }}
+            - Rp{{ number_format($tiket->harga,0,',','.') }}
         </option>
-
-        <option value="VIP">
-            VIP - Rp250.000
-        </option>
-    </select>
+    @endforeach
+</select>
 
     <label>Jumlah Tiket</label>
 
