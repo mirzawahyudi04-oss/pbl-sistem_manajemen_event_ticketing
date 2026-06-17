@@ -96,40 +96,102 @@
         </div>
         <table>
             <tr><th>#</th><th>Event</th><th>Organizer</th><th>Kategori</th><th>Tanggal</th><th>Tiket</th><th>Status</th><th>Aksi</th></tr>
-            <tr>
-                <td>1</td><td><strong>Java Jazz Festival</strong></td><td>PT Event Indonesia</td>
-                <td><span class="badge badge-blue">Musik</span></td><td>01 Apr 2026</td><td>540 / 1000</td>
-                <td><span class="badge badge-green">Approved</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Hapus</a></td>
-            </tr>
-            <tr>
-                <td>2</td><td><strong>Tech Expo 2026</strong></td><td>Polibatam</td>
-                <td><span class="badge badge-blue">Teknologi</span></td><td>10 Mei 2026</td><td>0 / 500</td>
-                <td><span class="badge badge-yellow">Pending</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-success">Approve</a><a href="#" class="btn btn-danger">Tolak</a></td>
-            </tr>
-            <tr>
-                <td>3</td><td><strong>Batam Food Festival</strong></td><td>Batam Creative Hub</td>
-                <td><span class="badge badge-blue">Kuliner</span></td><td>20 Jun 2026</td><td>210 / 800</td>
-                <td><span class="badge badge-green">Approved</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Hapus</a></td>
-            </tr>
-            <tr>
-                <td>4</td><td><strong>Music Night Live</strong></td><td>Soundwave Org</td>
-                <td><span class="badge badge-blue">Musik</span></td><td>05 Jul 2026</td><td>0 / 300</td>
-                <td><span class="badge badge-red">Rejected</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-primary">Detail</a><a href="#" class="btn btn-danger">Hapus</a></td>
-            </tr>
-            <tr>
-                <td>5</td><td><strong>Batam Run 2026</strong></td><td>Sport Batam Club</td>
-                <td><span class="badge badge-blue">Olahraga</span></td><td>15 Agt 2026</td><td>0 / 2000</td>
-                <td><span class="badge badge-yellow">Pending</span></td>
-                <td style="display:flex;gap:6px;"><a href="#" class="btn btn-success">Approve</a><a href="#" class="btn btn-danger">Tolak</a></td>
-            </tr>
-        </table>
-    </div>
+            <tbody>
+
+@foreach($events as $i => $event)
+
+<tr>
+
+<td>{{ $i+1 }}</td>
+
+<td>
+<strong>{{ $event->nama_event }}</strong>
+</td>
+
+<td>
+{{ $event->organizer->nama_organizer }}
+</td>
+
+<td>-</td>
+
+<td>
+{{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}
+</td>
+
+<td>
+{{ $event->tikets->sum('kuota') }}
+</td>
+
+<td>
+
+@if($event->status=='approved')
+
+<span class="badge badge-green">
+Approved
+</span>
+
+@elseif($event->status=='pending')
+
+<span class="badge badge-yellow">
+Pending
+</span>
+
+@else
+
+<span class="badge badge-red">
+Rejected
+</span>
+
+@endif
+
+</td>
+
+<td>
+@if($event->status == 'pending')
+
+<div style="display:flex; gap:6px;">
+
+<form action="{{ route('admin.event.approve',$event->id_event) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <button type="submit"
+        style="background:#22c55e;color:white;border:none;padding:7px 12px;border-radius:6px;cursor:pointer;">
+        Approve
+    </button>
+</form>
+
+<form action="{{ route('admin.event.reject',$event->id_event) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <button type="submit"
+        style="background:#ef4444;color:white;border:none;padding:7px 12px;border-radius:6px;cursor:pointer;">
+        Tolak
+    </button>
+</form>
+
 </div>
 
-<footer>Copyright ©2026 EventHub Admin Panel</footer>
+@elseif($event->status == 'approved')
+
+<span class="badge badge-green">Approved</span>
+
+@else
+
+<span class="badge badge-red">Rejected</span>
+
+@endif
+@endforeach
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+<footer>
+Copyright ©2026 EventHub Admin Panel
+</footer>
+
 </body>
 </html>

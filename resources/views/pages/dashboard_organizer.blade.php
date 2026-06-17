@@ -27,7 +27,7 @@
        class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
         Laporan
     </a>
-    <a href="{{ route('laporan') }}"
+    <a href="{{ route('profile.organizer') }}"
        class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
        Profil
     </a>
@@ -114,11 +114,21 @@
                     {{ $event->lokasi }}
                 </td>
 
-                <td class="py-3">
-                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                        Aktif
-                    </span>
-                </td>
+@if($event->status=='pending')
+<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
+    Menunggu ACC
+</span>
+
+@elseif($event->status=='approved')
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+Aktif
+</span>
+
+@else
+<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
+Ditolak
+</span>
+@endif
 
             </tr>
 

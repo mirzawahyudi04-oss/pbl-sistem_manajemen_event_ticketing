@@ -7,8 +7,13 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\OrganizerProfileController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminDashboardController;
+
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -28,12 +33,28 @@ Route::post('/reset-password', [SimplePasswordResetController::class, 'updatePas
 // Admin
 Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.login.form');
 Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
+<<<<<<< HEAD
 Route::get('/dashboard-admin',
     [AdminDashboardController::class, 'index']
 )->name('dashboard_admin');
 Route::get('/admin/manajemen', function () {
     return view('pages.manajemen.admin');
 })->name('admin.manajemen');
+=======
+Route::get('/dashboard-admin', function () {
+    if (!session()->has('admin')) {
+        return redirect()->route('admin.login.form');
+    }
+
+    return view('pages.dashboard_admin');
+})->name('dashboard_admin');
+Route::get('/admin/manajemen', [AdminEventController::class, 'index'])
+    ->name('admin.manajemen');
+
+Route::get('/manajemen-event', 
+[AdminEventController::class,'index'])
+->name('admin.manajemen');
+>>>>>>> 642f7f51b6efad2093109d584d1e4099f92b7ce2
 Route::get('/admin/organizer', [AdminOrganizerController::class, 'index'])
     ->name('admin.organizer');
 
@@ -90,33 +111,53 @@ Route::middleware('auth')->group(function () {
     Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
     Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
    
-    
+    //laporan organizer nich gengs
+     Route::get('/laporan', [LaporanController::class, 'index'])
+        ->name('laporan');
 });
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 
 Route::get('/app', fn() => view('app'));
-Route::middleware('auth')->group(function () {
 
-    Route::get('/events/{id}/buy',
-        [TransactionController::class, 'create'])
-        ->name('transactions.create');
+Route::get('/events/{event}/buy', [TicketController::class, 'buy'])
+    ->name('tickets.buy');
 
-    Route::post('/events/{id}/buy',
-        [TransactionController::class, 'store'])
-        ->name('transactions.store');
+Route::post('/events/{event}/buy', [TicketController::class, 'store'])
+    ->name('tickets.store');
 
-});
-Route::middleware('auth')->group(function () {
+    Route::post('/events/{event}/payment',
+    [TicketController::class, 'payment'])
+    ->name('tickets.payment');
+    Route::get('/events/{event}/buy',
+    [TicketController::class, 'buy'])
+    ->name('tickets.buy');
 
-    Route::get('/events/{id}/buy',
-        [TransactionController::class, 'create'])
-        ->name('transactions.create');
+Route::post('/events/{event}/payment',
+    [TicketController::class, 'payment'])
+    ->name('tickets.payment');
 
-    Route::post('/events/{id}/buy',
-        [TransactionController::class, 'store'])
-        ->name('transactions.store');
+Route::post('/events/{event}/store',
+    [TicketController::class, 'store'])
+    ->name('tickets.store');
+Route::get('/transactions/create/{id}', [TransactionController::class, 'create'])
+    ->name('transactions.create');
 
-});
+Route::post('/transactions/store/{id}', [TransactionController::class, 'store'])
+    ->name('transactions.store');
+//
+Route::get('/profile-organizer', [OrganizerProfileController::class, 'index'])
+    ->name('profile.organizer');
 
+Route::put('/profile-organizer/update', [OrganizerProfileController::class, 'update'])
+    ->name('profile.organizer.update');
+    
+//admin acc we
+Route::put('/admin/event/{id}/approve',
+[AdminEventController::class,'approve'])
+->name('admin.event.approve');
 
+//admin menolak wkwk
+Route::put('/admin/event/{id}/reject',
+[AdminEventController::class,'reject'])
+->name('admin.event.reject');

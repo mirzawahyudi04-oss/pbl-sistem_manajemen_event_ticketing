@@ -1,24 +1,37 @@
 @extends('layouts.app')
 
 @section('title', 'Kelola Event')
-
 @section('sidebar')
     <a href="{{ route('dashboard_organizer') }}"
        class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
         Dashboard
     </a>
+
     <a href="{{ route('manajemen') }}"
-       class="block px-4 py-2.5 rounded-lg text-sm bg-indigo-600 text-white font-medium">
+       class="block px-4 py-2.5 rounded-lg text-sm transition bg-indigo-600 text-white font-medium">
         Kelola Event
     </a>
-    <a href="{{ route('tiket') }}"
-       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
-        Tiket
-    </a>
+
     <a href="{{ route('transaksi') }}"
        class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
         Transaksi
     </a>
+
+    <a href="{{ route('peserta.index') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Peserta
+    </a>
+
+    <a href="{{ route('laporan') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+        Laporan
+    </a>
+    <a href="{{ route('profile.organizer') }}"
+       class="block px-4 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-slate-700 hover:text-white">
+       Profil
+    </a>
+    
+    
 @endsection
 
 @section('content')

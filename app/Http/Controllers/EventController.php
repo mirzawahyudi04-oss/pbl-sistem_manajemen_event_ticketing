@@ -19,16 +19,19 @@ class EventController extends Controller
     }
 
     public function index()
-    {
-        $events = Event::with(['organizer', 'tikets'])->get();
-        return view('pages.events', compact('events'));
-    }
+{
+    $events = Event::orderBy('created_at', 'desc')
+        ->get();
+
+    return view('pages.events', compact('events'));
+}
 
     public function show($id)
-    {
-        $event = Event::with(['organizer', 'tikets'])->findOrFail($id);
-        return view('pages.detail_event', compact('event'));
-    }
+{
+    $event = Event::with('tikets')->findOrFail($id);
+
+    return view('pages.detail_event', compact('event'));
+}
 
     public function kelolaEvent()
     {
@@ -68,6 +71,7 @@ class EventController extends Controller
             'tanggal'      => $request->tanggal,
             'lokasi'       => $request->lokasi,
             'gambar'       => $gambar,
+            'status'       => 'pending',
         ]);
 
         foreach ($request->tiket as $t) {
@@ -112,6 +116,7 @@ class EventController extends Controller
             'tanggal'    => $request->tanggal,
             'lokasi'     => $request->lokasi,
             'gambar'     => $gambar,
+            'status'     => $request->status,
         ]);
 
         Tiket::where('id_event', $id)->delete();

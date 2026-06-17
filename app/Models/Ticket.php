@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class Ticket extends Model
 {
-    protected $table = 'transactions';
-
     protected $fillable = [
         'user_id',
         'event_id',
         'ticket_type',
-        'qty',
-        'total_price'
+        'quantity',
+        'payment_method',
+        'payment_proof',
+        'status'
     ];
 }

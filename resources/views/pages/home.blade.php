@@ -14,197 +14,294 @@
     <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
         <a href="/" class="text-[17px] font-semibold tracking-tight text-[#10194F]">STEVENtix</a>
         <div class="flex gap-2">
-            <a href="{{ route('login') }}"
-               class="px-4 py-1.5 text-[13px] rounded-lg border border-black/[.08] text-[#10194F] hover:bg-slate-100 transition">
-                Login
-            </a>
-            <a href="{{ route('register') }}"
-               class="px-4 py-1.5 text-[13px] rounded-lg bg-[#10194F] text-white hover:bg-[#5661A4] transition">
-                Daftar
-            </a>
+           
         </div>
     </div>
 </nav>
 
+{{-- ========================= --}}
 {{-- HERO --}}
-<section class="max-w-7xl mx-auto px-6 py-20">
-    <div class="max-w-lg">
-        <h1 class="text-4xl font-semibold leading-tight tracking-tight text-[#10194F] mb-3">
-            Beli tiket event<br>tanpa ribet
-        </h1>
-        <p class="text-[15px] text-slate-500 leading-relaxed mb-7">
-            Platform pemesanan tiket untuk konser, seminar, dan workshop.
-        </p>
-        <div class="flex gap-2">
-            <a href="{{ route('login') }}"
-               class="px-5 py-2.5 text-[13px] font-medium rounded-lg bg-[#10194F] text-white hover:bg-[#5661A4] transition">
-                Mulai sekarang
-            </a>
-            <a href="{{ route('register') }}"
-               class="px-5 py-2.5 text-[13px] font-medium rounded-lg border border-[#10194F]/25 text-[#10194F] hover:bg-white transition">
-                Daftar gratis
-            </a>
-        </div>
-    </div>
-</section>
+{{-- ========================= --}}
+<section
+class="relative bg-cover bg-center bg-no-repeat min-h-screen"
+style="background-image: url('{{ asset('images/bgLP.jpg') }}');">
 
-<hr class="border-black/[.08]">
+    <div class="max-w-7xl mx-auto px-6 py-24">
 
-{{-- EVENT LIST --}}
-<section class="max-w-7xl mx-auto px-6 py-10">
-    <p class="text-[11px] uppercase tracking-widest text-slate-400 mb-5">Event tersedia</p>
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-    <div class="grid grid-cols-4 gap-3">
+            <div >
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=21" alt="Music Festival" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Batam</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Music Festival 2026</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh STEVENtix Organizer</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp150.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
+                <span class="px-3 py-1 rounded-full bg-white/10 text-white text-sm">
+                     Platform Ticketing Event
+                </span>
+
+                <h1 class="mt-6 text-5xl font-bold leading-tight text-white">
+                    Temukan Event
+                    Favoritmu
+                    Dalam Satu Platform
+                </h1>
+
+                <p class="mt-5 text-white/80 text-lg leading-8">
+                    Pesan tiket konser, seminar, workshop,
+                    festival hingga olahraga dengan mudah,
+                    cepat dan aman.
+                </p>
+
+                <div class="mt-8 flex gap-3">
+
+                    <a href="{{ route('register') }}"
+                    class="px-6 py-3 rounded-xl bg-white text-[#10194F] font-semibold hover:scale-105 duration-300">
+
+                        Daftar Gratis
+
+                    </a>
+
+                    <a href="{{ route('login') }}"
+                    class="px-6 py-3 rounded-xl border border-white text-white hover:bg-white hover:text-[#10194F] duration-300">
+
+                        Login Brader
+
+                    </a>
+                    
+
+                    <a href="#event"
+                    class="px-6 py-3 rounded-xl border border-white text-white hover:bg-white hover:text-[#10194F] duration-300">
+
+                        Jelajahi Event
+
+                    </a>
+
                 </div>
-            </div>
-        </div>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=22" alt="Tech Conference" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Jakarta</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Tech Conference 2026</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Event Corp</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp100.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
             </div>
-        </div>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=23" alt="Workshop UI/UX" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Bandung</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Workshop UI/UX</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Design Hub</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp75.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=24" alt="Fun Run 5K" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Surabaya</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Fun Run 5K</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Sport Indo</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp50.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
+           
         </div>
 
     </div>
 </section>
 
-<hr class="border-black/[.08]">
+
+{{-- ========================= --}}
+{{-- KEUNGGULAN --}}
+{{-- ========================= --}}
+<section class="py-16 bg-white">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid md:grid-cols-4 gap-5">
+
+<div class="bg-slate-50 rounded-2xl p-6">
+
+<div class="text-4xl"></div>
+
+<h3 class="font-semibold mt-3 text-[#10194F]">
+Tiket Resmi
+</h3>
+
+<p class="text-sm text-slate-500 mt-2">
+Semua event berasal dari organizer terpercaya.
+</p>
+
+</div>
 
 
-<section class="max-w-7xl mx-auto px-6 py-10">
-    <p class="text-[11px] uppercase tracking-widest text-slate-400 mb-5">Event tersedia</p>
+<div class="bg-slate-50 rounded-2xl p-6">
 
-    <div class="grid grid-cols-4 gap-3">
+<div class="text-4xl"></div>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=28" alt="Music Festival" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Batam</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Music Festival 2026</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh STEVENtix Organizer</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp150.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
-        </div>
+<h3 class="font-semibold mt-3 text-[#10194F]">
+Pemesanan Cepat
+</h3>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=27" alt="Tech Conference" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Jakarta</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Tech Conference 2026</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Event Corp</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp100.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
-        </div>
+<p class="text-sm text-slate-500 mt-2">
+Hanya beberapa langkah hingga tiket berhasil dibeli.
+</p>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=25" alt="Workshop UI/UX" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Bandung</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Workshop UI/UX</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Design Hub</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp75.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
-        </div>
+</div>
 
-        <div class="bg-white border border-black/[.08] rounded-xl overflow-hidden hover:border-slate-300 transition">
-            <img src="https://picsum.photos/400/220?random=26" alt="Fun Run 5K" class="w-full h-36 object-cover">
-            <div class="p-3.5">
-                <div class="text-[11px] text-slate-400 mb-1">Surabaya</div>
-                <div class="text-[13px] font-semibold text-[#10194F] mb-1">Fun Run 5K</div>
-                <div class="text-[12px] text-slate-400 mb-3">Oleh Sport Indo</div>
-                <div class="border-t border-slate-100 pt-2.5 flex justify-between items-center">
-                    <div>
-                        <div class="text-[11px] text-slate-400">Mulai dari</div>
-                        <div class="text-[13px] font-semibold text-[#10194F]">Rp50.000</div>
-                    </div>
-                    <a href="{{ route('login') }}" class="text-[12px] font-medium text-[#5661A4] hover:underline">Detail →</a>
-                </div>
-            </div>
-        </div>
 
-    </div>
+<div class="bg-slate-50 rounded-2xl p-6">
+
+<div class="text-4xl"></div>
+
+<h3 class="font-semibold mt-3 text-[#10194F]">
+Pembayaran Aman
+</h3>
+
+<p class="text-sm text-slate-500 mt-2">
+Proses pembayaran aman dan mudah digunakan.
+</p>
+
+</div>
+
+
+<div class="bg-slate-50 rounded-2xl p-6">
+
+<div class="text-4xl"></div>
+
+<h3 class="font-semibold mt-3 text-[#10194F]">
+QR Check-in
+</h3>
+
+<p class="text-sm text-slate-500 mt-2">
+Masuk event cukup scan QR Code tiketmu.
+</p>
+
+</div>
+
+</div>
+
+</div>
 </section>
 
+
+{{-- ========================= --}}
+{{-- EVENT --}}
+{{-- ========================= --}}
+<section id="event" class="py-16 bg-slate-50">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="flex justify-between mb-8">
+
+<div>
+
+<p class="uppercase tracking-widest text-sm text-slate-400">
+EVENT POPULER
+</p>
+
+<h2 class="text-3xl font-bold text-[#10194F]">
+Temukan Event Menarik
+</h2>
+
+</div>
+
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+@for($i=1;$i<=6;$i++)
+
+<div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 duration-300">
+
+<img
+src="https://picsum.photos/500/300?random={{$i}}"
+class="h-52 w-full object-cover">
+
+<div class="p-5">
+
+<span class="text-sm text-slate-500">
+📍 Batam
+</span>
+
+<h3 class="font-bold text-lg mt-2 text-[#10194F]">
+Music Festival 2026
+</h3>
+
+<p class="text-sm text-slate-500 mt-1">
+Oleh STEVENtix Organizer
+</p>
+
+<div class="flex justify-between mt-5">
+
+<div>
+
+<p class="text-xs text-slate-400">
+Mulai dari
+</p>
+
+<p class="font-bold text-[#10194F]">
+Rp150.000
+</p>
+
+</div>
+
+<a
+href="{{ route('login') }}"
+class="text-[#5661A4] font-semibold">
+
+Detail →
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+@endfor
+
+</div>
+
+</div>
+
+</section>
+
+
+{{-- ========================= --}}
+{{-- CTA --}}
+{{-- ========================= --}}
+<section class="py-20 bg-[#10194F]">
+
+<div class="max-w-4xl mx-auto text-center px-6">
+
+<h2 class="text-4xl font-bold text-white">
+
+Siap Mengikuti Event Favoritmu?
+
+</h2>
+
+<p class="mt-5 text-white/70">
+
+Gabung sekarang dan nikmati pengalaman membeli tiket event
+dengan mudah, cepat, dan aman bersama STEVENtix.
+
+</p>
+
+<a
+href="{{ route('register') }}"
+class="inline-block mt-8 px-8 py-3 bg-white text-[#10194F] rounded-xl font-semibold hover:scale-105 duration-300">
+
+Daftar Gratis
+
+</a>
+
+</div>
+
+</section>
+
+
+{{-- ========================= --}}
 {{-- FOOTER --}}
-<footer class="bg-[#10194F] mt-4">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <span class="text-[14px] font-semibold text-white">STEVENtix</span>
-        <small class="text-[12px] text-white/40">© {{ date('Y') }} All Rights Reserved</small>
-    </div>
-</footer>
+{{-- ========================= --}}
+<footer class="bg-slate-900 text-white">
 
-</body>
-</html>
+<div class="max-w-7xl mx-auto px-6 py-8 flex justify-between">
+
+<div>
+
+<h2 class="font-bold text-xl">
+STEVENtix
+</h2>
+
+<p class="text-white/60 text-sm mt-2">
+Platform pemesanan tiket event modern
+untuk konser, seminar, workshop,
+dan festival di Indonesia.
+</p>
+
+</div>
+
+<div class="text-right text-white/50 text-sm">
+
+© {{ date('Y') }} STEVENtix
+
+</div>
+
+</div>
+
+</footer>
+```
