@@ -10,6 +10,7 @@ class Peserta extends Model
     use HasFactory;
 
     protected $table = 'peserta';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nama',

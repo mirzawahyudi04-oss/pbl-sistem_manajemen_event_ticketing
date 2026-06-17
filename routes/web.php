@@ -33,28 +33,18 @@ Route::post('/reset-password', [SimplePasswordResetController::class, 'updatePas
 // Admin
 Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.login.form');
 Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('admin.login');
-<<<<<<< HEAD
 Route::get('/dashboard-admin',
     [AdminDashboardController::class, 'index']
 )->name('dashboard_admin');
 Route::get('/admin/manajemen', function () {
     return view('pages.manajemen.admin');
 })->name('admin.manajemen');
-=======
-Route::get('/dashboard-admin', function () {
-    if (!session()->has('admin')) {
-        return redirect()->route('admin.login.form');
-    }
-
-    return view('pages.dashboard_admin');
-})->name('dashboard_admin');
 Route::get('/admin/manajemen', [AdminEventController::class, 'index'])
     ->name('admin.manajemen');
 
 Route::get('/manajemen-event', 
 [AdminEventController::class,'index'])
 ->name('admin.manajemen');
->>>>>>> 642f7f51b6efad2093109d584d1e4099f92b7ce2
 Route::get('/admin/organizer', [AdminOrganizerController::class, 'index'])
     ->name('admin.organizer');
 

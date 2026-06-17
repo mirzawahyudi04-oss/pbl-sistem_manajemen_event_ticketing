@@ -172,14 +172,14 @@
     </td>
 
     <td class="p-4">
-        {{ $event->tanggal_event }}
+        {{ $event->tanggal }}
     </td>
 
     <td class="p-4">
 
         @if($event->status == 'Approved')
             <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                Approved
+                Aktif
             </span>
 
         @elseif($event->status == 'Pending')

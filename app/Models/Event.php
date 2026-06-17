@@ -14,7 +14,6 @@ class Event extends Model
         'id_organizer',
         'nama_event',
         'lokasi',
-<<<<<<< HEAD
         'tanggal',
         'gambar'
     ];
@@ -30,11 +29,6 @@ class Event extends Model
     }
 
     // Relasi ke Tiket
-=======
-        'gambar'
-    ];
-
->>>>>>> 642f7f51b6efad2093109d584d1e4099f92b7ce2
     public function tikets()
     {
         return $this->hasMany(
