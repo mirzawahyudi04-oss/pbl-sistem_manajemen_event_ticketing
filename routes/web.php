@@ -13,6 +13,8 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminEventController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\OrganizerPesertaController;
+use App\Http\Controllers\OrganizerTransactionController;
 
 
 Route::get('/', fn() => view('pages.home'))->name('home');
@@ -78,7 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/riwayat', fn() => view('pages.riwayat_user'))->name('user.riwayat');
     Route::get('/user/profile', fn() => view('pages.profile_user'))->name('user.profile');
     Route::get('/user/tiket', fn() => view('pages.tiket_user'))->name('user.tiket');
-    Route::get('/transaksi', fn() => view('pages.transaksi'))->name('transaksi');
+    Route::get('/transaksi',
+    [OrganizerTransactionController::class,'index'])
+    ->name('transaksi');
     Route::get('/peserta', fn() => view('pages.dashboard_user'))->name('peserta');
     Route::get('/laporan', fn() => view('pages.dashboard'))->name('laporan');
     Route::get('/profile-organizer', fn() => view('pages.profile_user'))->name('profile.organizer');
@@ -98,7 +102,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/events-delete/{id}', [EventController::class, 'destroy'])->name('events.destroy');
 
     //pesserta
-    Route::get('/peserta', [PesertaController::class, 'show'])->name('peserta.index');
+   Route::get('/peserta',
+    [OrganizerPesertaController::class,'index'])
+    ->name('peserta.index');
     Route::post('/peserta', [PesertaController::class, 'simpan'])->name('peserta.simpan');
    
     //laporan organizer nich gengs

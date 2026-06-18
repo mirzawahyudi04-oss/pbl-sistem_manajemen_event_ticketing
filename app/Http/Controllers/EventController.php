@@ -83,7 +83,7 @@ class EventController extends Controller
             ]);
         }
 
-        return redirect()->route('manajemen')->with('success', 'Event berhasil ditambahkan!');
+        return redirect()->route('manajemen')->with('success', 'Event berhasil di ajukan!');
     }
 
     // edit
