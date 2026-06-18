@@ -8,6 +8,7 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\AdminOrganizerController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\TicketController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\OrganizerProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminEventController;
@@ -16,6 +17,8 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrganizerPesertaController;
 use App\Http\Controllers\OrganizerTransactionController;
 
+=======
+>>>>>>> Stashed changes
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -132,6 +135,7 @@ Route::post('/events/{event}/buy', [TicketController::class, 'store'])
 Route::post('/events/{event}/payment',
     [TicketController::class, 'payment'])
     ->name('tickets.payment');
+<<<<<<< Updated upstream
 
 Route::post('/events/{event}/store',
     [TicketController::class, 'store'])
@@ -157,3 +161,18 @@ Route::put('/admin/event/{id}/approve',
 Route::put('/admin/event/{id}/reject',
 [AdminEventController::class,'reject'])
 ->name('admin.event.reject');
+=======
+
+Route::post('/events/{event}/store',
+    [TicketController::class, 'store'])
+    ->name('tickets.store');
+Route::get('/transactions/create', function () {
+    return view('transactions.create');
+})->name('transactions.create');
+Route::get('/transactions/create', function () {
+    return redirect()->route('tickets.buy', 1);
+})->name('transactions.create');
+
+Route::get('/events/{event}/buy', [TicketController::class, 'buy'])
+    ->name('tickets.buy');
+>>>>>>> Stashed changes

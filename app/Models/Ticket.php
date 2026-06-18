@@ -15,4 +15,17 @@ class Ticket extends Model
         'payment_proof',
         'status'
     ];
+<<<<<<< Updated upstream
+=======
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id_event');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+>>>>>>> Stashed changes
 }
