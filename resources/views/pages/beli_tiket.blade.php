@@ -104,10 +104,17 @@ button:hover{
     <h4>Informasi Pembayaran</h4>
 
     <p><b>DANA</b> : 081234567890</p>
+    <p><b>Atas Nama</b> : StevenTix</p>
+
+    <br>
 
     <p><b>GoPay</b> : 081234567890</p>
+    <p><b>Atas Nama</b> : StevenTix</p>
+
+    <br>
 
     <p><b>Mandiri</b> : 1234567890123</p>
+    <p><b>Atas Nama</b> : StevenTix</p>
 </div>
 
 <form action="{{ route('transactions.store', $event->id_event) }}"
@@ -118,11 +125,13 @@ button:hover{
 
     <label>Jenis Tiket</label>
 
-    <select name="ticket_type" required>
+<select name="ticket_type" id="ticket_type" required>
 
         @foreach($event->tikets as $tiket)
 
-            <option value="{{ $tiket->nama_tiket }}">
+            <option
+    value="{{ $tiket->nama_tiket }}"
+    data-harga="{{ $tiket->harga }}">
                 {{ $tiket->nama_tiket }}
                 -
                 Rp {{ number_format($tiket->harga,0,',','.') }}
@@ -134,15 +143,23 @@ button:hover{
 
     <label>Jumlah Tiket</label>
 
-    <input
-        type="number"
-        name="qty"
-        value="1"
-        min="1"
-        required>
+<input
+    type="number"
+    id="qty"
+    name="qty"
+    value="1"
+    min="1"
+    required>
 
-    <label>Metode Pembayaran</label>
+<label>Total Harga</label>
 
+<input
+    type="text"
+    id="total_harga"
+    readonly
+    style="background:#f5f5f5;">
+
+<label>Metode Pembayaran</label>
     <select name="payment_method" required>
         <option value="">-- Pilih Metode --</option>
         <option value="dana">DANA</option>
@@ -165,6 +182,32 @@ button:hover{
 </form>
 
 </div>
+<script>
+function updateTotal() {
 
+    let tiket = document.getElementById('ticket_type');
+    let qty = document.getElementById('qty').value;
+
+    let harga =
+        tiket.options[tiket.selectedIndex]
+             .dataset.harga;
+
+    let total = harga * qty;
+
+    document.getElementById('total_harga').value =
+        'Rp ' + Number(total).toLocaleString('id-ID');
+}
+
+document.getElementById('ticket_type')
+        .addEventListener('change', updateTotal);
+
+document.getElementById('qty')
+        .addEventListener('input', updateTotal);
+
+updateTotal();
+</script>
+
+</body>
+</html>
 </body>
 </html>
