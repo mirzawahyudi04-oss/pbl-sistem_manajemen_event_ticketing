@@ -102,6 +102,7 @@ button:hover{
 
 <div class="payment-box">
     <h4>Informasi Pembayaran</h4>
+   
 
     <p><b>DANA</b> : 081234567890</p>
     <p><b>Atas Nama</b> : StevenTix</p>
@@ -115,6 +116,7 @@ button:hover{
 
     <p><b>Mandiri</b> : 1234567890123</p>
     <p><b>Atas Nama</b> : StevenTix</p>
+
 </div>
 
 <form action="{{ route('transactions.store', $event->id_event) }}"
@@ -160,15 +162,25 @@ button:hover{
     style="background:#f5f5f5;">
 
 <label>Metode Pembayaran</label>
-    <select name="payment_method" required>
-        <option value="">-- Pilih Metode --</option>
-        <option value="dana">DANA</option>
-        <option value="gopay">GoPay</option>
-        <option value="mandiri">Mandiri Transfer</option>
-    </select>
 
-    <label>Upload Bukti Pembayaran</label>
+<select name="payment_method" required>
+    <option value="">-- Pilih Metode --</option>
+    <option value="dana">DANA</option>
+    <option value="gopay">GoPay</option>
+    <option value="mandiri">Mandiri Transfer</option>
+    <option value="qris">QRIS</option>
+</select>
 
+<div id="qris-box" style="display:none; margin-bottom:20px;">
+    <p><b>Scan QRIS STEVENtix</b></p>
+
+    <img
+        src="{{ asset('images/qris-steventix.png') }}"
+        alt="QRIS STEVENtix"
+        width="250">
+</div>
+
+<label>Upload Bukti Pembayaran</label>
     <input
         type="file"
         name="payment_proof"
@@ -206,7 +218,22 @@ document.getElementById('qty')
 
 updateTotal();
 </script>
+<script>
+const metode = document.querySelector('[name="payment_method"]');
 
+metode.addEventListener('change', function() {
+
+    const qrisBox = document.getElementById('qris-box');
+
+    if (this.value === 'qris') {
+        qrisBox.style.display = 'block';
+    } else {
+        qrisBox.style.display = 'none';
+    }
+});
+</script>
+
+</body>
 </body>
 </html>
 </body>
