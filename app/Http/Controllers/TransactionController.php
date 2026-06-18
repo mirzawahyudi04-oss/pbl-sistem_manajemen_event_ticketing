@@ -34,76 +34,53 @@ class TransactionController extends Controller
     }
 
     public function store(Request $request, $id)
-    {
-        $event = Event::findOrFail($id);
+{
+    $event = Event::findOrFail($id);
 
-        $request->validate([
-            'ticket_type' => 'required',
-            'qty' => 'required|integer|min:1'
-        ]);
+    $request->validate([
+        'ticket_type' => 'required',
+        'qty' => 'required|integer|min:1',
+        'payment_method' => 'required',
+        'payment_proof' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        // cari tiket berdasarkan nama tiket
-        $tiket = Tiket::where(
-                        'id_event',
-                        $event->id_event
-                    )
-                    ->where(
-                        'nama_tiket',
-                        $request->ticket_type
-                    )
-                    ->first();
+    // cari tiket berdasarkan nama tiket
+    $tiket = Tiket::where('id_event', $event->id_event)
+                ->where('nama_tiket', $request->ticket_type)
+                ->first();
 
-        // cek tiket ada atau tidak
-        if (!$tiket) {
-
-            return back()->with(
-                'error',
-                'Tiket tidak ditemukan'
-            );
-        }
-
-        // cek kuota habis
-        if ($tiket->kuota <= 0) {
-
-            return back()->with(
-                'error',
-                'Tiket sudah habis terjual'
-            );
-        }
-
-        // cek kuota cukup atau tidak
-        if ($tiket->kuota < $request->qty) {
-
-            return back()->with(
-                'error',
-                'Kuota tiket tidak cukup'
-            );
-        }
-
-        // hitung total harga
-        $total = $tiket->harga * $request->qty;
-
-        // simpan transaksi
-        Transaction::create([
-            'user_id' => auth()->id(),
-            'event_id' => $event->id_event,
-            'ticket_type' => $request->ticket_type,
-            'qty' => $request->qty,
-            'total_price' => $total,
-            'status' => 'pending',
-        ]);
-
-        // kurangi kuota tiket
-        $tiket->kuota -= $request->qty;
-
-        // simpan perubahan
-        $tiket->save();
-
-        return redirect()
-            ->back()
-            ->with(
-                'success',
-                'Pembayaran berhasil dibuat!'
-            );
+    if (!$tiket) {
+        return back()->with('error', 'Tiket tidak ditemukan');
     }
-}
+
+    if ($tiket->kuota <= 0) {
+        return back()->with('error', 'Tiket sudah habis terjual');
+    }
+
+    if ($tiket->kuota < $request->qty) {
+        return back()->with('error', 'Kuota tiket tidak cukup');
+    }
+
+    // upload bukti pembayaran
+    $proofPath = $request->file('payment_proof')
+                        ->store('payment_proofs', 'public');
+
+    // hitung total harga
+    $total = $tiket->harga * $request->qty;
+
+    // simpan transaksi
+    Transaction::create([
+        'user_id' => auth()->id(),
+        'event_id' => $event->id_event,
+        'ticket_type' => $request->ticket_type,
+        'qty' => $request->qty,
+        'total_price' => $total,
+        'payment_method' => $request->payment_method,
+        'payment_proof' => $proofPath,
+        'status' => 'pending',
+    ]);
+
+    return redirect()
+        ->back()
+        ->with('success', 'Pembayaran berhasil dikirim dan menunggu verifikasi admin!');
+}}
