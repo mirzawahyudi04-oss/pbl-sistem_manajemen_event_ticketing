@@ -11,12 +11,15 @@ class Event extends Model
     protected $primaryKey = 'id_event';
 
     protected $fillable = [
-        'id_organizer',
-        'nama_event',
-        'lokasi',
-        'tanggal',
-        'gambar'
-    ];
+    'id_organizer',
+    'nama_event',
+    'deskripsi',
+    'tanggal',
+    'lokasi',
+    'gambar',
+    'status',
+];
+
 
     // Relasi ke Organizer
     public function organizer()
