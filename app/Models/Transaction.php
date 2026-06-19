@@ -8,7 +8,7 @@ class Transaction extends Model
 {
     protected $table = 'transactions';
 
-    protected $fillable = [
+   protected $fillable = [
     'user_id',
     'event_id',
     'ticket_type',
@@ -17,6 +17,8 @@ class Transaction extends Model
     'payment_method',
     'payment_proof',
     'status',
+    'ticket_code',
+    'is_used'
 ];
     public function user()
     {
