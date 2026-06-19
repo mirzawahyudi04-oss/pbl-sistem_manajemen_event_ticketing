@@ -84,6 +84,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi',
     [OrganizerTransactionController::class,'index'])
     ->name('transaksi');
+
+    //aproverejecttransaksiorganizer
+    Route::get('/transaksi',
+[OrganizerTransactionController::class,'index'])
+->name('transaksi');
+
+Route::put('/transaksi/{id}/approve',
+[OrganizerTransactionController::class,'approve'])
+->name('transaksi.approve');
+
+Route::put('/transaksi/{id}/reject',
+[OrganizerTransactionController::class,'reject'])
+->name('transaksi.reject'); 
+
     Route::get('/peserta', fn() => view('pages.dashboard_user'))->name('peserta');
     Route::get('/laporan', fn() => view('pages.dashboard'))->name('laporan');
     Route::get('/profile-organizer', fn() => view('pages.profile_user'))->name('profile.organizer');

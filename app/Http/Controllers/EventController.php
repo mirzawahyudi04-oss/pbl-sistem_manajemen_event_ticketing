@@ -86,6 +86,8 @@ class EventController extends Controller
         return redirect()->route('manajemen')->with('success', 'Event berhasil di ajukan!');
     }
 
+    
+
     // edit
 
     public function update(Request $request, $id)

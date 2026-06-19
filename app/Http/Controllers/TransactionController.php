@@ -82,5 +82,8 @@ class TransactionController extends Controller
 
     return redirect()
         ->back()
-        ->with('success', 'Pembayaran berhasil dikirim dan menunggu verifikasi admin!');
+        ->with(
+    'success',
+    'Pembayaran berhasil dikirim dan menunggu verifikasi organizer.'
+);
 }}

@@ -32,13 +32,16 @@ class OrganizerTransactionController extends Controller
                 $organizer->id_organizer
             )
             ->select(
+                'transactions.id',
+                'transactions.payment_proof',
+                'transactions.status',
                 'users.name',
                 'events.nama_event',
                 'transactions.ticket_type',
                 'transactions.qty',
                 'transactions.total_price',
                 'transactions.created_at'
-            )
+        )
             ->latest()
             ->get();
 
@@ -47,4 +50,23 @@ class OrganizerTransactionController extends Controller
             compact('transaksi')
         );
     }
+    public function approve($id)
+{
+    $trx = Transaction::findOrFail($id);
+
+    $trx->status = 'paid';
+    $trx->save();
+
+    return back()->with('success','Pembayaran diterima');
+}
+
+public function reject($id)
+{
+    $trx = Transaction::findOrFail($id);
+
+    $trx->status = 'rejected';
+    $trx->save();
+
+    return back()->with('success','Pembayaran ditolak');
+}
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< Updated upstream
+
 use App\Models\Event;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -55,37 +55,10 @@ class TicketController extends Controller
 
         return redirect()
             ->route('events.index')
-            ->with('success', 'Tiket berhasil dibeli.');
-=======
-use Illuminate\Http\Request;
-use App\Models\Event;
+            ->with(
+                'success',
+                'Pembayaran berhasil dikirim dan menunggu verifikasi organizer.'
+            );
 
-class TicketController extends Controller
-{
-    public function buy($event)
-    {
-        $event = Event::findOrFail($event);
-
-        return view('tickets.buy', compact('event'));
-    }
-
-    public function payment(Request $request, $event)
-    {
-        $event = Event::findOrFail($event);
-
-        $qty = $request->input('qty');
-        $payment_method = $request->input('payment_method');
-        $ticket_type = $request->input('ticket_type', 'regular');
-
-        $total = $qty * $event->harga;
-
-        return view('tickets.payment', compact(
-            'event',
-            'qty',
-            'payment_method',
-            'ticket_type',
-            'total'
-        ));
->>>>>>> Stashed changes
     }
 }
