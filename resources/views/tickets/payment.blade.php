@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -207,7 +207,7 @@ button:hover{
 
 </body>
 </html>
-=======
+
 <h2>Halaman Pembayaran</h2>
 
 <p>Event: {{ $event->nama_event }}</p>
@@ -235,4 +235,4 @@ button:hover{
     <input type="file" name="payment_proof" required>
     <button type="submit">Kirim</button>
 </form>
->>>>>>> Stashed changes
+

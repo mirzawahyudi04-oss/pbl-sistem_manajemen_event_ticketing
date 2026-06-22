@@ -15,8 +15,7 @@ class Ticket extends Model
         'payment_proof',
         'status'
     ];
-<<<<<<< Updated upstream
-=======
+
 
     public function event()
     {
@@ -27,5 +26,5 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
->>>>>>> Stashed changes
+
 }

@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -93,7 +93,6 @@ button{
 
 </body>
 </html>
-=======
 <h2>Beli Tiket</h2>
 
 <form method="POST" action="{{ route('tickets.payment', $event->id_event) }}">
@@ -114,4 +113,3 @@ button{
 
     <button type="submit">Lanjut Bayar</button>
 </form>
->>>>>>> Stashed changes
