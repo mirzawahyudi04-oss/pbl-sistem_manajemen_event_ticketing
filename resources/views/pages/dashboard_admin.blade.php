@@ -21,15 +21,13 @@
 
 <body class="bg-slate-100">
 
-    <body class="bg-slate-100">
-
 <div class="flex">
 
     <!-- Sidebar -->
     <aside class="fixed left-0 top-0 h-screen w-64 bg-slate-900 text-white">
 
         <div class="p-6 border-b border-slate-800">
-            <h2 class="text-2xl font-bold"> EventHub</h2>
+            <h2 class="text-2xl font-bold">EventHub</h2>
             <p class="text-sm text-slate-400">Admin Dashboard</p>
         </div>
 
@@ -37,12 +35,12 @@
 
             <a href="{{ route('dashboard_admin') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600">
-                 Dashboard
+                Dashboard
             </a>
 
             <a href="{{ route('admin.manajemen') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
-                 Manajemen Event
+                Manajemen Event
             </a>
 
             <a href="{{ route('admin.organizer') }}"
@@ -52,17 +50,17 @@
 
             <a href="{{ route('admin.peserta') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
-                 Peserta
+                Peserta
             </a>
 
             <a href="{{ route('admin.tiket') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
-                 Tiket
+                Tiket
             </a>
 
             <a href="{{ route('admin.laporan') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
-                 Laporan
+                Laporan
             </a>
 
         </nav>
@@ -70,7 +68,7 @@
         <div class="absolute bottom-0 w-full p-4 border-t border-slate-800">
             <a href="{{ route('admin.login.form') }}"
                class="text-red-400 hover:text-red-300">
-                 Logout
+                Logout
             </a>
         </div>
 
@@ -87,12 +85,12 @@
                 </h1>
 
                 <p class="text-slate-500 mt-1">
-                    Selamat datang 
+                    Selamat datang Admin
                 </p>
             </div>
 
             <div class="bg-white px-4 py-2 rounded-xl shadow-sm border">
-                 Admin
+                Admin
             </div>
 
         </div>
@@ -103,115 +101,122 @@
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Total Event</p>
                 <h2 class="text-3xl font-bold mt-2">
-    {{ $totalEvent }}
-</h2>
+                    {{ $totalEvent }}
+                </h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Organizer</p>
                 <h2 class="text-3xl font-bold mt-2">
-    {{ $totalOrganizer }}
-</h2>
+                    {{ $totalOrganizer }}
+                </h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
                 <p class="text-slate-500 text-sm">Peserta</p>
                 <h2 class="text-3xl font-bold mt-2">
-    {{ $totalPeserta }}
-</h2>
+                    {{ $totalPeserta }}
+                </h2>
             </div>
 
             <div class="bg-white p-6 rounded-xl shadow-sm border">
-                <p class="text-slate-500 text-sm">Tiket Terjual</p>
+                <p class="text-slate-500 text-sm">Total Kuota Tiket</p>
                 <h2 class="text-3xl font-bold mt-2">
-    {{ $totalKuota }}
-</h2>
-            </div>
-
-        </div>
-
-        <!-- Event Terbaru -->
-        <div class="bg-white rounded-xl shadow-sm border">
-
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 class="font-semibold text-lg">
-                    Event Terbaru
+                    {{ $totalKuota }}
                 </h2>
-
-                <a href="{{ route('admin.manajemen') }}"
-                   class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                    Lihat Semua
-                </a>
-            </div>
-
-            <div class="overflow-x-auto">
-
-                <table class="w-full">
-
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th class="text-left p-4">Event</th>
-                            <th class="text-left p-4">Organizer</th>
-                            <th class="text-left p-4">Tanggal</th>
-                            <th class="text-left p-4">Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-@foreach($eventTerbaru as $event)
-
-<tr class="border-t hover:bg-slate-50">
-
-    <td class="p-4">
-        {{ $event->nama_event }}
-    </td>
-
-    <td class="p-4">
-        {{ $event->organizer->nama_organizer ?? '-' }}
-    </td>
-
-    <td class="p-4">
-        {{ $event->tanggal }}
-    </td>
-
-    <td class="p-4">
-
-        @if($event->status == 'Approved')
-            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                Aktif
-            </span>
-
-        @elseif($event->status == 'Pending')
-            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
-                Pending
-            </span>
-
-        @else
-            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-                Rejected
-            </span>
-        @endif
-
-    </td>
-
-</tr>
-
-@endforeach
-
-</tbody>
-                </table>
-
             </div>
 
         </div>
 
-    </main>
+        <!-- Grafik -->
+        <!-- Grafik Status Event -->
+<div class="bg-white p-6 rounded-xl shadow-sm border mb-6">
+    <h2 class="text-2xl font-bold mb-4">Grafik Status Event</h2>
 
+    <div style="height:300px;">
+        <canvas id="statusChart"></canvas>
+    </div>
 </div>
 
-</body>
+<!-- Persentase Status Event -->
+<div class="bg-white p-6 rounded-xl shadow-sm border">
+    <h2 class="text-2xl font-bold mb-4">Persentase Status Event</h2>
+
+    <div style="height:250px; width:250px; margin:auto;">
+        <canvas id="statusPieChart"></canvas>
+    </div>
+</div>
+
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Grafik Batang
+const barCtx = document.getElementById('statusChart');
+
+new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Approved', 'Pending', 'Rejected'],
+        datasets: [{
+            label: 'Jumlah Event',
+            data: [
+                {{ $approvedEvent }},
+                {{ $pendingEvent }},
+                {{ $rejectedEvent }}
+            ],
+            backgroundColor: [
+                '#22c55e',
+                '#f59e0b',
+                '#ef4444'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    precision: 0
+                }
+            }
+        }
+    }
+});
+
+// Grafik Donut
+const pieCtx = document.getElementById('statusPieChart');
+
+new Chart(pieCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Approved', 'Pending', 'Rejected'],
+        datasets: [{
+            data: [
+                {{ $approvedEvent }},
+                {{ $pendingEvent }},
+                {{ $rejectedEvent }}
+            ],
+            backgroundColor: [
+                '#22c55e',
+                '#f59e0b',
+                '#ef4444'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
 
 </body>
-
 </html>

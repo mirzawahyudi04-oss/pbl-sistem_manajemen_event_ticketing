@@ -9,19 +9,19 @@ class AdminEventController extends Controller
 {
     public function index()
 {
-    $events = Event::with('organizer','tikets')->get();
+    $events = Event::with('organizer', 'tikets')->get();
 
-    $total = Event::count();
-    $approved = Event::where('status','approved')->count();
-    $pending = Event::where('status','pending')->count();
-    $rejected = Event::where('status','rejected')->count();
+    $totalEvent = Event::count();
+    $approvedEvent = Event::where('status', 'approved')->count();
+    $pendingEvent = Event::where('status', 'pending')->count();
+    $rejectedEvent = Event::where('status', 'rejected')->count();
 
-    return view('pages.manajemen_admin',compact(
+    return view('pages.manajemen_admin', compact(
         'events',
-        'total',
-        'approved',
-        'pending',
-        'rejected'
+        'totalEvent',
+        'approvedEvent',
+        'pendingEvent',
+        'rejectedEvent'
     ));
 }
 
