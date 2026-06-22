@@ -11,17 +11,21 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::table('transactions', function ($table) {
-        $table->string('payment_method')->nullable();
-    });
+    if (!Schema::hasColumn('transactions', 'payment_method')) {
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->string('payment_method')->nullable();
+        });
+    }
 }
     /**
      * Reverse the migrations.
      */
     public function down(): void
-    {
+{
+    if (Schema::hasColumn('transactions', 'payment_method')) {
         Schema::table('transactions', function (Blueprint $table) {
-            //
+            $table->dropColumn('payment_method');
         });
     }
+}
 };
