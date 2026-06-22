@@ -63,7 +63,7 @@ class PesertaController extends Controller
 {
     $tikets = Transaction::with('event')
         ->where('user_id', auth()->id())
-        ->where('status', 'approved')
+        ->where('status', 'paid')
         ->latest()
         ->get();
 

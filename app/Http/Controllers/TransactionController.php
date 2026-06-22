@@ -79,10 +79,10 @@ Transaction::create([
     }
 
     public function eTicket($id)
-    {
-        $ticket = Transaction::with('event', 'user')
-            ->findOrFail($id);
+{
+    $ticket = Transaction::with('event', 'user')
+        ->findOrFail($id);
 
-        return view('pages.e_ticket', compact('ticket'));
-    }
+    return view('tickets.e-ticket', compact('ticket'));
+}
 }

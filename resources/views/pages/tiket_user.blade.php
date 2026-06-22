@@ -48,10 +48,10 @@
                 </p>
             </div>
             <div class="flex items-center gap-2">
-                <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full">Lunas</span>
-                <a href="#" class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition">
-                    E-Tiket
-                </a>
+               <a href="{{ route('e-ticket', $tiket->id) }}"
+   class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition">
+    E-Tiket
+</a>
             </div>
         </div>
         @empty
