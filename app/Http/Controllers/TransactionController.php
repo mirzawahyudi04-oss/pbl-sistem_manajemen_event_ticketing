@@ -81,6 +81,7 @@ Transaction::create([
     public function eTicket($id)
 {
     $ticket = Transaction::with('event', 'user')
+        ->where('user_id', auth()->id())
         ->findOrFail($id);
 
     return view('tickets.e-ticket', compact('ticket'));
