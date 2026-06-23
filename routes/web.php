@@ -15,7 +15,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrganizerPesertaController;
 use App\Http\Controllers\OrganizerTransactionController;
-
+use App\Http\Controllers\OrganizerDashboardController;
 
 
 Route::get('/', fn() => view('pages.home'))->name('home');
@@ -77,8 +77,8 @@ Route::get('/admin/laporan', function () {
 Route::middleware('auth')->group(function () {
    Route::get('/dashboard-user', [PesertaController::class, 'dashboardUser'])
     ->name('dashboard_user');
-    Route::get('/dashboard-organizer',
-    [EventController::class, 'dashboardOrganizer'])->name('dashboard_organizer');
+    Route::get('/dashboard-organizer', [OrganizerDashboardController::class, 'index'])
+    ->name('dashboard_organizer');
     Route::get('/user/riwayat', fn() => view('pages.riwayat_user'))->name('user.riwayat');
     Route::get('/user/profile', fn() => view('pages.profile_user'))->name('user.profile');
    Route::get('/user/tiket', [PesertaController::class, 'tiketSaya'])

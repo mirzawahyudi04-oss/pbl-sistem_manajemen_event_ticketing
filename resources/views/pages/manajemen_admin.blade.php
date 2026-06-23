@@ -2,196 +2,352 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Event - Admin</title>
     <link rel="icon" type="image/png" href="{{ asset('images/logofavicon22.png') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-        body { background:#f8fafc; }
-        .sidebar { width:240px; height:100vh; background:#111827; position:fixed; color:white; display:flex; flex-direction:column; overflow-y:auto; }
-        .sidebar-brand { display:flex; align-items:center; gap:10px; padding:22px 20px; border-bottom:1px solid #374151; }
-        .brand-icon { width:36px; height:36px; background:#3b82f6; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; }
-        .sidebar-brand h2 { font-size:16px; font-weight:700; letter-spacing:1px; }
-        .sidebar-brand span { font-size:11px; color:#6b7280; display:block; }
-        .menu-label { padding:10px 20px 4px; font-size:10px; font-weight:600; color:#4b5563; letter-spacing:1.5px; text-transform:uppercase; }
-        .sidebar a { display:flex; align-items:center; gap:12px; color:#9ca3af; text-decoration:none; padding:11px 20px; transition:all .2s; font-size:14px; border-left:3px solid transparent; }
-        .sidebar a:hover { background:#1f2937; color:white; border-left-color:#3b82f6; }
-        .sidebar a.active { background:#1e3a5f; color:#60a5fa; border-left-color:#3b82f6; }
-        .sidebar a .icon { font-size:16px; width:20px; text-align:center; }
-        .sidebar-menu { padding:15px 0; flex:1; }
-        .sidebar-footer { padding:15px 0; border-top:1px solid #374151; }
-        .sidebar-footer a { color:#ef4444 !important; }
-        .sidebar-footer a:hover { background:#1f2937 !important; border-left-color:#ef4444 !important; }
-        .main { margin-left:240px; padding:30px; min-height:100vh; }
-        .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; }
-        .page-header h1 { font-size:22px; font-weight:700; color:#111827; }
-        .page-header p { color:#6b7280; font-size:13px; margin-top:2px; }
-        .box { background:white; border-radius:12px; padding:24px; box-shadow:0 1px 8px rgba(0,0,0,.06); }
-        .mini-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
-        .mini-card { background:white; border-radius:12px; padding:16px; box-shadow:0 1px 8px rgba(0,0,0,.06); display:flex; align-items:center; gap:14px; }
-        .mini-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; }
-        table { width:100%; border-collapse:collapse; }
-        th { padding:12px 14px; text-align:left; font-size:12px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:.5px; background:#f9fafb; border-bottom:2px solid #f3f4f6; }
-        td { padding:14px; border-bottom:1px solid #f3f4f6; font-size:14px; color:#374151; }
-        tr:last-child td { border-bottom:none; }
-        tr:hover td { background:#f9fafb; }
-        .badge { padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600; }
-        .badge-green  { background:#dcfce7; color:#16a34a; }
-        .badge-yellow { background:#fef9c3; color:#ca8a04; }
-        .badge-red    { background:#fee2e2; color:#dc2626; }
-        .badge-blue   { background:#dbeafe; color:#2563eb; }
-        .btn { padding:7px 14px; border-radius:8px; border:none; cursor:pointer; font-size:12px; font-weight:600; font-family:'Poppins',sans-serif; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s; }
-        .btn-primary { background:#3b82f6; color:white; }
-        .btn-primary:hover { background:#2563eb; }
-        .btn-success { background:#dcfce7; color:#16a34a; }
-        .btn-danger  { background:#fee2e2; color:#dc2626; }
-        .search-bar { display:flex; gap:10px; margin-bottom:20px; }
-        .search-bar input, .search-bar select { padding:9px 14px; border:1px solid #e5e7eb; border-radius:8px; font-size:13px; font-family:'Poppins',sans-serif; outline:none; background:white; }
-        .search-bar input { flex:1; }
-        .search-bar input:focus { border-color:#3b82f6; }
-        footer { text-align:center; padding:20px; color:#9ca3af; font-size:12px; margin-left:240px; }
+        body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-slate-100">
 
-<div class="sidebar">
-    <div class="sidebar-brand">
-        <div class="brand-icon"></div>
-        <div><h2>EVENTHUB</h2><span>Admin Panel</span></div>
-    </div>
-    <div class="sidebar-menu">
-        <div class="menu-label">Main</div>
-        <a href="{{ route('dashboard_admin') }}"><span class="icon"></span> Dashboard</a>
-        <a href="{{ route('admin.manajemen') }}" class="active"><span class="icon"></span> Manajemen Event</a>
-        <div class="menu-label">Kelola</div>
-        <a href="{{ route('admin.organizer') }}"><span class="icon"></span> Organizer</a>
-        <a href="{{ route('admin.peserta') }}"><span class="icon"></span> Peserta</a>
-        <a href="{{ route('admin.tiket') }}"><span class="icon"></span> Tiket</a>
-        <div class="menu-label">Analitik</div>
-        <a href="{{ route('admin.laporan') }}"><span class="icon"></span> Laporan</a>
-    </div>
-    <div class="sidebar-footer">
-        <a href="{{ route('admin.login') }}"><span class="icon"></span> Logout</a>
-    </div>
-</div>
+<div class="flex">
 
-<div class="main">
-    <div class="page-header">
-        <div><h1>Manajemen Event</h1><p>Kelola semua event yang terdaftar di platform</p></div>
-        <a href="#" class="btn btn-primary">+ Tambah Event</a>
-    </div>
-
-    <div class="mini-cards">
-        <div class="mini-card"><div class="mini-icon" style="background:#dbeafe;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Total Event</p><p style="font-size:22px;font-weight:700;">25</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#dcfce7;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Approved</p><p style="font-size:22px;font-weight:700;">18</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#fef9c3;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Pending</p><p style="font-size:22px;font-weight:700;">5</p></div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:#fee2e2;"></div><div><p style="font-size:11px;color:#6b7280;font-weight:600;">Rejected</p><p style="font-size:22px;font-weight:700;">2</p></div></div>
-    </div>
-
-    <div class="box">
-        <div class="search-bar">
-            <input type="text" placeholder="🔍  Cari nama event...">
-            <select><option>Semua Status</option><option>Approved</option><option>Pending</option><option>Rejected</option></select>
-            <select><option>Semua Kategori</option><option>Musik</option><option>Teknologi</option><option>Kuliner</option><option>Olahraga</option></select>
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-slate-900 text-white flex flex-col">
+        <div class="p-6 border-b border-slate-800">
+            <h2 class="text-2xl font-bold">EventHub</h2>
+            <p class="text-sm text-slate-400">Admin Dashboard</p>
         </div>
-        <table>
-            <tr><th>#</th><th>Event</th><th>Organizer</th><th>Kategori</th><th>Tanggal</th><th>Tiket</th><th>Status</th><th>Aksi</th></tr>
-            <tbody>
+        <nav class="p-4 space-y-2 flex-1">
+            <a href="{{ route('dashboard_admin') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
+                Dashboard
+            </a>
+            <a href="{{ route('admin.manajemen') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white">
+                Manajemen Event
+            </a>
+            <a href="{{ route('admin.organizer') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
+                Organizer
+            </a>
+            <a href="{{ route('admin.peserta') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
+                Peserta
+            </a>
+            <a href="{{ route('admin.tiket') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
+                Tiket
+            </a>
+            <a href="{{ route('admin.laporan') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
+                Laporan
+            </a>
+        </nav>
+        <div class="p-4 border-t border-slate-800">
+            <a href="{{ route('admin.login.form') }}" class="text-red-400 hover:text-red-300 px-4 py-3 flex items-center gap-3">
+                Logout
+            </a>
+        </div>
+    </aside>
 
-@foreach($events as $i => $event)
+    <!-- Main Content -->
+    <main class="ml-64 flex-1 p-8">
 
-<tr>
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-800">Manajemen Event</h1>
+                <p class="text-slate-500 mt-1">Kelola semua event yang terdaftar di platform</p>
+            </div>
+            <div class="bg-white px-4 py-2 rounded-xl shadow-sm border">
+                Admin
+            </div>
+        </div>
 
-<td>{{ $i+1 }}</td>
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <p class="text-slate-500 text-sm">Total Event</p>
+                <h2 class="text-3xl font-bold mt-2">{{ $events->count() }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <p class="text-slate-500 text-sm">Approved</p>
+                <h2 class="text-3xl font-bold mt-2 text-green-600">{{ $events->where('status','approved')->count() }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <p class="text-slate-500 text-sm">Pending</p>
+                <h2 class="text-3xl font-bold mt-2 text-yellow-500">{{ $events->where('status','pending')->count() }}</h2>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <p class="text-slate-500 text-sm">Rejected</p>
+                <h2 class="text-3xl font-bold mt-2 text-red-500">{{ $events->where('status','rejected')->count() }}</h2>
+            </div>
+        </div>
 
-<td>
-<strong>{{ $event->nama_event }}</strong>
-</td>
+        <!-- Table Card -->
+        <div class="bg-white rounded-xl shadow-sm border">
 
-<td>
-{{ $event->organizer->nama_organizer }}
-</td>
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="font-semibold text-lg text-slate-800">Daftar Event</h2>
+                <div class="flex gap-3">
+                    <input type="text" placeholder="Cari nama event..."
+                        class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                    <select class="border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        <option>Semua Status</option>
+                        <option>Approved</option>
+                        <option>Pending</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+            </div>
 
-<td>-</td>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th class="text-left p-4 text-slate-500 text-sm font-semibold w-12">#</th>
+                            <th class="text-left p-4 text-slate-500 text-sm font-semibold">Nama Event</th>
+                            <th class="text-left p-4 text-slate-500 text-sm font-semibold">Organizer</th>
+                            <th class="text-left p-4 text-slate-500 text-sm font-semibold w-32">Status</th>
+                            <th class="text-left p-4 text-slate-500 text-sm font-semibold w-48">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($events as $i => $event)
+                        <tr class="border-t hover:bg-slate-50">
 
-<td>
-{{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}
-</td>
+                            <td class="p-4 text-slate-400 text-sm">{{ $i + 1 }}</td>
 
-<td>
-{{ $event->tikets->sum('kuota') }}
-</td>
+                            <td class="p-4">
+                                <p class="font-semibold text-slate-800">{{ $event->nama_event }}</p>
+                                <p class="text-xs text-slate-400 mt-0.5">{{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}</p>
+                            </td>
 
-<td>
+                            <td class="p-4 text-slate-600 text-sm">{{ $event->organizer->nama_organizer }}</td>
 
-@if($event->status=='approved')
+                            <td class="p-4">
+                                @if($event->status == 'approved')
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Approved</span>
+                                @elseif($event->status == 'pending')
+                                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending</span>
+                                @else
+                                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">Rejected</span>
+                                @endif
+                            </td>
 
-<span class="badge badge-green">
-Approved
-</span>
+                            <td class="p-4">
+                                <div class="flex gap-2 items-center">
+                                    {{-- Tombol Detail --}}
+                                    <button
+                                        onclick="openModal(
+                                            '{{ addslashes($event->nama_event) }}',
+                                            '{{ addslashes($event->organizer->nama_organizer) }}',
+                                            '{{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}',
+                                            '{{ addslashes($event->lokasi ?? '-') }}',
+                                            '{{ addslashes($event->deskripsi ?? '-') }}',
+                                            '{{ $event->tikets->sum('kuota') }}',
+                                            '{{ $event->status }}',
+                                            '{{ $event->id_event }}',
+                                            '{{ $event->poster ?? '' }}'
+                                        )"
+                                        class="bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-2 rounded-lg transition">
+                                        Lihat Detail
+                                    </button>
 
-@elseif($event->status=='pending')
+                                    @if($event->status == 'pending')
+                                        <form action="{{ route('admin.event.approve', $event->id_event) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit"
+                                                class="bg-green-500 hover:bg-green-600 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">
+                                                Approve
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.event.reject', $event->id_event) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit"
+                                                class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">
+                                                Tolak
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </td>
 
-<span class="badge badge-yellow">
-Pending
-</span>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-@else
+        </div>
 
-<span class="badge badge-red">
-Rejected
-</span>
-
-@endif
-
-</td>
-
-<td>
-@if($event->status == 'pending')
-
-<div style="display:flex; gap:6px;">
-
-<form action="{{ route('admin.event.approve',$event->id_event) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <button type="submit"
-        style="background:#22c55e;color:white;border:none;padding:7px 12px;border-radius:6px;cursor:pointer;">
-        Approve
-    </button>
-</form>
-
-<form action="{{ route('admin.event.reject',$event->id_event) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <button type="submit"
-        style="background:#ef4444;color:white;border:none;padding:7px 12px;border-radius:6px;cursor:pointer;">
-        Tolak
-    </button>
-</form>
-
+    </main>
 </div>
 
-@elseif($event->status == 'approved')
 
-<span class="badge badge-green">Approved</span>
+<!-- ===================== MODAL DETAIL EVENT ===================== -->
+<div id="modalDetail"
+     class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4">
 
-@else
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
 
-<span class="badge badge-red">Rejected</span>
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-6 border-b">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Detail Event</h2>
+                <p class="text-sm text-slate-500 mt-0.5">Informasi lengkap sebelum mengambil keputusan</p>
+            </div>
+            <button onclick="closeModal()"
+                class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 text-lg font-bold transition">
+                ✕
+            </button>
+        </div>
 
-@endif
-@endforeach
+        <!-- Modal Body -->
+        <div class="p-6 space-y-6">
 
-</tbody>
-</table>
+            <!-- Poster (jika ada) -->
+            <div id="modalPosterWrap" class="hidden">
+                <img id="modalPoster" src="" alt="Poster Event"
+                    class="w-full h-52 object-cover rounded-xl border border-slate-200">
+            </div>
 
+            <!-- Info Grid -->
+            <div class="grid grid-cols-2 gap-4">
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Nama Event</p>
+                    <p id="modalNama" class="text-slate-800 font-semibold text-sm"></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Organizer</p>
+                    <p id="modalOrganizer" class="text-slate-800 font-semibold text-sm"></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Tanggal</p>
+                    <p id="modalTanggal" class="text-slate-800 font-semibold text-sm"></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Lokasi</p>
+                    <p id="modalLokasi" class="text-slate-800 font-semibold text-sm"></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Kuota Tiket</p>
+                    <p id="modalKuota" class="text-slate-800 font-semibold text-sm"></p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4">
+                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Status</p>
+                    <div id="modalStatus"></div>
+                </div>
+
+            </div>
+
+            <!-- Deskripsi -->
+            <div class="bg-slate-50 rounded-xl p-4">
+                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-2">Deskripsi Event</p>
+                <p id="modalDeskripsi" class="text-slate-700 text-sm leading-relaxed"></p>
+            </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div id="modalFooter" class="p-6 border-t flex gap-3 justify-end">
+            <!-- Tombol Approve & Tolak diisi lewat JS kalau status pending -->
+        </div>
+
+    </div>
 </div>
+<!-- ============================================================== -->
 
-</div>
 
-<footer>
-Copyright ©2026 EventHub Admin Panel
-</footer>
+<script>
+    function openModal(nama, organizer, tanggal, lokasi, deskripsi, kuota, status, idEvent, poster) {
+
+        // Isi konten
+        document.getElementById('modalNama').textContent      = nama;
+        document.getElementById('modalOrganizer').textContent = organizer;
+        document.getElementById('modalTanggal').textContent   = tanggal;
+        document.getElementById('modalLokasi').textContent    = lokasi;
+        document.getElementById('modalDeskripsi').textContent = deskripsi;
+        document.getElementById('modalKuota').textContent     = kuota + ' tiket';
+
+        // Badge status
+        const statusMap = {
+            'approved': '<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Approved</span>',
+            'pending':  '<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending</span>',
+            'rejected': '<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">Rejected</span>',
+        };
+        document.getElementById('modalStatus').innerHTML = statusMap[status] ?? status;
+
+        // Poster
+        const posterWrap = document.getElementById('modalPosterWrap');
+        if (poster && poster.trim() !== '') {
+            document.getElementById('modalPoster').src = '/storage/' + poster;
+            posterWrap.classList.remove('hidden');
+        } else {
+            posterWrap.classList.add('hidden');
+        }
+
+        // Footer: tampilkan tombol Approve & Tolak hanya jika pending
+        const footer = document.getElementById('modalFooter');
+        if (status === 'pending') {
+            footer.innerHTML = `
+                <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-semibold transition">
+                    Tutup
+                </button>
+                <form action="/admin/event/${idEvent}/reject" method="POST" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition">
+                        Tolak Event
+                    </button>
+                </form>
+                <form action="/admin/event/${idEvent}/approve" method="POST" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white text-sm font-semibold transition">
+                        Approve Event
+                    </button>
+                </form>
+            `;
+        } else {
+            footer.innerHTML = `
+                <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm font-semibold transition">
+                    Tutup
+                </button>
+            `;
+        }
+
+        // Tampilkan modal
+        const modal = document.getElementById('modalDetail');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modalDetail');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+
+    // Tutup modal kalau klik di luar kotak
+    document.getElementById('modalDetail').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+</script>
 
 </body>
 </html>

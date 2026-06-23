@@ -16,7 +16,6 @@ class Ticket extends Model
         'status'
     ];
 
-
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id', 'id_event');
@@ -26,5 +25,4 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

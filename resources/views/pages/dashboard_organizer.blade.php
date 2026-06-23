@@ -47,27 +47,23 @@
 </div>
 
 <!-- STAT CARD -->
-<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="grid grid-cols-3 gap-4 mb-6">
 
     <div class="bg-white rounded-xl p-5 border border-slate-100">
-        <p class="text-3xl font-semibold">
-        {{ $events->count() }}</p>Total Event</p>
-        <p class="text-3xl font-semibold">12</p>
+        <p class="text-xs text-slate-500 mb-1">Total Event</p>
+        <p class="text-3xl font-semibold">{{ $events->count() }}</p>
     </div>
 
     <div class="bg-white rounded-xl p-5 border border-slate-100">
         <p class="text-xs text-slate-500 mb-1">Tiket Terjual</p>
-        <p class="text-3xl font-semibold">540</p>
+        <p class="text-3xl font-semibold">{{ $totalTiketTerjual }}</p>
     </div>
 
     <div class="bg-white rounded-xl p-5 border border-slate-100">
         <p class="text-xs text-slate-500 mb-1">Pendapatan</p>
-        <p class="text-3xl font-semibold">Rp12JT</p>
-    </div>
-
-    <div class="bg-white rounded-xl p-5 border border-slate-100">
-        <p class="text-xs text-slate-500 mb-1">Pengunjung</p>
-        <p class="text-3xl font-semibold">1.200</p>
+        <p class="text-3xl font-semibold">
+            Rp{{ number_format($totalPendapatan, 0, ',', '.') }}
+        </p>
     </div>
 
 </div>
@@ -114,22 +110,21 @@
                     {{ $event->lokasi }}
                 </td>
 
-@if($event->status=='pending')
-<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
-    Menunggu ACC
-</span>
-
-@elseif($event->status=='approved')
-<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-Aktif
-</span>
-
-@else
-<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-Ditolak
-</span>
-@endif
-
+                <td class="py-3">
+                    @if($event->status == 'pending')
+                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
+                            Menunggu ACC
+                        </span>
+                    @elseif($event->status == 'approved')
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+                            Aktif
+                        </span>
+                    @else
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
+                            Ditolak
+                        </span>
+                    @endif
+                </td>
             </tr>
 
             @empty
