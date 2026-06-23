@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tiket extends Model
 {
     protected $primaryKey = 'id_tiket';
-    public $timestamps = false; 
+    public $timestamps = false;
 
     protected $fillable = [
         'id_event',

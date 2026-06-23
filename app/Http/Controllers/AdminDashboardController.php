@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Organizer;
-use App\Models\Peserta;
+use App\Models\User;
 use App\Models\Tiket;
-use App\Models\User; // tambahkan ini
 
 class AdminDashboardController extends Controller
 {
     public function index()
     {
         $totalEvent = Event::count();
+
+        $approvedEvent = Event::where('status', 'approved')->count();
+        $pendingEvent = Event::where('status', 'pending')->count();
+        $rejectedEvent = Event::where('status', 'rejected')->count();
+
         $totalOrganizer = Organizer::count();
 
-        $totalPeserta = User::where('role', 'buyer')->count();
+        $totalPeserta = User::count();
 
         $totalKuota = Tiket::sum('kuota');
 
-        $eventTerbaru = Event::with('organizer')
-            ->latest('id_event')
-            ->take(5)
-            ->get();
-
-        return view('pages.dashboard_admin', compact(
-            'totalEvent',
-            'totalOrganizer',
-            'totalPeserta',
-            'totalKuota',
-            'eventTerbaru'
-        ));
+        return view('pages.dashboard_admin', [
+            'totalEvent' => $totalEvent,
+            'approvedEvent' => $approvedEvent,
+            'pendingEvent' => $pendingEvent,
+            'rejectedEvent' => $rejectedEvent,
+            'totalOrganizer' => $totalOrganizer,
+            'totalPeserta' => $totalPeserta,
+            'totalKuota' => $totalKuota,
+        ]);
     }
 }
