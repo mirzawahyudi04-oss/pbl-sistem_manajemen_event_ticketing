@@ -71,6 +71,7 @@ Transaction::create([
     'status' => 'pending',
     'is_used' => false,
 ]);
+$tiket->decrement('kuota', $request->qty);
 
         return redirect()->back()->with(
             'success',

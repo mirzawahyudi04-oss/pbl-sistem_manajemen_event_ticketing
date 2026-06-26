@@ -6,6 +6,7 @@ use App\Models\Organizer;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Tiket;
 
 class OrganizerTransactionController extends Controller
 {
@@ -51,12 +52,25 @@ class OrganizerTransactionController extends Controller
         return back()->with('success', 'Pembayaran diterima');
     }
 
-    public function reject($id)
-    {
-        $trx = Transaction::findOrFail($id);
-        $trx->status = 'rejected';
-        $trx->save();
+   public function reject($id)
+{
+    $transaction = Transaction::findOrFail($id);
 
-        return back()->with('success', 'Pembayaran ditolak');
+    // Hanya kembalikan kuota jika transaksi masih pending
+    if ($transaction->status == 'pending') {
+
+        $tiket = Tiket::where('id_event', $transaction->event_id)
+            ->where('nama_tiket', $transaction->ticket_type)
+            ->first();
+
+        if ($tiket) {
+            $tiket->increment('kuota', $transaction->qty);
+        }
+
+        $transaction->status = 'rejected';
+        $transaction->save();
     }
+
+    return back()->with('success', 'Transaksi berhasil ditolak.');
+}
 }
