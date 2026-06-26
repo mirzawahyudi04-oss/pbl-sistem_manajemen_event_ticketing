@@ -83,7 +83,7 @@
         <tbody>
             @forelse($transaksi as $item)
             <tr class="border-b border-slate-100 hover:bg-slate-50">
-                <td class="py-3">{{ $loop->iteration }}</td>
+               <td class="py-3">{{ $transaksi->count() - $loop->index }}</td>
                 <td class="py-3">TRX{{ str_pad($item->id, 5, '0', STR_PAD_LEFT) }}</td>
                 <td class="py-3">{{ $item->name }}</td>
                 <td class="py-3">{{ $item->nama_event }}</td>
