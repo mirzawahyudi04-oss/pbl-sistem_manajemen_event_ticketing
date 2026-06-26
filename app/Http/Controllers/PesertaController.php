@@ -69,4 +69,14 @@ class PesertaController extends Controller
 
     return view('pages.tiket_user', compact('tikets'));
 }
+
+public function riwayat()
+{
+    $riwayat = Transaction::with('event')
+        ->where('user_id', Auth::id())
+        ->latest()
+        ->get();
+
+    return view('pages.riwayat_user', compact('riwayat'));
+}
 }

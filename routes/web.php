@@ -80,7 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard-organizer', [OrganizerDashboardController::class, 'index'])
     ->name('dashboard_organizer');
     Route::get('/user/riwayat', fn() => view('pages.riwayat_user'))->name('user.riwayat');
-    Route::get('/user/profile', fn() => view('pages.profile_user'))->name('user.profile');
+   Route::get('/user/riwayat', [PesertaController::class, 'riwayat'])
+    ->name('user.riwayat');
    Route::get('/user/tiket', [PesertaController::class, 'tiketSaya'])
     ->name('user.tiket');
     Route::get('/transaksi',
