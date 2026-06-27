@@ -163,7 +163,7 @@
         <form method="POST" action="/register">
             @csrf
             <input type="text" name="name" placeholder="Nama Lengkap" required>
-            <input type="text" name="phone" placeholder="Nomor WhatsApp" required>
+            <input type="text" name="no_handphone" placeholder="Nomor Handphone" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>

@@ -57,11 +57,12 @@ class AuthController extends Controller
     ]);
 
     $user = User::create([
-        'name'     => $request->name,
-        'email'    => $request->email,
-        'password' => Hash::make($request->password),
-        'role'     => $request->role
-    ]);
+        'name'         => $request->name,
+        'email'        => $request->email,
+        'password'     => Hash::make($request->password),
+        'role'         => $request->role,
+        'no_handphone' => $request->no_handphone,
+]);
 
     // Otomatis buat data organizer kalau role organizer
     if ($request->role === 'organizer') {

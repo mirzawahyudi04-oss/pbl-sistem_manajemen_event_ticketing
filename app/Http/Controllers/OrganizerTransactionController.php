@@ -38,7 +38,7 @@ class OrganizerTransactionController extends Controller
             $query->where('events.id_event', $request->event_id);
         }
 
-        $transaksi = $query->latest()->get();
+        $transaksi = $query->oldest()->get();
 
         return view('pages.transaksi_organizer', compact('transaksi', 'events'));
     }
