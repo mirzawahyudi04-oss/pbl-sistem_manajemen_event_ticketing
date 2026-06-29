@@ -52,6 +52,7 @@ class AuthController extends Controller
     $request->validate([
         'name'     => ['required'],
         'email'    => ['required', 'email', 'unique:users,email'],
+        'no_handphone' => ['required'],
         'password' => ['required', 'min:3'],
         'role'     => ['required']
     ]);
@@ -67,11 +68,10 @@ class AuthController extends Controller
     // Otomatis buat data organizer kalau role organizer
     if ($request->role === 'organizer') {
         \App\Models\Organizer::create([
-            'id_user'        => $user->id,
-            'nama_organizer' => $request->name,
-            'kontak'         => $request->phone,
-            
-        ]);
+    'id_user'        => $user->id,
+    'nama_organizer' => $request->name,
+    'kontak'         => $user->no_handphone,
+]);
     }
 
     return redirect()->route('login')
