@@ -37,7 +37,6 @@
                class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600">
                 Dashboard
             </a>
-
             <a href="{{ route('admin.manajemen') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
                 Manajemen Event
@@ -51,11 +50,6 @@
             <a href="{{ route('admin.peserta') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
                 Peserta
-            </a>
-
-            <a href="{{ route('admin.tiket') }}"
-               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
-                Tiket
             </a>
 
             <a href="{{ route('admin.laporan') }}"

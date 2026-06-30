@@ -12,6 +12,7 @@ class Event extends Model
 
     protected $fillable = [
     'id_organizer',
+    'id_kategori',
     'nama_event',
     'deskripsi',
     'tanggal',
@@ -40,4 +41,12 @@ class Event extends Model
             'id_event'
         );
     }
+    public function kategori()
+{
+    return $this->belongsTo(
+        Kategori::class,
+        'id_kategori',
+        'id_kategori'
+    );
+}
 }

@@ -90,7 +90,8 @@
             @forelse($events as $event)
             <div class="event-card bg-white rounded-2xl overflow-hidden border border-[#eef0f7] hover:border-[#c7ceea] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer"
                  data-search="{{ strtolower($event->nama_event . ' ' . $event->lokasi) }}"
-                 data-kategori="{{ strtolower($event->kategori ?? 'umum') }}">
+                 data-kategori="{{ strtolower($event->kategori->nama_kategori) }}"
+        </div>
 
                 {{-- GAMBAR --}}
                 <div class="overflow-hidden h-36">
@@ -102,7 +103,7 @@
                 {{-- BODY --}}
                 <div class="p-3.5">
                     <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#eef0f9] text-[#5661A4] mb-1.5 capitalize">
-                        {{ $event->kategori ?? 'umum' }}
+                        {{ $event->kategori->nama_kategori }}
                     </span>
                     <p class="text-[11px] text-slate-400 mb-1 flex items-center gap-1">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>

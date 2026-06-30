@@ -38,10 +38,7 @@
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
                 Peserta
             </a>
-            <a href="{{ route('admin.tiket') }}"
-               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
-                Tiket
-            </a>
+            
             <a href="{{ route('admin.laporan') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
                 Laporan

@@ -153,6 +153,25 @@
                 <input type="date" id="input_tanggal" name="tanggal"
                        class="w-full border border-slate-200 rounded-lg px-3 py-2" required>
             </div>
+            <div>
+    <label class="block text-sm mb-1">Kategori</label>
+
+    <select
+        name="id_kategori"
+        id="input_kategori"
+        class="w-full border border-slate-200 rounded-lg px-3 py-2"
+        required>
+
+        <option value="">Pilih kategori</option>
+
+        @foreach($kategori as $k)
+            <option value="{{ $k->id_kategori }}">
+                {{ $k->nama_kategori }}
+            </option>
+        @endforeach
+
+    </select>
+</div>
 
             <div>
                 <label class="block text-sm mb-1">Jenis Tiket</label>

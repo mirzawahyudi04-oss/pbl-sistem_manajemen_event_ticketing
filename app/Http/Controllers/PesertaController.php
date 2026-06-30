@@ -12,7 +12,7 @@ class PesertaController extends Controller
 {
     public function index()
     {
-        $pesertas = User::where('role', 'peserta')
+        $pesertas = User::where('role', 'buyer')
     ->withSum('transactions', 'qty')
     ->get();
 

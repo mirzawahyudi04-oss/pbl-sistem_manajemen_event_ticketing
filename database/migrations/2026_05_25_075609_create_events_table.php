@@ -20,7 +20,7 @@ return new class extends Migration
     $table->date('tanggal');
     $table->string('lokasi');
 
-    $table->timestamps();
+    $table->timedatestamps();
 });
     }
 

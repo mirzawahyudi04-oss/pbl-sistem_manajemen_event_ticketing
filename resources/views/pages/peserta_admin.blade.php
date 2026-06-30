@@ -38,10 +38,7 @@
                class="flex items-center gap-3 px-4 py-3 rounded-lg bg-blue-600 text-white">
                 Peserta
             </a>
-            <a href="{{ route('admin.tiket') }}"
-               class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
-                Tiket
-            </a>
+            
             <a href="{{ route('admin.laporan') }}"
                class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 text-slate-300">
                 Laporan
@@ -128,7 +125,7 @@
     </td>
 
     <td class="p-4 text-slate-600">
-        {{ $peserta->phone ?? '-' }}
+        {{ $peserta->no_handphone ?? '-' }}
     </td>
 
     <td class="p-4 text-slate-600">
@@ -154,7 +151,7 @@
     <td class="p-4">
         <div class="flex gap-2">
 
-            <a href="{{ route('admin.peserta.detail',$peserta->id) }}"
+            <a href="{{ route('admin.peserta',$peserta->id) }}"
                class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-2 rounded-lg">
                 Detail
             </a>
@@ -165,7 +162,7 @@
                     Blokir
                 </a>
             @else
-                <a href="{{ route('admin.peserta.aktifkan',$peserta->id) }}"
+                <a href="{{ route('admin.peserta',$peserta->id) }}"
                    class="bg-green-100 hover:bg-green-200 text-green-700 text-xs font-semibold px-3 py-2 rounded-lg">
                     Aktifkan
                 </a>

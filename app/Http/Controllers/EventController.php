@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Tiket;
 use App\Models\Organizer;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -18,9 +19,10 @@ class EventController extends Controller
         return view('pages.dashboard_organizer', compact('events'));
     }
 
-    public function index()
+   public function index()
 {
-    $events = Event::orderBy('created_at', 'desc')
+    $events = Event::with(['kategori', 'tikets', 'organizer'])
+        ->orderBy('created_at', 'desc')
         ->get();
 
     return view('pages.events', compact('events'));
@@ -39,7 +41,12 @@ class EventController extends Controller
         $events = $organizer
             ? Event::where('id_organizer', $organizer->id_organizer)->with('tikets')->get()
             : collect();
-        return view('pages.kelola_event', compact('events'));
+        $kategori = Kategori::all();
+
+return view(
+    'pages.kelola_event',
+    compact('events','kategori')
+);
     }
 
     public function store(Request $request)
@@ -49,6 +56,7 @@ class EventController extends Controller
             'deskripsi'          => 'required|string',
             'tanggal'            => 'required|date',
             'lokasi'             => 'required|string',
+            'id_kategori'        => 'required|exists:kategori,id_kategori',
             'gambar'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'tiket.*.nama_tiket' => 'required|string',
             'tiket.*.harga'      => 'required|numeric|min:0',
@@ -66,6 +74,7 @@ class EventController extends Controller
 
         $event = Event::create([
             'id_organizer' => $organizer->id_organizer,
+            'id_kategori'  => $request->id_kategori,
             'nama_event'   => $request->nama_event,
             'deskripsi'    => $request->deskripsi,
             'tanggal'      => $request->tanggal,
@@ -115,6 +124,7 @@ class EventController extends Controller
         $event->update([
             'nama_event' => $request->nama_event,
             'deskripsi'  => $request->deskripsi,
+            'id_kategori' => $request->id_kategori,
             'tanggal'    => $request->tanggal,
             'lokasi'     => $request->lokasi,
             'gambar'     => $gambar,
