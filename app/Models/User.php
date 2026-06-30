@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Transaction;
 
 #[Fillable(['name', 'email', 'no_handphone', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
@@ -22,4 +23,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function transactions()
+{
+    return $this->hasMany(Transaction::class, 'user_id');
+}
 }

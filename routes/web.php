@@ -60,9 +60,8 @@ Route::put('/admin/organizer/{id}', [AdminOrganizerController::class, 'update'])
 Route::delete('/admin/organizer/{id}', [AdminOrganizerController::class, 'destroy'])
     ->name('admin.organizer.destroy');
 
-Route::get('/admin/peserta', function () {
-    return view('pages.peserta_admin');
-})->name('admin.peserta');
+Route::get('/admin/peserta', [PesertaController::class, 'index'])
+    ->name('admin.peserta');
 
 Route::get('/admin/tiket', function () {
     return view('pages.tiket_admin');

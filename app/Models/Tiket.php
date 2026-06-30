@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tiket extends Model
 {
+    protected $table = 'tikets';
     protected $primaryKey = 'id_tiket';
     public $timestamps = false;
 
@@ -16,8 +17,8 @@ class Tiket extends Model
         'kuota',
     ];
 
-    public function event()
-    {
-        return $this->belongsTo(Event::class, 'id_event', 'id_event');
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class, 'id_user');
+}
 }

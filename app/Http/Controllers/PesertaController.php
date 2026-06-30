@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PesertaController extends Controller
 {
-    public function show()
+    public function index()
     {
-        $peserta = Transaksi::all();
+        $pesertas = User::where('role', 'peserta')
+    ->withSum('transactions', 'qty')
+    ->get();
 
-        return view('pages.peserta', [
-            'peserta' => $peserta
-        ]);
+return view('pages.peserta_admin', compact('pesertas'));
     }
 
     public function simpan(Request $request)

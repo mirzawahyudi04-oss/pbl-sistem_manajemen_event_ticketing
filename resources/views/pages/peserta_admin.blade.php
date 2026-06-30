@@ -104,74 +104,85 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- Ganti dengan @foreach($pesertas as $i => $peserta) sesuai data dari controller --}}
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4 text-slate-600">1</td>
-                            <td class="p-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center text-base">👤</div>
-                                    <span class="font-medium text-slate-800">Andi Saputra</span>
-                                </div>
-                            </td>
-                            <td class="p-4 text-slate-600">andi.saputra@gmail.com</td>
-                            <td class="p-4 text-slate-600">0812-1111-2222</td>
-                            <td class="p-4 text-slate-600">5</td>
-                            <td class="p-4 text-slate-600">Feb 2025</td>
-                            <td class="p-4">
-                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Aktif</span>
-                            </td>
-                            <td class="p-4">
-                                <div class="flex gap-2">
-                                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">Detail</a>
-                                    <a href="#" class="bg-red-100 hover:bg-red-200 text-red-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Blokir</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4 text-slate-600">2</td>
-                            <td class="p-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center text-base">👤</div>
-                                    <span class="font-medium text-slate-800">Siti Rahayu</span>
-                                </div>
-                            </td>
-                            <td class="p-4 text-slate-600">siti.rahayu@mail.com</td>
-                            <td class="p-4 text-slate-600">0856-3333-4444</td>
-                            <td class="p-4 text-slate-600">3</td>
-                            <td class="p-4 text-slate-600">Mar 2025</td>
-                            <td class="p-4">
-                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Aktif</span>
-                            </td>
-                            <td class="p-4">
-                                <div class="flex gap-2">
-                                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">Detail</a>
-                                    <a href="#" class="bg-red-100 hover:bg-red-200 text-red-600 text-xs font-semibold px-3 py-2 rounded-lg transition">Blokir</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="border-t hover:bg-slate-50">
-                            <td class="p-4 text-slate-600">3</td>
-                            <td class="p-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 bg-red-100 rounded-full flex items-center justify-center text-base">👤</div>
-                                    <span class="font-medium text-slate-800">Dewi Lestari</span>
-                                </div>
-                            </td>
-                            <td class="p-4 text-slate-600">dewi.lestari@gmail.com</td>
-                            <td class="p-4 text-slate-600">0895-7777-8888</td>
-                            <td class="p-4 text-slate-600">1</td>
-                            <td class="p-4 text-slate-600">Mei 2025</td>
-                            <td class="p-4">
-                                <span class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-semibold">Nonaktif</span>
-                            </td>
-                            <td class="p-4">
-                                <div class="flex gap-2">
-                                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition">Detail</a>
-                                    <a href="#" class="bg-green-100 hover:bg-green-200 text-green-700 text-xs font-semibold px-3 py-2 rounded-lg transition">Aktifkan</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+@forelse($pesertas as $peserta)
+<tr class="border-t hover:bg-slate-50">
+
+    <td class="p-4 text-slate-600">
+        {{ $loop->iteration }}
+    </td>
+
+    <td class="p-4">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center">
+                👤
+            </div>
+
+            <span class="font-medium text-slate-800">
+                {{ $peserta->name }}
+            </span>
+        </div>
+    </td>
+
+    <td class="p-4 text-slate-600">
+        {{ $peserta->email }}
+    </td>
+
+    <td class="p-4 text-slate-600">
+        {{ $peserta->phone ?? '-' }}
+    </td>
+
+    <td class="p-4 text-slate-600">
+        {{ $peserta->transactions_sum_qty ?? 0 }}
+    </td>
+
+    <td class="p-4 text-slate-600">
+        {{ $peserta->created_at->format('M Y') }}
+    </td>
+
+    <td class="p-4">
+        @if($peserta->status == 'aktif')
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                Aktif
+            </span>
+        @else
+            <span class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-semibold">
+                Nonaktif
+            </span>
+        @endif
+    </td>
+
+    <td class="p-4">
+        <div class="flex gap-2">
+
+            <a href="{{ route('admin.peserta.detail',$peserta->id) }}"
+               class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-2 rounded-lg">
+                Detail
+            </a>
+
+            @if($peserta->status == 'aktif')
+                <a href="{{ route('admin.peserta.blokir',$peserta->id) }}"
+                   class="bg-red-100 hover:bg-red-200 text-red-600 text-xs font-semibold px-3 py-2 rounded-lg">
+                    Blokir
+                </a>
+            @else
+                <a href="{{ route('admin.peserta.aktifkan',$peserta->id) }}"
+                   class="bg-green-100 hover:bg-green-200 text-green-700 text-xs font-semibold px-3 py-2 rounded-lg">
+                    Aktifkan
+                </a>
+            @endif
+
+        </div>
+    </td>
+
+</tr>
+@empty
+<tr>
+    <td colspan="8" class="text-center p-6">
+        Tidak ada data peserta.
+    </td>
+</tr>
+@endforelse
+</tbody>
                 </table>
             </div>
 

@@ -21,10 +21,9 @@ class Transaction extends Model
     'is_used'
 ];
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id', 'id_event');
