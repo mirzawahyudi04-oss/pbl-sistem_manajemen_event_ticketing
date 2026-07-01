@@ -208,31 +208,5 @@ button:hover{
 </body>
 </html>
 
-<h2>Halaman Pembayaran</h2>
 
-<p>Event: {{ $event->nama_event }}</p>
-<p>Jumlah: {{ $qty }}</p>
-<p>Tipe Tiket: {{ $ticket_type }}</p>
-<p>Metode: {{ $payment_method }}</p>
-<p>Total: Rp {{ $total }}</p>
-
-<hr>
-
-@if($payment_method == 'dana')
-    <p>Transfer ke DANA: 08xxxxxxx</p>
-@elseif($payment_method == 'gopay')
-    <p>Transfer ke GoPay: 08xxxxxxx</p>
-@elseif($payment_method == 'mandiri')
-    <p>Transfer Mandiri: 1234567890</p>
-@endif
-
-<hr>
-
-<h3>Upload Bukti Pembayaran</h3>
-
-<form method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="payment_proof" required>
-    <button type="submit">Kirim</button>
-</form>
 

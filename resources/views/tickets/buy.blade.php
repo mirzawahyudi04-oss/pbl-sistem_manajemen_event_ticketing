@@ -93,23 +93,3 @@ button{
 
 </body>
 </html>
-<h2>Beli Tiket</h2>
-
-<form method="POST" action="{{ route('tickets.payment', $event->id_event) }}">
-    @csrf
-
-    <input type="number" name="qty" min="1" required placeholder="Jumlah tiket">
-
-    <select name="ticket_type" required>
-        <option value="regular">Regular</option>
-        <option value="vip">VIP</option>
-    </select>
-
-    <select name="payment_method" required>
-        <option value="dana">DANA</option>
-        <option value="gopay">GoPay</option>
-        <option value="mandiri">Mandiri</option>
-    </select>
-
-    <button type="submit">Lanjut Bayar</button>
-</form>

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\Tiket;
 
 class TicketController extends Controller
 {
@@ -18,11 +19,17 @@ class TicketController extends Controller
 
     public function payment(Request $request, Event $event)
     {
-        $harga = match ($request->ticket_type) {
-            'VIP' => 250000,
-            default => 100000,
-        };
+       $tiket = Tiket::where('id_event', $event->id_event)
+              ->where('nama_tiket', $request->ticket_type)
+              ->first();
 
+if (!$tiket) {
+    return back()->with('error', 'Tiket tidak ditemukan.');
+}
+
+if ($tiket->kuota < $request->quantity) {
+    return back()->with('error', 'Kuota tiket tidak mencukupi.');
+}
         $total = $harga * $request->quantity;
 
         return view('tickets.payment', [
@@ -46,12 +53,12 @@ class TicketController extends Controller
         };
 
         Transaction::create([
-            'user_id' => auth()->id(),
-            'event_id' => $event->id_event,
-            'ticket_type' => $request->ticket_type,
-            'qty' => $request->quantity,
-            'total_price' => $harga * $request->quantity,
-        ]);
+    'user_id' => auth()->id(),
+    'event_id' => $event->id_event,
+    'ticket_type' => $tiket->nama_tiket,
+    'qty' => $request->quantity,
+    'total_price' => $tiket->harga * $request->quantity,
+]);
 
         return redirect()
             ->route('events.index')
