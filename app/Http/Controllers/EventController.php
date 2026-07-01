@@ -66,7 +66,7 @@ return view(
         $gambar = null;
         if ($request->hasFile('gambar')) {
             $file   = $request->file('gambar');
-            $gambar = $file->getClientOriginalName();
+         $gambar = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images'), $gambar);
         }
 
@@ -116,10 +116,10 @@ return view(
 
         $gambar = $event->gambar;
         if ($request->hasFile('gambar')) {
-            $file   = $request->file('gambar');
-            $gambar = $file->getClientOriginalName();
-            $file->move(public_path('images'), $gambar);
-        }
+    $file = $request->file('gambar');
+    $gambar = uniqid() . '.' . $file->getClientOriginalExtension();
+    $file->move(public_path('images'), $gambar);
+}
 
         $event->update([
             'nama_event' => $request->nama_event,
@@ -128,7 +128,7 @@ return view(
             'tanggal'    => $request->tanggal,
             'lokasi'     => $request->lokasi,
             'gambar'     => $gambar,
-            'status'     => $request->status,
+           'status' => 'pending',
         ]);
 
         Tiket::where('id_event', $id)->delete();
