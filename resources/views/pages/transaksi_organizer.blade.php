@@ -38,29 +38,45 @@
     </p>
 </div>
 
-{{-- FILTER EVENT --}}
-<div class="bg-white rounded-xl border border-slate-200 p-4 mb-4">
-    <form method="GET" action="{{ route('transaksi') }}" class="flex items-center gap-3">
-        <label class="text-sm text-slate-500">Filter Event:</label>
-        <select name="event_id"
-            onchange="this.form.submit()"
-            class="border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none">
-            <option value="">-- Semua Event --</option>
-            @foreach($events as $event)
-                <option value="{{ $event->id_event }}"
-                    {{ request('event_id') == $event->id_event ? 'selected' : '' }}>
-                    {{ $event->nama_event }}
-                </option>
-            @endforeach
-        </select>
-        @if(request('event_id'))
-            <a href="{{ route('transaksi') }}"
-               class="text-sm text-slate-400 hover:text-red-500">
-                Reset
-            </a>
-        @endif
-    </form>
-</div>
+{{-- SEARCH TRANSAKSI --}}
+<div class="bg-white rounded-xl border border-slate-200 p-4 mb-5">
+
+    <form method="GET"
+      action="{{ route('transaksi') }}">
+
+    <div class="relative">
+
+        <input
+            type="text"
+            name="search"
+            value="{{ request('search') }}"
+            placeholder="Cari ID transaksi, nama pembeli, atau nama event..."
+            class="w-full border border-slate-300 rounded-lg py-3 pl-11 pr-28 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="absolute left-3 top-3.5 h-5 w-5 text-slate-400"
+             fill="none"
+             stroke="currentColor"
+             viewBox="0 0 24 24">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-4-4m2-5a7 7 0 11-14 0a7 7 0 0114 0z"/>
+
+        </svg>
+
+        <button
+            class="absolute right-2 top-2 bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm hover:bg-indigo-700">
+
+            Cari
+
+        </button>
+
+    </div>
+    </div>
+
+</form>
 
 {{-- TABEL --}}
 <div class="bg-white rounded-xl border border-slate-200 p-5">
@@ -142,16 +158,35 @@
     </table>
 </div>
 
-{{-- Modal Bukti Pembayaran --}}
-<div id="proofModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-xl p-5 w-full max-w-lg relative">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">Bukti Pembayaran</h2>
+// MODAL BUKTI PEMBAYARAN
+<div id="proofModal"
+     class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
+
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
+
+        {{-- Header --}}
+        <div class="flex items-center justify-between px-6 py-4 border-b">
+            <h2 class="text-lg font-semibold text-slate-800">
+                Bukti Pembayaran
+            </h2>
+
             <button onclick="closeProof()"
-                class="text-slate-500 hover:text-red-500 text-2xl leading-none">&times;</button>
+                class="w-9 h-9 rounded-full hover:bg-slate-100 text-2xl text-slate-500 hover:text-red-500 transition">
+                &times;
+            </button>
         </div>
-        <img id="proofImage" src="" class="w-full rounded-lg border">
+
+        {{-- Isi --}}
+        <div class="p-5 flex justify-center overflow-auto">
+
+            <img id="proofImage"
+                 src=""
+                 class="max-h-[75vh] w-auto max-w-full object-contain rounded-lg border shadow-sm">
+
+        </div>
+
     </div>
+
 </div>
 
 <script>

@@ -87,14 +87,22 @@
                             class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs">
                         Edit
                     </button>
-                    <form action="{{ route('events.destroy', $event->id_event) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('Hapus event ini?')"
-                                class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-                            Hapus
-                        </button>
-                    </form>
+                    <form action="{{ route('events.destroy',$event->id_event) }}"
+      method="POST">
+
+    @csrf
+    @method('DELETE')
+
+    <button
+        type="button"
+        onclick="showDelete(this)"
+        class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
+
+        Hapus
+
+    </button>
+
+</form>
                 </td>
             </tr>
             @empty
@@ -199,6 +207,36 @@
         </button>
     </form>
 </div>
+<div id="deleteModal"
+     class="hidden fixed inset-0 bg-black/40 items-center justify-center z-50">
+
+    <div class="bg-white rounded-lg p-5 w-80">
+
+        <h2 class="text-lg font-semibold mb-2">
+            Hapus Event?
+        </h2>
+
+        <p class="text-sm text-slate-500 mb-5">
+            Event yang dihapus tidak dapat dikembalikan.
+        </p>
+
+        <div class="flex justify-end gap-2">
+
+            <button onclick="closeDelete()"
+                class="px-4 py-2 border rounded-lg">
+                Batal
+            </button>
+
+            <button onclick="confirmDelete()"
+                class="px-4 py-2 bg-red-600 text-white rounded-lg">
+                Hapus
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <script>
 let tiketCount = 1;
@@ -289,6 +327,31 @@ function addTiket() {
         </div>
     `);
     tiketCount++;
+}
+let deleteForm = null;
+
+function showDelete(button) {
+
+    deleteForm = button.closest('form');
+
+    document.getElementById('deleteModal').classList.remove('hidden');
+    document.getElementById('deleteModal').classList.add('flex');
+
+}
+
+function closeDelete() {
+
+    document.getElementById('deleteModal').classList.remove('flex');
+    document.getElementById('deleteModal').classList.add('hidden');
+
+}
+
+function confirmDelete() {
+
+    if(deleteForm){
+        deleteForm.submit();
+    }
+
 }
 </script>
 

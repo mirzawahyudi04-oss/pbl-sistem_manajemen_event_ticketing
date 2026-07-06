@@ -41,6 +41,15 @@ class Event extends Model
             'id_event'
         );
     }
+
+    public function transactions()
+{
+    return $this->hasMany(
+        Transaction::class,
+        'event_id',
+        'id_event'
+    );
+}
     public function kategori()
 {
     return $this->belongsTo(

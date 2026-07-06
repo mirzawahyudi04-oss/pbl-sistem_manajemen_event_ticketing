@@ -39,8 +39,8 @@
 
 <div class="mb-6">
     <h1 class="text-2xl font-semibold">
-        Halo, Organizer
-    </h1>
+    Halo, {{ $organizer->nama_organizer }}
+</h1>
     <p class="text-sm text-slate-500 mt-1">
         Kelola event dan pantau performa penjualan tiket
     </p>
@@ -68,71 +68,90 @@
 
 </div>
 
-<!-- DATA EVENT -->
-<!-- DATA EVENT -->
-<div class="bg-white rounded-xl border border-slate-100 p-5">
+<!-- GRAFIK PENJUALAN -->
 
-    <div class="pb-3 mb-4 border-b border-slate-100">
-        <p class="text-xs uppercase tracking-wide text-slate-400">
-            Data Event Saya
+<div class="bg-white rounded-xl border border-slate-100 p-6 mb-6">
+
+    <div class="flex justify-between items-center mb-5">
+        <div>
+            <h2 class="text-lg font-semibold">
+                Grafik Penjualan Tiket
+            </h2>
+            <p class="text-sm text-slate-500">
+                Penjualan tiket selama 6 bulan terakhir
+            </p>
+        </div>
+    </div>
+
+    <div class="h-80">
+
+        <canvas id="salesChart"></canvas>
+
+    </div>
+
+</div>
+<!-- TOP EVENT -->
+
+<div class="bg-white rounded-xl border border-slate-100 p-6">
+
+    <div class="mb-5">
+
+        <h2 class="text-lg font-semibold">
+            Top 5 Event Terlaris
+        </h2>
+
+        <p class="text-sm text-slate-500">
+            Event dengan jumlah tiket terjual terbanyak.
         </p>
+
     </div>
 
     <table class="w-full">
 
         <thead>
-            <tr class="border-b border-slate-100">
-                <th class="text-left py-3">No</th>
+
+            <tr class="border-b">
+
+                <th class="text-left py-3">Ranking</th>
+
                 <th class="text-left py-3">Nama Event</th>
-                <th class="text-left py-3">Tanggal</th>
-                <th class="text-left py-3">Lokasi</th>
-                <th class="text-left py-3">Status</th>
+
+                <th class="text-center py-3">Tiket Terjual</th>
+
             </tr>
+
         </thead>
 
         <tbody>
 
-            @forelse($events as $index => $event)
+            @forelse($topEvents as $index => $event)
 
-            <tr class="border-b border-slate-50">
+            <tr class="border-b">
 
-                <td class="py-3">{{ $index + 1 }}</td>
+                <td class="py-3 font-semibold">
+                    #{{ $index + 1 }}
+                </td>
 
                 <td class="py-3">
                     {{ $event->nama_event }}
                 </td>
 
-                <td class="py-3">
-                    {{ \Carbon\Carbon::parse($event->tanggal)->format('d M Y') }}
+                <td class="py-3 text-center">
+                    {{ $event->tiket_terjual }}
                 </td>
 
-                <td class="py-3">
-                    {{ $event->lokasi }}
-                </td>
-
-                <td class="py-3">
-                    @if($event->status == 'pending')
-                        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">
-                            Menunggu ACC
-                        </span>
-                    @elseif($event->status == 'approved')
-                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
-                            Aktif
-                        </span>
-                    @else
-                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
-                            Ditolak
-                        </span>
-                    @endif
-                </td>
             </tr>
 
             @empty
 
             <tr>
-                <td colspan="5" class="py-5 text-center text-slate-400">
-                    Belum ada event
+
+                <td colspan="3" class="py-6 text-center text-slate-400">
+
+                    Belum ada data
+
                 </td>
+
             </tr>
 
             @endforelse
@@ -142,5 +161,47 @@
     </table>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('salesChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: @json($months),
+
+        datasets: [{
+
+            label: 'Tiket Terjual',
+
+            data: @json($sales),
+
+            borderWidth: 3,
+
+            fill: false,
+
+            tension: 0.4
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+</script>
 
 @endsection

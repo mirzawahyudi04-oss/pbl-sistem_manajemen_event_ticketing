@@ -127,6 +127,8 @@ Route::put('/transaksi/{id}/reject',
     //laporan organizer nich gengs
      Route::get('/laporan', [LaporanController::class, 'index'])
         ->name('laporan');
+    Route::get('/laporan/pdf', [LaporanController::class, 'exportPdf'])
+    ->name('laporan.pdf');
 });
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
