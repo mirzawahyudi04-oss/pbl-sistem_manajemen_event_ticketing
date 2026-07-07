@@ -140,6 +140,7 @@
                                 <div class="flex gap-2 items-center">
                                     {{-- Tombol Detail --}}
                                     <button
+                                    
                                         onclick="openModal(
                                             '{{ addslashes($event->nama_event) }}',
                                             '{{ addslashes($event->organizer->nama_organizer) }}',
