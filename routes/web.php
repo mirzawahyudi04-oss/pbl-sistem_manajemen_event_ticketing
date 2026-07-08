@@ -3,20 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SimplePasswordResetController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\AdminLaporanController;
 use App\Http\Controllers\AdminOrganizerController;
-use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\TicketController;
-use App\Http\Controllers\OrganizerProfileController;
-use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminEventController;
-use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrganizerPesertaController;
 use App\Http\Controllers\OrganizerTransactionController;
 use App\Http\Controllers\OrganizerDashboardController;
-
+use App\Http\Controllers\OrganizerProfileController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
 
@@ -204,6 +204,10 @@ Route::get('/transactions/create', function () {
     return redirect()->route('tickets.buy', 1);
 })->name('transactions.create');
 
+//laporan admin
+Route::get('/admin/laporan', [AdminLaporanController::class,'index'])
+    ->name('admin.laporan');
+    
 Route::get('/events/{event}/buy', [TicketController::class, 'buy'])
     ->name('tickets.buy');
     Route::get('/e-ticket/{id}', [TransactionController::class, 'eTicket'])
