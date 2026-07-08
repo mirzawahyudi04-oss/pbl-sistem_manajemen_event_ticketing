@@ -190,11 +190,20 @@
                                         @csrf
                                         @method('DELETE')
 
+                                        <form action="{{ route('admin.organizer.destroy', $organizer->id_organizer) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus organizer ini?')">
+
+                                        @csrf
+                                        @method('DELETE')
+
                                         <button
                                             type="submit"
                                             class="bg-red-100 hover:bg-red-200 text-red-600 text-xs font-semibold px-3 py-2 rounded-lg">
                                             Hapus
                                         </button>
+
+                                    </form>
 
                                     </form>
 

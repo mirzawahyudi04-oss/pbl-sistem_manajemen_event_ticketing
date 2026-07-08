@@ -158,7 +158,7 @@
     </table>
 </div>
 
-// MODAL BUKTI PEMBAYARAN
+
 <div id="proofModal"
      class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 p-4">
 

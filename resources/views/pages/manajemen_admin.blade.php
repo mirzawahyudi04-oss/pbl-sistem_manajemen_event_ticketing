@@ -150,7 +150,7 @@
                                             '{{ $event->tikets->sum('kuota') }}',
                                             '{{ $event->status }}',
                                             '{{ $event->id_event }}',
-                                            '{{ $event->poster ?? '' }}'
+                                            '{{ $event->gambar ?? '' }}'
                                         )"
                                         class="bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-2 rounded-lg transition">
                                         Lihat Detail
@@ -193,7 +193,7 @@
 <div id="modalDetail"
      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4">
 
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
 
         <!-- Modal Header -->
         <div class="flex justify-between items-center p-6 border-b">
@@ -207,62 +207,111 @@
             </button>
         </div>
 
-        <!-- Modal Body -->
-        <div class="p-6 space-y-6">
+       <!-- Modal Body -->
+<div class="space-y-6">
 
-            <!-- Poster (jika ada) -->
-            <div id="modalPosterWrap" class="hidden">
-                <img id="modalPoster" src="" alt="Poster Event"
-                    class="w-full h-52 object-cover rounded-xl border border-slate-200">
+    <!-- Poster -->
+    <div id="modalPosterWrap" class="relative hidden">
+        <img id="modalPoster"
+            src=""
+            class="w-full h-[500px] object-cover">
+         <div
+        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+    </div>
+    </div>
+
+    <div class="px-6 pb-6">
+
+        <!-- Judul -->
+        <h2 id="modalNama"
+            class="text-3xl font-bold text-slate-800 mb-2">
+        </h2>
+
+        <!-- Tanggal & Lokasi -->
+        <div class="flex flex-wrap gap-6 text-slate-500 text-sm mb-6">
+
+            <div>
+                <p class="text-xs uppercase font-semibold text-slate-400">
+                    Tanggal
+                </p>
+
+                <p id="modalTanggal"
+                    class="font-semibold text-slate-700">
+                </p>
             </div>
 
-            <!-- Info Grid -->
-            <div class="grid grid-cols-2 gap-4">
+            <div>
+                <p class="text-xs uppercase font-semibold text-slate-400">
+                    Lokasi
+                </p>
 
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Nama Event</p>
-                    <p id="modalNama" class="text-slate-800 font-semibold text-sm"></p>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Organizer</p>
-                    <p id="modalOrganizer" class="text-slate-800 font-semibold text-sm"></p>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Tanggal</p>
-                    <p id="modalTanggal" class="text-slate-800 font-semibold text-sm"></p>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Lokasi</p>
-                    <p id="modalLokasi" class="text-slate-800 font-semibold text-sm"></p>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Kuota Tiket</p>
-                    <p id="modalKuota" class="text-slate-800 font-semibold text-sm"></p>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-4">
-                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Status</p>
-                    <div id="modalStatus"></div>
-                </div>
-
-            </div>
-
-            <!-- Deskripsi -->
-            <div class="bg-slate-50 rounded-xl p-4">
-                <p class="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-2">Deskripsi Event</p>
-                <p id="modalDeskripsi" class="text-slate-700 text-sm leading-relaxed"></p>
+                <p id="modalLokasi"
+                    class="font-semibold text-slate-700">
+                </p>
             </div>
 
         </div>
 
-        <!-- Modal Footer -->
-        <div id="modalFooter" class="p-6 border-t flex gap-3 justify-end">
-            <!-- Tombol Approve & Tolak diisi lewat JS kalau status pending -->
+        <!-- Card Info -->
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+
+            <div class="bg-slate-50 rounded-xl p-5">
+
+                <p class="text-xs uppercase text-slate-400 font-semibold">
+                    Organizer
+                </p>
+
+                <p id="modalOrganizer"
+                    class="text-lg font-semibold mt-2 text-slate-800">
+                </p>
+
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-5">
+
+                <p class="text-xs uppercase text-slate-400 font-semibold">
+                    Kuota
+                </p>
+
+                <p id="modalKuota"
+                    class="text-lg font-semibold mt-2 text-slate-800">
+                </p>
+
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-5">
+
+                <p class="text-xs uppercase text-slate-400 font-semibold">
+                    Status
+                </p>
+
+                <div id="modalStatus"
+                    class="mt-3">
+                </div>
+
+            </div>
+
         </div>
+
+        <!-- Deskripsi -->
+        <div>
+
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">
+                Deskripsi Event
+            </h3>
+
+            <p id="modalDeskripsi"
+                class="text-slate-600 leading-8">
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+<div id="modalFooter"
+     class="p-6 border-t flex gap-3 justify-end">
+</div>
 
     </div>
 </div>
@@ -291,10 +340,16 @@
         // Poster
         const posterWrap = document.getElementById('modalPosterWrap');
         if (poster && poster.trim() !== '') {
-            document.getElementById('modalPoster').src = '/storage/' + poster;
+
+            document.getElementById('modalPoster').src =
+                "{{ asset('images') }}/" + poster;
+
             posterWrap.classList.remove('hidden');
+
         } else {
+
             posterWrap.classList.add('hidden');
+
         }
 
         // Footer: tampilkan tombol Approve & Tolak hanya jika pending
@@ -307,9 +362,20 @@
                 <form action="/admin/event/${idEvent}/reject" method="POST" style="display:inline;">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="PUT">
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition">
+                    <form action="/admin/event/${idEvent}/reject"
+                    method="POST"
+                    onsubmit="return confirm('Yakin ingin menolak event ini?')">
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_method" value="PUT">
+
+                    <button
+                        type="submit"
+                        class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition">
                         Tolak Event
                     </button>
+
+                </form>
                 </form>
                 <form action="/admin/event/${idEvent}/approve" method="POST" style="display:inline;">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

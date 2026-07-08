@@ -70,6 +70,9 @@ Route::get('/admin/tiket', function () {
 Route::get('/admin/laporan', function () {
     return view('pages.laporan_admin');
 })->name('admin.laporan');
+Route::get('/admin/laporan', function () {
+    return view('pages.laporan_adminblade');
+})->name('admin.laporan');
 
 
 // Protected Routes (perlu login)
@@ -178,6 +181,18 @@ Route::put('/admin/event/{id}/reject',
 [AdminEventController::class,'reject'])
 ->name('admin.event.reject');
 
+//admin peserta coy
+Route::get('/admin/peserta/{id}/detail',
+    [PesertaController::class, 'detail'])
+    ->name('admin.peserta.detail');
+
+Route::put('/admin/peserta/{id}/blokir',
+    [PesertaController::class,'blokir'])
+    ->name('admin.peserta.blokir');
+
+Route::put('/admin/peserta/{id}/aktifkan',
+    [PesertaController::class,'aktifkan'])
+    ->name('admin.peserta.aktifkan');
 
 Route::post('/events/{event}/store',
     [TicketController::class, 'store'])

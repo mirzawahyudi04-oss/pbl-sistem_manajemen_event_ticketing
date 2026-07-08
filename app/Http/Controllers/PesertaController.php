@@ -10,14 +10,57 @@ use App\Models\User;
 
 class PesertaController extends Controller
 {
-    public function index()
-    {
-        $pesertas = User::where('role', 'buyer')
-    ->withSum('transactions', 'qty')
-    ->get();
+    public function index(Request $request)
+{
+    $search = $request->search;
 
-return view('pages.peserta_admin', compact('pesertas'));
-    }
+    $pesertas = User::where('role', 'buyer')
+
+        ->when($search, function ($query) use ($search) {
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+
+            });
+
+        })
+
+        ->withSum('transactions', 'qty')
+
+        ->get();
+
+    return view('pages.peserta_admin', compact('pesertas'));
+}
+
+
+
+
+    public function blokir($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->status = 'nonaktif';
+
+    $user->save();
+
+    return redirect()->back()
+        ->with('success','Peserta berhasil diblokir.');
+}
+
+
+public function aktifkan($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->status = 'aktif';
+
+    $user->save();
+
+    return redirect()->back()
+        ->with('success','Peserta berhasil diaktifkan.');
+}
 
     public function simpan(Request $request)
     {

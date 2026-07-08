@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Transaction;
 
-#[Fillable(['name', 'email', 'no_handphone', 'password', 'role'])]
+#[Fillable(['name', 'email', 'no_handphone', 'password', 'role', 'status'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
