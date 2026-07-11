@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SimplePasswordResetController;
 use App\Http\Controllers\AdminLaporanController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\TransactionController;
 
 Route::get('/', fn() => view('pages.home'))->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLoginUser'])->name('login');

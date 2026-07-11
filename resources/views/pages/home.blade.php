@@ -182,27 +182,36 @@ Temukan Event Menarik
 
 <div class="grid lg:grid-cols-3 gap-6">
 
-@for($i=1;$i<=6;$i++)
+@foreach($events as $event)
 
-<div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 duration-300">
+<div class="
+    bg-white 
+    rounded-2xl 
+    overflow-hidden 
+    shadow-sm 
+    hover:shadow-xl 
+    hover:-translate-y-1 
+    duration-300
+">
 
 <img
-src="https://picsum.photos/500/300?random={{$i}}"
+src="{{ $event->gambar && file_exists(public_path('images/'.$event->gambar))
+    ? asset('images/'.$event->gambar)
+    : asset('images/default-event.jpg') }}"
 class="h-52 w-full object-cover">
+
 
 <div class="p-5">
 
 <span class="text-sm text-slate-500">
-📍 Batam
+📍 {{ $event->lokasi }}
 </span>
 
 <h3 class="font-bold text-lg mt-2 text-[#10194F]">
-Music Festival 2026
+    {{ $event->nama_event }}
 </h3>
 
-<p class="text-sm text-slate-500 mt-1">
-Oleh STEVENtix Organizer
-</p>
+{{ $event->organizer->nama_organizer ?? 'Organizer' }}
 
 <div class="flex justify-between mt-5">
 
@@ -213,7 +222,7 @@ Mulai dari
 </p>
 
 <p class="font-bold text-[#10194F]">
-Rp150.000
+    Rp {{ number_format($event->tikets->min('harga'), 0, ',', '.') }}
 </p>
 
 </div>
@@ -232,7 +241,7 @@ Detail →
 
 </div>
 
-@endfor
+@endforeach
 
 </div>
 

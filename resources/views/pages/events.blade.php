@@ -87,11 +87,16 @@
         @php $events = $events ?? []; @endphp
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="eventContainer">
-            @forelse($events as $event)
+@forelse($events as $event)
+
+@php
+    $isExpired = \Carbon\Carbon::parse($event->tanggal)->isPast();
+@endphp
             <div class="event-card bg-white rounded-2xl overflow-hidden border border-[#eef0f7] hover:border-[#c7ceea] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer"
+            {{ $isExpired ? 'opacity-60 grayscale' : '' }}
                  data-search="{{ strtolower($event->nama_event . ' ' . $event->lokasi) }}"
-                 data-kategori="{{ strtolower($event->kategori->nama_kategori) }}"
-        </div>
+                 data-kategori="{{ strtolower($event->kategori->nama_kategori ?? '') }}">
+        
 
                 {{-- GAMBAR --}}
                 <div class="overflow-hidden h-36">
@@ -99,11 +104,18 @@
                          alt="{{ $event->nama_event }}"
                          class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                 </div>
+                @if($isExpired)
+
+<div class="bg-slate-700 text-white text-[10px] font-bold text-center py-2 tracking-wide">
+    EVENT SUDAH BERAKHIR
+</div>
+
+@endif
 
                 {{-- BODY --}}
                 <div class="p-3.5">
                     <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-[#eef0f9] text-[#5661A4] mb-1.5 capitalize">
-                        {{ $event->kategori->nama_kategori }}
+                        {{ $event->kategori->nama_kategori ?? '-' }}
                     </span>
                     <p class="text-[11px] text-slate-400 mb-1 flex items-center gap-1">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
@@ -124,21 +136,33 @@
 
                 {{-- TOMBOL --}}
                 <div class="px-3.5 pb-3.5">
-                    <a href="{{ route('events.show', $event->id_event) }}"
-                       class="block text-center text-xs font-bold bg-[#10194F] text-white py-2.5 rounded-lg hover:bg-[#5661A4] transition duration-200 tracking-wide">
-                        Lihat Tiket
-                    </a>
-                </div>
-            </div>
 
-            @empty
-            <div class="col-span-4 text-center py-16 text-slate-400 text-sm">
-                Belum ada event tersedia.
-            </div>
-            @endforelse
+                @if($isExpired)
+
+                <button
+                    class="block w-full text-center text-xs font-bold bg-slate-300 text-white py-2.5 rounded-lg cursor-not-allowed">
+                    Event Berakhir
+                </button>
+
+                @else
+
+                <a href="{{ route('events.show', $event->id_event) }}"
+                class="block text-center text-xs font-bold bg-[#10194F] text-white py-2.5 rounded-lg hover:bg-[#5661A4] transition duration-200 tracking-wide">
+                    Lihat Tiket
+                </a>
+
+                @endif
+
+                </div>
+        </div>
+        @empty
+            <p class="text-sm text-slate-500">
+                Tidak ada event yang tersedia.
+            </p>
+        @endforelse
         </div>
     </div>
-
+    
     {{-- FOOTER --}}
     <footer class="bg-white border-t border-slate-100 px-8 py-5 flex justify-between items-center">
         <span class="text-[15px] font-bold text-[#10194F]">STEVENtix</span>
